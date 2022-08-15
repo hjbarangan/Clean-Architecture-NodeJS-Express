@@ -1,4 +1,4 @@
-const invoiceEntity = () => {
+const makeInvoiceEntity = () => {
   //data
 
   const data = {invoice_number, car_id, customer_id, salesperson_id}
@@ -23,3 +23,5 @@ const invoiceEntity = () => {
   return Object.freeze(data)
 
 };
+
+module.exports = makeInvoiceEntity;

@@ -1,5 +1,7 @@
-const customerEntity = () => {
+const makeCustomerEntity = ({data}) => {
   //insert here the data structure\
+
+  const {firstname, lastname, contact_number, address} = data;
 
   // conditions
 
@@ -18,12 +20,7 @@ const customerEntity = () => {
   if (!address) {
     throw new Error("Enter Customer's Address");
   }
-  return Object.freeze({
-    customer_firstname: firstname,
-    customer_lastname: lastname,
-    customer_contact_number: contact_number,
-    customer_address: address,
-  });
+  return Object.freeze(data);
 };
 
-module.exports = customerEntity;
+module.exports = makeCustomerEntity;

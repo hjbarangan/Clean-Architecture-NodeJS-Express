@@ -1,5 +1,7 @@
-const salespersonEntity = () => {
+const makeSalespersonEntity = ({ data }) => {
   //data
+
+  const { firstname, lastname } = data;
 
   //conditions
   if (!firstname) {
@@ -9,10 +11,7 @@ const salespersonEntity = () => {
     throw new Error("Enter Salesperson Lastname");
   }
 
-  return Object.freeze({
-    salesperson_firstname: firstname,
-    salesperson_lastname: lastname,
-  });
+  return Object.freeze(data);
 };
 
-module.exports = salespersonEntity;
+module.exports = makeSalespersonEntity;
