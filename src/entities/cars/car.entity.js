@@ -1,8 +1,10 @@
-const makeCarEntity = () => {
+const makeCarEntity = ({data}) => {
+
   //insert here the data;
+  const { serial_number, brand, model, color, year, car_status, image_file } = data;
+  console.log(data);
 
   // insert here the error message and conditions
-
   if (!serial_number) {
     throw new Error("Car must have serial_number!");
   }
@@ -31,14 +33,7 @@ const makeCarEntity = () => {
     throw new Error("Car must have an image_file!");
   }
 
-  return Object.freeze({
-    serial_number: serial_number,
-    brand: brand,
-    model: model,
-    year: year,
-    status: car_status,
-    image_file: image_file
-  });
+  return Object.freeze(data);
 };
 
 module.exports = makeCarEntity;
