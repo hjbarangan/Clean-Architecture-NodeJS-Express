@@ -8,7 +8,7 @@
 
 ### Commands:
 
-```console
+```
 npm install
 npm run server
 npm run test (for testing)
