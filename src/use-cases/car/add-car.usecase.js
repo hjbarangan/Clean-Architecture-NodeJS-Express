@@ -1,14 +1,14 @@
 const carEntity = require("../../entities/cars/index");
 
 const addCar = ({ carDB }) => {
-  return async function postCar(data) {
-    const result = carEntity(data);
+  return async function postCar(info) {
+    const result = carEntity(info);
     const carExists = await carDB.findBySerial(result.serial_number);
 
     if (carExists.rowCount !== 0) {
       const result = {
         msg: "Car already exists",
-        car: carExists.rows[0],
+        car: carExists.rows
       };
       return result;
     }

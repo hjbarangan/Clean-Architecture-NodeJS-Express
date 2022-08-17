@@ -57,7 +57,7 @@ async function addCar({ ...info } ) {
 // };
 
 
-async function findBySerial ({serial_number}) {
+async function findBySerial (serial_number) {
   const connect = await dbs();
 
   const sql = "SELECT * FROM cars WHERE serial_number = $1";
