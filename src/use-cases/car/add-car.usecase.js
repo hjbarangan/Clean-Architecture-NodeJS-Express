@@ -1,14 +1,12 @@
-const carEntity = require("../../entities/cars/index");
-
-const addCar = ({ carDB }) => {
-  return async function postCar(data) {
-    const result = carEntity(data);
+const addCar = ({ carDB, carEntity }) => {
+  return async function postCar(info) {
+    const result = carEntity(info);
     const carExists = await carDB.findBySerial(result.serial_number);
 
     if (carExists.rowCount !== 0) {
       const result = {
         msg: "Car already exists",
-        car: carExists.rows[0],
+        car: carExists.rows,
       };
       return result;
     }
@@ -25,31 +23,4 @@ const addCar = ({ carDB }) => {
 };
 module.exports = addCar;
 
-// const makeCategory = require("../../entities/categories/app");
 
-// const makeAddCategory = ({ categoriesDb }) => {
-//   return async function posts(info) {
-//     const result = makeCategory(info);
-//     const categoryExists = await categoriesDb.findByName(result.getName());
-
-//     const rows = categoryExists.rows;
-
-//     if (categoryExists.rowCount !== 0) {
-//       const result = {
-//         msg: "Category already exists!",
-//         command: categoryExists.command,
-//         rows
-//       };
-//       return result;
-//     }
-
-//     return categoriesDb.insert({
-//       name: result.getName(),
-//       description: result.getDescription(),
-//       teams_id: result.getTeam(),
-//       time_limit_on_seconds: result.getTimeLimit()
-//     });
-//   };
-// };
-
-// module.exports = makeAddCategory;
