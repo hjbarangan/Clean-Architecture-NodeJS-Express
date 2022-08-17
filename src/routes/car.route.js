@@ -1,4 +1,11 @@
 const router = require("express").Router();
+
+const { postCarController } = require("../controllers/car/index")
+
+const makeExpressCallback = require("../express-callback/index")
+
+router.post("/cars/add", makeExpressCallback(postCarController));
+
 // const authorization = require("../middleware/auth.middleware");
 // const { upload } = require("../middleware/upload");
 
