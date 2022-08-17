@@ -1,5 +1,5 @@
-const makeCarEntity = require("./car.entity")
+const makeCarEntity = require("./car.entity");
 
-const carEntity = makeCarEntity({data})
+const carEntity = makeCarEntity({});
 
 module.exports = carEntity;

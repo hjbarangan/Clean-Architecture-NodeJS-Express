@@ -1,0 +1,1 @@
+insert into cars (serial_number, brand, model, color, year, car_for_sale) values ('123', 'Honda', 'X1233', 'Red', '2022', 'Yes') RETURNING *;
