@@ -1,9 +1,10 @@
-const makeCustomerEntity = ({make}) => {
-  return make = ({ data } = {}) => {
-    const { firstname, lastname, contact_number, address } = data;
-
-    // conditions
-
+const makeCustomerEntity = ({}) => {
+  return async function make({
+    firstname,
+    lastname,
+    contact,
+    address,
+  } = {}) {
     if (!firstname) {
       throw new Error("Enter Customer's Firstname");
     }
@@ -12,14 +13,20 @@ const makeCustomerEntity = ({make}) => {
       throw new Error("Enter Customer's Lastname");
     }
 
-    if (!contact_number) {
+    if (!contact) {
       throw new Error("Enter Customer's Contact Number");
     }
 
     if (!address) {
       throw new Error("Enter Customer's Address");
     }
-    return Object.freeze(data);
+
+    return Object.freeze({
+      firstname,
+      lastname,
+      contact,
+      address,
+    });
   };
 };
 
