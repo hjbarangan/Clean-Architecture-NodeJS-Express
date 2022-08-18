@@ -1,5 +1,5 @@
 const makeCarEntity = ({}) => {
-  return function make({
+  return async function make({
     serial_number,
     brand,
     model,
