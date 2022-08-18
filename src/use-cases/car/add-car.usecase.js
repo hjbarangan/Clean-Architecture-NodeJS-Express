@@ -5,7 +5,7 @@ const addCar = ({ carDB, carEntity }) => {
 
     if (carExists.rowCount !== 0) {
       const result = {
-        msg: "Car already exists",
+        msg: "Serial Number already exists",
         car: carExists.rows,
       };
       return result;

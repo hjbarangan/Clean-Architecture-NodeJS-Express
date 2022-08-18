@@ -10,7 +10,7 @@ const carData = ({ dbs }) => {
 
   //insert here the queries
 
-  async function getAllCars({}) {
+  async function getAllCars() {
     const connect = await dbs();
 
     const sql = "SELECT * FROM cars";
