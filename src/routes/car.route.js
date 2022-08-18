@@ -1,13 +1,13 @@
 const router = require("express").Router();
 
-const { postCarController, putCarController } = require("../controllers/car/index")
+const { postCarController, putCarController, getAllCarsController, getCarByIdController } = require("../controllers/car/index")
 
 const makeExpressCallback = require("../express-callback/index")
 
 router.post("/cars/add", makeExpressCallback(postCarController));
 router.put("/cars/edit/:id", makeExpressCallback(putCarController) );
-// router.get("/cars",authorization, getCars);
-// router.get("/cars/view/:id", authorization, getCarById);
+router.get("/cars", makeExpressCallback(getAllCarsController));
+router.get("/cars/view/:id", makeExpressCallback(getCarByIdController));
 
 // const authorization = require("../middleware/auth.middleware");
 // const { upload } = require("../middleware/upload");

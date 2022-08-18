@@ -1,7 +1,7 @@
 
 const addCarController = ({ addCarUseCase }) => {
 
-  return async function get(httpRequest) {
+  return async function post(httpRequest) {
     const headers = {
       "Content-Type": "application/json",
     };
