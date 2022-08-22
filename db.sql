@@ -86,7 +86,9 @@ CREATE TABLE IF NOT EXISTS "users"(
     "email" UNIQUE VARCHAR(100),
     "password" VARCHAR(100),
     "firstname" VARCHAR(100),
-    "lastname" VARCHAR(100));
+    "lastname" VARCHAR(100),
+    "created_at" TIME WITH TIME ZONE
+    );
 
 
 
