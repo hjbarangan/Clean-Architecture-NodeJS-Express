@@ -1,0 +1,16 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ../Clean-Architecture-NodeJS-Express
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: clean-api
+    volumes:
+      - ./Clean-Architecture-NodeJS-Express:/usr/src/app
+      - api-modules:/usr/src/app/node_modules
+    ports:
+      - 4000:4000
+
+volumes:
+ api-modules:
