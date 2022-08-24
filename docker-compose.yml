@@ -2,15 +2,29 @@ version: '3'
 services:
   api:
     build:
-      context: ../Clean-Architecture-NodeJS-Express
+      context: ../clean-arch-API
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: clean-api
     volumes:
-      - ./Clean-Architecture-NodeJS-Express:/usr/src/app
+      - ./clean-arch-API:/usr/src/app
       - api-modules:/usr/src/app/node_modules
     ports:
       - 4000:4000
 
+  db:
+    image: 'postgres'
+    ports: 
+    - '5433:5432'
+    environment:
+      POSTGRES_PASSWORD: 'admin'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'clean_api'
+    volumes:
+      - data:/var/lib/postgresql/data
+      
+
+
 volumes:
  api-modules:
+ data:

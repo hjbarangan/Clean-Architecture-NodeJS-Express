@@ -11,7 +11,7 @@ const addUser = ({ userDB, userEntity }) => {
         return result;
       }
   
-      return carDB.addUser({
+      return userDB.addUser({
         email: result.email,
         password: result.password,
         firstname: result.firstname,

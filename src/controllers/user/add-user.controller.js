@@ -37,4 +37,4 @@ const addUserController = ({ addUserUseCase }) => {
   
   }
   
-  module.exports = addCarController;
+  module.exports = addUserController;

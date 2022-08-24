@@ -1,3 +1,4 @@
+require("tls").DEFAULT_MIN_VERSION = "TLSv1";
 const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
@@ -6,6 +7,7 @@ const helmet = require("helmet");
 
 const carRoutes = require("./routes/car.route");
 const customerRoutes = require("./routes/customer.route");
+const userRoutes = require("./routes/user.route")
 
 const app = express();
 
@@ -21,6 +23,7 @@ app.use(helmet());
 
 app.use(carRoutes);
 app.use(customerRoutes);
+app.use(userRoutes);
 
 const PORT = process.env.PORT || 3000;
 

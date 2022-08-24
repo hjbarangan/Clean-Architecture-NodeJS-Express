@@ -1,4 +1,4 @@
-const userData = ({ dbs, comparePassword }) => {
+const userData = ({ dbs, comparePassword, encryptPass1, jwtGenerate }) => {
   return Object.freeze({
     getAllUsers,
     getUserById,
@@ -22,6 +22,32 @@ const userData = ({ dbs, comparePassword }) => {
     return connect.query(sql, params);
   }
 
+  async function findByEmail(email) {
+    const connect = await dbs();
+
+    const sql = "SELECT * FROM users WHERE email = $1";
+
+    const params = [email];
+
+    return connect.query(sql, params);
+  }
+
+  async function addUser({ ...info }) {
+    const connect = await dbs();
+
+    const sql =
+      "INSERT INTO users (email, password, firstname, lastname ) VALUES ( $1, $2, $3, $4 ) RETURNING *;";
+
+    // // let hashedPassword = encryptPass1.encryptPass({password});
+    // const result3 = [email, hashedPassword,firstname, lastname];
+    const params = [info.email, info.password, info.firstname, info.lastname];
+    console.log(params);
+
+    return connect.query(sql, params);
+  }
+  
+};
+
   async function editUser({ id, ...info }) {
     const connect = await dbs();
 
@@ -39,15 +65,6 @@ const userData = ({ dbs, comparePassword }) => {
     return connect.query(sql, params);
   }
 
-  async function findByEmail(email) {
-    const connect = await dbs();
-
-    const sql = "SELECT * FROM users WHERE email = $1";
-
-    const params = [email];
-
-    return connect.query(sql, params);
-  }
 
 
   async function userLogin(data) {
@@ -62,15 +79,13 @@ const userData = ({ dbs, comparePassword }) => {
 
       const user = await connect.query(sql, params);
 
-      const validPassword = await comparePassword(
-        password,
-        user.rows[0].password
-      );
+      const encryptPass = user.rows[0].password;
+      const validPassword = await comparePassword(password, encryptPass);
 
       if (!validPassword) {
         return res.status(401).json({ message: "Invalid password" });
       } else {
-        const token = jwtGenerator(user.rows[0].user_id);
+        const token = jwtGenerate(user.rows[0].user_id);
         console.log({ token: token, user: user.rows });
       }
     } catch (error) {
@@ -78,46 +93,6 @@ const userData = ({ dbs, comparePassword }) => {
     }
   }
 
-  //  async function createUser({ entity }){
-  //      try {
-  //          const {email, password, role, status} = entity;
-  //          const User = model.UserModel;
 
-  //          let encryptedpwd = encryptPasswordService({password})
-
-  //          const response = await User.create({
-  //              email: email,
-  //              password: encryptedpwd,
-  //              role: role,
-  //              status: status,
-  //          });
-  //          return response.dataValues;
-  //      } catch (error) {
-  //          console.log("Error: ", error);
-  //      }
-  //  }
-
-  async function addUser({ info }) {
-    const connect = await dbs();
-
-    const { email, password, firstname, lastname } = info;
-
-    const sql =
-      "INSERT INTO users (email, password, firstname, lastname, created_at, updated_at) VALUES ( $1, $2, $3, $4, NOW(), NOW()) RETURNING *;";
-
-    // const data = [info.email, info.password, info.firstname, info.lastname];
-
-    const hashedPassword = await encryptPassword({ password });
-
-    const result = {
-      email: email,
-      password: hashedPassword,
-      firstname: firstname,
-      lastname: lastname,
-    };
-
-    return connect.query(sql, result);
-  }
-};
 
 module.exports = userData;
