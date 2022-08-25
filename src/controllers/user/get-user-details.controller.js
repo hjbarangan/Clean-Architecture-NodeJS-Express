@@ -1,7 +1,7 @@
 
-const fetchAllUsersController = ({ viewAllUsersUseCase }) => {
+const fetchUserDetailsController = ({ viewUserUseCase }) => {
 
-    return async function getAll(httpRequest) {
+    return async function getDetails(httpRequest) {
       const headers = {
         "Content-Type": "application/json",
       };
@@ -13,9 +13,9 @@ const fetchAllUsersController = ({ viewAllUsersUseCase }) => {
         const toView = {
           ...info,
           source,
-          
+          id: httpRequest.params.id,
         };
-        const cars = await viewAllUsersUseCase(toView);
+        const cars = await viewUserUseCase(toView);
   
         return {
           headers: {
@@ -38,4 +38,4 @@ const fetchAllUsersController = ({ viewAllUsersUseCase }) => {
   
   }
   
-  module.exports = fetchAllUsersController;
+  module.exports = fetchUserDetailsController;

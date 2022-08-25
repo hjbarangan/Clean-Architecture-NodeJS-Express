@@ -1,10 +1,7 @@
 const makeCustomerEntity = ({}) => {
-  return async function make({
-    firstname,
-    lastname,
-    contact,
-    address,
-  } = {}) {
+  return function createCustomer(customer) {
+    const { firstname, lastname, contact, address } = customer;
+
     if (!firstname) {
       throw new Error("Enter Customer's Firstname");
     }

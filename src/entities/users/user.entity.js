@@ -1,5 +1,8 @@
 const makeUserEntity = ({}) => {
-  return async function make({ email, password, firstname, lastname } = {}) {
+  return function createUser(user) {
+
+    const { email, password, firstname, lastname } = user;
+
     if (!email) {
       throw new Error("Car must have email!");
     }

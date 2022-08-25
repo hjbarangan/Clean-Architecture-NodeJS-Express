@@ -5,7 +5,7 @@ const { postCarController, putCarController, getAllCarsController, getCarByIdCon
 const makeExpressCallback = require("../express-callback/index")
 
 router.post("/cars/add", makeExpressCallback(postCarController));
-router.put("/cars/edit/:id", makeExpressCallback(putCarController) );
+router.patch("/cars/edit/:id", makeExpressCallback(putCarController) );
 router.get("/cars", makeExpressCallback(getAllCarsController));
 router.get("/cars/view/:id", makeExpressCallback(getCarByIdController));
 
