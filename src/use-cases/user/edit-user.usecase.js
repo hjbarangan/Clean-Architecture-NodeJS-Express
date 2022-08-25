@@ -11,7 +11,7 @@ const editUser = ({ userDB, userEntity }) => {
       return result;
     }
 
-    return carDB.editUser({
+    return userDB.editUser({
       id: id,
       email: result.email,
       password: result.password,
