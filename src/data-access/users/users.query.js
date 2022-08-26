@@ -1,4 +1,4 @@
-const userData = ({ dbs, comparePassword, encryptPassword, jwtGenerate }) => {
+const userData = ({ dbs, authService, comparePassword, encryptPassword, jwtGenerate }) => {
   return Object.freeze({
     getAllUsers,
     getUserById,
@@ -34,11 +34,12 @@ const userData = ({ dbs, comparePassword, encryptPassword, jwtGenerate }) => {
     const sql =
       "INSERT INTO users (email, password, firstname, lastname ) VALUES ( $1, $2, $3, $4 ) RETURNING *;";
 
-    /** //TODO: fixed the encypt password function
-     let hashedPassword = await encryptPassword(password)
-     const result3 = [email, hashedPassword,firstname, lastname]; */ 
+    /** //TODO: fixed the encrypt password function */ 
+    //  var hashedPassword = authService({password});
 
-    const params = [email, password, firstname, lastname];
+     const params = [email, authService(password), firstname, lastname]; 
+
+    // const params = [email, password, firstname, lastname];
     console.log(params);
     return connect.query(sql, params);
   }
