@@ -15,14 +15,14 @@ const fetchInvoiceDetailsController = ({ viewInvoiceUseCase }) => {
           source,
           id: httpRequest.params.id,
         };
-        const cars = await viewInvoiceUseCase(toView);
+        const invoice = await viewInvoiceUseCase(toView);
   
         return {
           headers: {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { cars },
+          body: { invoice },
         };
       } catch (e) {
         console.log(e);

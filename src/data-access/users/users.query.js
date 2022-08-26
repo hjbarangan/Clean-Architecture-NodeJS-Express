@@ -8,7 +8,6 @@ const userData = ({ dbs, comparePassword, encryptPassword, jwtGenerate }) => {
     userLogin,
   });
 
-  //insert here the queries
   async function getAllUsers() {
     const connect = await dbs();
     const sql = "SELECT * FROM users";
@@ -24,56 +23,43 @@ const userData = ({ dbs, comparePassword, encryptPassword, jwtGenerate }) => {
 
   async function findByEmail(email) {
     const connect = await dbs();
-
     const sql = "SELECT * FROM users WHERE email = $1";
-
     const params = [email];
-
     return connect.query(sql, params);
   }
 
   async function addUser(user) {
     const connect = await dbs();
-
     const { email, password, firstname, lastname } = user;
     const sql =
       "INSERT INTO users (email, password, firstname, lastname ) VALUES ( $1, $2, $3, $4 ) RETURNING *;";
 
-    // TODO: fixed the encypt password function
-    // let hashedPassword = await encryptPassword(password)
-    // const result3 = [email, hashedPassword,firstname, lastname];
+    /** //TODO: fixed the encypt password function
+     let hashedPassword = await encryptPassword(password)
+     const result3 = [email, hashedPassword,firstname, lastname]; */ 
 
     const params = [email, password, firstname, lastname];
-
     console.log(params);
-
     return connect.query(sql, params);
   }
 };
 
-async function editUser({ id, ...info }) {
+async function editUser(user) {
   const connect = await dbs();
-
+  const { email, password, firstname, lastname, id } = user;
   const sql =
     "UPDATE users SET email = $1, password = $2, firstname = $3, lastname = $4,  updated_at = NOW() WHERE user_id = $5 RETURNING *";
-
-  const params = [info.email, info.password, info.firstname, info.lastname, id];
-
+  const params = [email, password, firstname, lastname, id];
   return connect.query(sql, params);
 }
 
 async function userLogin(data) {
   try {
     const connect = await dbs();
-
     const { email, password } = data;
-
     const sql = "SELECT * FROM users WHERE email = $1";
-
     const params = [email];
-
     const user = await connect.query(sql, params);
-
     const encryptPass = user.rows[0].password;
     const validPassword = await comparePassword(password, encryptPass);
 

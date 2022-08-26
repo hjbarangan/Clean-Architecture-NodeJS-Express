@@ -15,14 +15,14 @@ const fetchAllCustomersController = ({ viewAllCustomersUseCase }) => {
           source,
           
         };
-        const cars = await viewAllCustomersUseCase(toView);
+        const customers = await viewAllCustomersUseCase(toView);
   
         return {
           headers: {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { cars },
+          body: { customers },
         };
       } catch (e) {
         console.log(e);

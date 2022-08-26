@@ -1,5 +1,5 @@
 
-const fetchAllSalespersonsController = ({ viewAllSalespersonsUseCase }) => {
+const fetchAllSalespersonsController = ({ viewAllSalespersonUseCase }) => {
 
     return async function getAll(httpRequest) {
       const headers = {
@@ -15,14 +15,14 @@ const fetchAllSalespersonsController = ({ viewAllSalespersonsUseCase }) => {
           source,
           
         };
-        const cars = await viewAllSalespersonsUseCase(toView);
-  
+        const salesperson = await viewAllSalespersonUseCase(toView);
+        console.log(salesperson);
         return {
           headers: {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { cars },
+          body: { salesperson },
         };
       } catch (e) {
         console.log(e);

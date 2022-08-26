@@ -8,6 +8,9 @@ const helmet = require("helmet");
 const carRoutes = require("./routes/car.route");
 const customerRoutes = require("./routes/customer.route");
 const userRoutes = require("./routes/user.route")
+const salespersonRoutes = require("./routes/salesperson.route")
+const invoiceRoutes = require("./routes/invoice.route")
+
 
 const app = express();
 
@@ -24,6 +27,8 @@ app.use(helmet());
 app.use(carRoutes);
 app.use(customerRoutes);
 app.use(userRoutes);
+app.use(salespersonRoutes);
+app.use(invoiceRoutes);
 
 const PORT = process.env.PORT || 3000;
 

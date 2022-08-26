@@ -1,9 +1,7 @@
 const makeInvoiceEntity = ({}) => {
-  //data
   return function createCustomer(invoice) {
     const { invoice_number, car_id, customer_id, salesperson_id } = invoice;
 
-    //condition
     if (!invoice_number) {
       throw new Error("Enter Invoice Number");
     }

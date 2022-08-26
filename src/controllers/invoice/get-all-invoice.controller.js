@@ -15,14 +15,14 @@ const fetchAllInvoicesController = ({ viewAllInvoicesUseCase }) => {
           source,
           
         };
-        const cars = await viewAllInvoicesUseCase(toView);
+        const invoice = await viewAllInvoicesUseCase(toView);
   
         return {
           headers: {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { cars },
+          body: { invoice },
         };
       } catch (e) {
         console.log(e);

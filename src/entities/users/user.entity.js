@@ -1,6 +1,5 @@
 const makeUserEntity = ({}) => {
   return function createUser(user) {
-
     const { email, password, firstname, lastname } = user;
 
     if (!email) {

@@ -1,4 +1,4 @@
-const makeExpressCallback = controller => {
+const makeExpressCallback = (controller) => {
     return (req, res) => {
       const httpRequest = {
         body: req.body,

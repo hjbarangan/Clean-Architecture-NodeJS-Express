@@ -9,7 +9,7 @@ const {
 
 const makeExpressCallback = require("../express-callback/index");
 
-router.post("/salesperson/add", makeExpressCallback(postSalespersonController));
+router.post("/salespersons/add", makeExpressCallback(postSalespersonController));
 router.put("/salesperson/edit/:id", makeExpressCallback(putSalespersonController));
 router.get("/salesperson/:id", makeExpressCallback(getSalespersonByIdController));
 router.get("/salesperson", makeExpressCallback(getAllSalespersonController));

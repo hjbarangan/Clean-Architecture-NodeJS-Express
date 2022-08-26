@@ -1,5 +1,5 @@
-const makeInvoiceEntity = require("./invoice");
+const makeInvoiceEntity = require("./invoice.entity");
 
-const invoiceEntity = makeInvoiceEntity({ data });
+const invoiceEntity = makeInvoiceEntity({});
 
 module.exports = invoiceEntity;

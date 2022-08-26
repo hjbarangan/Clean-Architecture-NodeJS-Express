@@ -9,7 +9,7 @@ const createInvoiceUseCase = createInvoice({ invoiceDB, invoiceEntity });
 const viewInvoiceUseCase = viewInvoice({ invoiceDB, invoiceEntity });
 const viewAllInvoicesUseCase = viewAllInvoices({
   invoiceDB,
-  invoiceCollection,
+  invoiceEntity,
 });
 
 const invoiceServices = Object.freeze({
