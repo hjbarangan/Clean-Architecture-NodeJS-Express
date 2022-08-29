@@ -26,8 +26,8 @@ async function dbs() {
   }
 }
 
-const makeDb = ({ db }) => {
-  return db({ dbs });
+const makeDb = ({ db, encryptPassword }) => {
+  return db({ dbs, encryptPassword});
 };
 
 module.exports = makeDb;

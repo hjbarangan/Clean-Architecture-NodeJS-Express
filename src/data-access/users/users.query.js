@@ -1,4 +1,12 @@
-const userData = ({ dbs, authService, comparePassword, encryptPassword, jwtGenerate }) => {
+
+const userData = ({
+  dbs,
+  encrypt,
+  authService,
+  comparePassword,
+  encryptPassword,
+  jwtGenerate,
+}) => {
   return Object.freeze({
     getAllUsers,
     getUserById,
@@ -34,12 +42,10 @@ const userData = ({ dbs, authService, comparePassword, encryptPassword, jwtGener
     const sql =
       "INSERT INTO users (email, password, firstname, lastname ) VALUES ( $1, $2, $3, $4 ) RETURNING *;";
 
-    /** //TODO: fixed the encrypt password function */ 
-    //  var hashedPassword = authService({password});
+    let hashedPassword = await encryptPassword(password);
 
-     const params = [email, authService(password), firstname, lastname]; 
+    const params = [email, hashedPassword, firstname, lastname];
 
-    // const params = [email, password, firstname, lastname];
     console.log(params);
     return connect.query(sql, params);
   }
@@ -63,6 +69,8 @@ async function userLogin(data) {
     const user = await connect.query(sql, params);
     const encryptPass = user.rows[0].password;
     const validPassword = await comparePassword(password, encryptPass);
+
+    console.log({ password: encryptPass, compared: validPassword})
 
     if (!validPassword) {
       return res.status(401).json({ message: "Invalid password" });

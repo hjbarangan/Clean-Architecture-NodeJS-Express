@@ -1,9 +1,7 @@
 const makeDb = require("../../config/db.config");
 const db = require("./users.query");
-const  authService = require("../../utils/index");
 
-// const  encrypt  = require("../../utils/encryptPass");
-
-const userDB = makeDb({ db, authService });
+const encryptPassword = require("../../utils/index");
+const userDB = makeDb({ db, encryptPassword });
 
 module.exports = userDB;

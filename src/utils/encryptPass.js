@@ -1,9 +1,8 @@
-const encryptPass = ({ bcrypt }) => {
-  const encrypt = async function encode(data) {
-    const { password } = data;
-    const salt = bcrypt.genSalt(10);
-    return bcrypt.hash(password, salt);
-  };
+const encryptPass = ({bcrypt}) => {
+  async function encrypt(password) {
+    const salt = await bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(password, salt);
+  }
   return encrypt;
 };
 
