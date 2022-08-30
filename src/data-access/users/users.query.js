@@ -51,26 +51,41 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
     return connect.query(sql, params);
   }
 
-  async function userLogin(data) {
+  async function userLogin(body) {
     try {
       const connect = await dbs();
-      const { email, password } = data;
-      const sql = "SELECT * FROM users WHERE email = $1";
+      const { email, password } = body;
       const params = [email];
+      const sql = "SELECT * FROM users WHERE email = $1";
+
+      console.log(body);
+
       const user = await connect.query(sql, params);
-      const encryptPass = user.rows[0].password;
-      let validPassword = await comparePassword(password, encryptPass);
 
-      console.log({ password: encryptPass, compared: validPassword });
+      const validPassword = await comparePassword(
+        password,
+        user.rows[0].password
+      );
 
-      if (!validPassword) {
-        return console.log({ message: "Invalid password" });
-      } else {
-        const token = jwtGenerate(user.rows[0].user_id);
-        console.log({ token: token, user: user.rows });
+      if (validPassword) {
+        console.log("working bitch");
+      }
+
+      console.log({ password: user.rows[0].password, compared: validPassword });
+
+      let result = {};
+      if (validPassword) {
+        (result.id = user.rows[0].user_id),
+          (result.firstname = user.rows[0].firstname),
+          (result.lastname = user.rows[0].lastname),
+          (result.email = user.rows[0].email),
+          (result.password = user.rows[0].password);
+        result.msg = "congrats dzae, ka-login na ka!";
+
+        return result;
       }
     } catch (error) {
-      console.log("Errawr!");
+      console.log(error);
     }
   }
 };

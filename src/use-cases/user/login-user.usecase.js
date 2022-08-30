@@ -5,19 +5,21 @@ const loginUser = ({ userDB, userLoginEntity }) => {
 
     if (userExists.rowCount == 0) {
       const result = {
-        msg: "Email does not exist!",
-        user: userExists.rows,
+        msg: "Email does not exist!"
       };
       return result;
     }
 
-    //TODO: insert invalid credentials condition
+    //TODO: if conditions when the credentials are incorrect/invalid.
 
-    let token = "";
+
+
+    //TODO: generate token 
+
+    
 
     return userDB.userLogin({
-      email: result.email,
-      password: result.password,
+      email: result.email, password: result.password, firstname: result.firstname, lastname: result.lastname
     });
   };
 };

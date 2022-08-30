@@ -3,11 +3,11 @@ const makeUserLoginEntity = ({}) => {
       const { email, password} = user;
   
       if (!email) {
-        throw new Error("Car must have email!");
+        throw new Error("Enter Email!");
       }
   
       if (!password) {
-        throw new Error("Car must have password!");
+        throw new Error("Enter Password!");
       }
 
   
