@@ -1,7 +1,4 @@
-const jwt = require("jsonwebtoken");
-const SECRET_KEY = require("../config/auth.config");
-
-const jwtGenerator = () => {
+const jwtGenerator = ({jwt, SECRET_KEY}) => {
   return function generate(user_id) {
     const payload = {
       user: user_id,

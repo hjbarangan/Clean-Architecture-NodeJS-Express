@@ -1,6 +1,6 @@
 const userDB = require("../../data-access/users/index");
 const { userEntity, userLoginEntity } = require("../../entities/users/index");
-const {jwtGenerate} = require("../../utils/index")
+const { jwtGenerate } = require("../../utils/index");
 
 const addUser = require("./add-user.usecase");
 const editUser = require("./edit-user.usecase");

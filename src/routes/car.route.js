@@ -1,13 +1,13 @@
 const router = require("express").Router();
 
 const { postCarController, putCarController, getAllCarsController, getCarByIdController } = require("../controllers/car/index")
-
+const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index")
 
-router.post("/cars/add", makeExpressCallback(postCarController));
-router.patch("/cars/edit/:id", makeExpressCallback(putCarController) );
-router.get("/cars", makeExpressCallback(getAllCarsController));
-router.get("/cars/view/:id", makeExpressCallback(getCarByIdController));
+router.post("/cars/add", authMiddleware, makeExpressCallback(postCarController));
+router.patch("/cars/edit/:id", authMiddleware, makeExpressCallback(putCarController) );
+router.get("/cars", authMiddleware, makeExpressCallback(getAllCarsController));
+router.get("/cars/view/:id", authMiddleware, makeExpressCallback(getCarByIdController));
 
 // const authorization = require("../middleware/auth.middleware");
 // const { upload } = require("../middleware/upload");

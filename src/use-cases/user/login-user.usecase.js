@@ -12,12 +12,11 @@ const loginUser = ({ userDB, userLoginEntity, jwtGenerate }) => {
 
     //TODO: if conditions when the credentials are incorrect/invalid.
 
-
-    //TODO: generate token
+    //TODO: return the generated token
 
     const token = jwtGenerate(userExists.rows[0].user_id);
     console.log("\x1b[35m%s\x1b[0m", {token: token});
-    console.log("\x1b[36m%s\x1b[0m", userExists.rows[0]);
+    // console.log("\x1b[36m%s\x1b[0m", userExists.rows[0]);
 
     // return userDB.userLogin({
     //   token: token,
@@ -28,14 +27,12 @@ const loginUser = ({ userDB, userLoginEntity, jwtGenerate }) => {
     //   lastname: result.lastname,
     // });
 
-    return ({
+    return userDB.userLogin({
       token: token,
       user_id: result.user_id,
       email: result.email,
-      password: result.password
+      password: result.password,
     });
-
-
   };
 };
 module.exports = loginUser;

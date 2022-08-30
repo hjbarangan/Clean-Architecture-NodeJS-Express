@@ -57,9 +57,6 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
       const { email, password } = body;
       const params = [email];
       const sql = "SELECT * FROM users WHERE email = $1";
-
-      // console.log(body);
-
       const user = await connect.query(sql, params);
 
       const validPassword = await comparePassword(
