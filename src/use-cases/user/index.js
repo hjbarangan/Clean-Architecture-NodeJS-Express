@@ -1,5 +1,6 @@
 const userDB = require("../../data-access/users/index");
 const { userEntity, userLoginEntity } = require("../../entities/users/index");
+const {jwtGenerate} = require("../../utils/index")
 
 const addUser = require("./add-user.usecase");
 const editUser = require("./edit-user.usecase");
@@ -11,7 +12,7 @@ const addUserUseCase = addUser({ userDB, userEntity });
 const editUserUseCase = editUser({ userDB, userEntity });
 const viewAllUsersUseCase = viewAllUsers({ userDB });
 const viewUserUseCase = viewUser({ userDB });
-const loginUserUseCase = loginUser({ userDB, userLoginEntity });
+const loginUserUseCase = loginUser({ userDB, userLoginEntity, jwtGenerate });
 
 const userServices = Object.freeze({
   addUserUseCase,

@@ -58,7 +58,7 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
       const params = [email];
       const sql = "SELECT * FROM users WHERE email = $1";
 
-      console.log(body);
+      // console.log(body);
 
       const user = await connect.query(sql, params);
 
@@ -67,11 +67,11 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
         user.rows[0].password
       );
 
-      if (validPassword) {
-        console.log("working bitch");
-      }
-
-      console.log({ password: user.rows[0].password, compared: validPassword });
+      console.log({
+        password: password,
+        encryptedPassword: user.rows[0].password,
+        isItValid: validPassword,
+      });
 
       let result = {};
       if (validPassword) {
@@ -80,9 +80,10 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
           (result.lastname = user.rows[0].lastname),
           (result.email = user.rows[0].email),
           (result.password = user.rows[0].password);
-        result.msg = "congrats dzae, ka-login na ka!";
 
         return result;
+      } else {
+        return false;
       }
     } catch (error) {
       console.log(error);

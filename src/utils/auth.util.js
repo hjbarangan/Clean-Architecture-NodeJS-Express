@@ -1,9 +1,10 @@
-const jwtGenerator = ({ jwt, SECRET_KEY }) => {
-  return function generate(data) {
-    const { user_id, email } = data;
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = require("../config/auth.config");
+
+const jwtGenerator = () => {
+  return function generate(user_id) {
     const payload = {
       user: user_id,
-      email: email
     };
     return jwt.sign(payload, SECRET_KEY, { expiresIn: "24hr" });
   };

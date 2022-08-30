@@ -1,5 +1,3 @@
-
-
 const dotenv = require("dotenv");
 const pg = require("pg");
 dotenv.config();
@@ -11,9 +9,8 @@ const config = {
   host: process.env.PG_HOST,
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000
+  connectionTimeoutMillis: 2000,
 };
-
 
 const pool = new pg.Pool(config);
 
@@ -26,8 +23,8 @@ async function dbs() {
   }
 }
 
-const makeDb = ({ db, encryptPassword, comparePassword, jwtGenerate }) => {
-  return db({ dbs, encryptPassword, comparePassword, jwtGenerate });
+const makeDb = ({ db, encryptPassword, comparePassword }) => {
+  return db({ dbs, encryptPassword, comparePassword });
 };
 
 module.exports = makeDb;
