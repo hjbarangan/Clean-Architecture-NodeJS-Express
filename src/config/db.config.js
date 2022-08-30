@@ -26,8 +26,8 @@ async function dbs() {
   }
 }
 
-const makeDb = ({ db, encryptPassword }) => {
-  return db({ dbs, encryptPassword});
+const makeDb = ({ db, encryptPassword, comparePassword, jwtGenerate }) => {
+  return db({ dbs, encryptPassword, comparePassword, jwtGenerate });
 };
 
 module.exports = makeDb;

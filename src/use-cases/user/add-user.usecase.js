@@ -5,7 +5,7 @@ const addUser = ({ userDB, userEntity }) => {
   
       if (userExists.rowCount !== 0) {
         const result = {
-          msg: "Email already exists",
+          msg: "User already exists",
           user: userExists.rows,
         };
         return result;
