@@ -18,6 +18,7 @@ const addCar = ({ carDB, carEntity }) => {
       color: result.color,
       year: result.year,
       car_for_sale: result.car_for_sale,
+      price: result.price
     });
   };
 };

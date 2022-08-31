@@ -1,6 +1,6 @@
 const makeCarEntity = ({}) => {
   return function createCar(car) {
-    const { serial_number, brand, model, color, year, car_for_sale } = car;
+    const { serial_number, brand, model, color, year, car_for_sale, price } = car;
 
     if (!serial_number) {
       throw new Error("Car must have serial_number!");
@@ -25,6 +25,11 @@ const makeCarEntity = ({}) => {
     if (!car_for_sale) {
       throw new Error("Car must have car status!");
     }
+
+    if (!price) {
+      throw new Error("Car must have car price!");
+    }
+
     return Object.freeze({
       serial_number,
       brand,
@@ -32,6 +37,7 @@ const makeCarEntity = ({}) => {
       color,
       year,
       car_for_sale,
+      price
     });
   };
 };

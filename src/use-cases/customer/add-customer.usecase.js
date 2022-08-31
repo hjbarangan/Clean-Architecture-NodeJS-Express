@@ -7,6 +7,7 @@ const addCustomer = ({ customerDB, customerEntity }) => {
       lastname: result.lastname,
       address: result.address,
       contact: result.contact,
+      created_date: result.created_date
     });
   };
 };
