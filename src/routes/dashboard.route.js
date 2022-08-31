@@ -6,15 +6,16 @@ const {
   getTopSellersController,
   getSalesNumberController,
 } = require("../controllers/dashboard/index");
+
 const authMiddleware = require("../middleware/index");
 const makeExpressCallback = require("../express-callback/index");
 
-router.post(
+router.get(
   "/customers-count",
   authMiddleware,
   makeExpressCallback(getCustomersCountController)
 );
-router.put(
+router.get(
   "/monthly-revenue",
   authMiddleware,
   makeExpressCallback(getMonthlyRevenueController)

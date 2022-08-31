@@ -21,19 +21,19 @@ const salespersonData = ({ dbs }) => {
 
   async function addSalesperson(salesperson) {
     const connect = await dbs();
-    const { firstname, lastname } = salesperson;
-    const params = [firstname, lastname];
+    const { firstname, lastname, contact} = salesperson;
+    const params = [firstname, lastname, contact];
     const sql =
-      "INSERT INTO salespersons (firstname, lastname) VALUES ( $1, $2) RETURNING *;";
+      "INSERT INTO salespersons (firstname, lastname, contact) VALUES ( $1, $2, $3) RETURNING *;";
     return connect.query(sql, params);
   }
 
   async function editSalesperson(salesperson) {
     const connect = await dbs();
-    const { firstname, lastname, id } = salesperson;
+    const { firstname, lastname, contact, id } = salesperson;
     const sql =
-      "UPDATE salespersons SET firstname = $1, lastname = $2 WHERE salesperson_id = $3 RETURNING *";
-    const params = [firstname, lastname, id];
+      "UPDATE salespersons SET firstname = $1, lastname = $2, contact = $3 WHERE salesperson_id = $4 RETURNING *";
+    const params = [firstname, lastname, contact, id];
     return connect.query(sql, params);
   }
 };

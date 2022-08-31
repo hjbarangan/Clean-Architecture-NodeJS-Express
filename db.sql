@@ -93,3 +93,27 @@ CREATE TABLE IF NOT EXISTS "users"(
 
 
 INSERT INTO cars (serial_number, make, model, color, year, car_for_sale) VALUES ('123hehe', 'Toyota', 'Vios', 'Red', '2021', 'Yes') RETURNING *;
+
+
+ALTER TABLE cars
+  ADD price numeric;
+
+ALTER TABLE customers
+  ADD created_date TIME WITHOUT TIME ZONE;
+
+ALTER TABLE salespersons
+ADD contact varchar(20);
+
+ALTER TABLE invoice
+ADD total numeric;
+
+ALTER TABLE cars
+ADD status boolean;
+
+ALTER TABLE customers
+ADD status boolean;
+
+ALTER TABLE customers
+ADD status boolean;
+
+
