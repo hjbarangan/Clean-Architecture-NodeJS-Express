@@ -93,8 +93,9 @@ CREATE TABLE IF NOT EXISTS "users"(
 
 
 INSERT INTO cars (serial_number, make, model, color, year, car_for_sale) VALUES ('123hehe', 'Toyota', 'Vios', 'Red', '2021', 'Yes') RETURNING *;
+INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale,price) VALUES ('123hehe', 'Toyota', 'Vios', 'Red', '2021', 'Yes', 2333300) RETURNING *;
 
-
+UPDATE cars SET status = false WHERE car_id = 46 RETURNING *
 ALTER TABLE cars
   ADD price numeric;
 
@@ -113,7 +114,7 @@ ADD status boolean;
 ALTER TABLE customers
 ADD status boolean;
 
-ALTER TABLE customers
+ALTER TABLE salespersons
 ADD status boolean;
 
 

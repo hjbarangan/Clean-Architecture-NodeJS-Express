@@ -5,6 +5,7 @@ const {
   putSalespersonController,
   getSalespersonByIdController,
   getAllSalespersonController,
+  softDeleteSalespersonController
 } = require("../controllers/salesperson/index");
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
@@ -13,5 +14,6 @@ router.post("/salespersons/add", authMiddleware, makeExpressCallback(postSalespe
 router.put("/salesperson/edit/:id", authMiddleware, makeExpressCallback(putSalespersonController));
 router.get("/salesperson/:id", authMiddleware, makeExpressCallback(getSalespersonByIdController));
 router.get("/salesperson", authMiddleware, makeExpressCallback(getAllSalespersonController));
+router.patch("/salesperson/delete/:id", authMiddleware, makeExpressCallback(softDeleteSalespersonController))
 
 module.exports = router;

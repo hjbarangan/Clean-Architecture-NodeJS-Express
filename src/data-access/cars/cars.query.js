@@ -4,6 +4,7 @@ const carData = ({ dbs }) => {
     getCarById,
     addCar,
     editCar,
+    softDeleteCar,
     findBySerial,
   });
 
@@ -35,6 +36,14 @@ const carData = ({ dbs }) => {
     const sql =
       "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , car_for_sale = $6, price = $7 WHERE car_id = $8 RETURNING *";
     const params = [serial_number, brand, model, color, year, car_for_sale, price, id];
+    return connect.query(sql, params);
+  }
+
+  async function softDeleteCar(id) {
+    const connect = await dbs();
+    const sql =
+      "UPDATE cars SET status = false WHERE car_id = $1 RETURNING *";
+    const params = [id];
     return connect.query(sql, params);
   }
 

@@ -4,6 +4,7 @@ const salespersonData = ({ dbs }) => {
     getSalespersonById,
     addSalesperson,
     editSalesperson,
+    softDeleteSalesperson
   });
 
   async function getAllSalespersons() {
@@ -36,6 +37,15 @@ const salespersonData = ({ dbs }) => {
     const params = [firstname, lastname, contact, id];
     return connect.query(sql, params);
   }
+
+async function softDeleteSalesperson(id) {
+  const connect = await dbs();
+  const sql =
+    "UPDATE salespersons SET status = false WHERE salesperson_id = $1 RETURNING *";
+  const params = [id];
+  return connect.query(sql, params);
+}
+
 };
 
 module.exports = salespersonData;

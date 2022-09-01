@@ -10,8 +10,6 @@ const loginUser = ({ userDB, userLoginEntity, jwtGenerate }) => {
       return result;
     }
 
-    //TODO: if conditions when the credentials are incorrect/invalid.
-
     //TODO: return the generated token
 
     const token = jwtGenerate(userExists.rows[0].user_id);
@@ -27,11 +25,10 @@ const loginUser = ({ userDB, userLoginEntity, jwtGenerate }) => {
     //   lastname: result.lastname,
     // });
 
-    return userDB.userLogin({
+    return ({
       token: token,
       user_id: result.user_id,
-      email: result.email,
-      password: result.password,
+      email: result.email
     });
   };
 };

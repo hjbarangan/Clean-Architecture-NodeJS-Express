@@ -4,6 +4,7 @@ const customerData = ({ dbs }) => {
     getCustomerById,
     addCustomer,
     editCustomer,
+    softDeleteCustomer
   });
 
   async function getAllCustomers() {
@@ -34,6 +35,14 @@ const customerData = ({ dbs }) => {
     const sql =
       "UPDATE customers SET firstname = $1, lastname = $2, address = $3, contact = $4 WHERE customer_id = $5 RETURNING *";
     const params = [firstname, lastname, address, contact, id];
+    return connect.query(sql, params);
+  }
+
+  async function softDeleteCustomer(id) {
+    const connect = await dbs();
+    const sql =
+      "UPDATE customers SET status = false WHERE customer_id = $1 RETURNING *";
+    const params = [id];
     return connect.query(sql, params);
   }
 
