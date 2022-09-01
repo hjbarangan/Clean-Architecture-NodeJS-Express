@@ -145,3 +145,22 @@ ALTER TABLE salespersons
 ALTER TABLE customers
   ADD updated_at TIME WITHOUT TIME ZONE,
 
+ALTER TABLE sales_invoice
+  ADD total_amount NUMERIC;
+
+
+--* Join Tables
+
+
+--* fetch car price from cars into sales_invoice table
+SELECT * FROM sales_invoice S JOIN cars C ON S.car_id = C.car_id WHERE status = true;
+
+UPDATE sales_invoice
+SET total_amount = cars.price FROM cars
+WHERE sales_invoice.car_id = cars.car_id RETURNING *;
+
+
+UPDATE sales_invoice
+SET total_amount = cars.price FROM cars
+WHERE sales_invoice.car_id = cars.car_id RETURNING invoice_id, sales_invoice.car_id, customer_id, salesperson_id, total_amount;
+

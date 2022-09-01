@@ -2,7 +2,6 @@ const makeSalespersonEntity = ({}) => {
   return function createSalesperson(salesperson) {
     const { firstname, lastname, contact} = salesperson;
 
-    //conditions
     if (!firstname) {
       throw new Error("Enter Salesperson Firstname");
     }

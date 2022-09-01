@@ -3,19 +3,19 @@ const makeUserEntity = ({}) => {
     const { email, password, firstname, lastname } = user;
 
     if (!email) {
-      throw new Error("Car must have email!");
+      throw new Error("User must have email!");
     }
 
     if (!password) {
-      throw new Error("Car must have password!");
+      throw new Error("User must have password!");
     }
 
     if (!firstname) {
-      throw new Error("Car must have firstname!");
+      throw new Error("User must have firstname!");
     }
 
     if (!lastname) {
-      throw new Error("Car must have lastname!");
+      throw new Error("User must have lastname!");
     }
 
     return Object.freeze({
