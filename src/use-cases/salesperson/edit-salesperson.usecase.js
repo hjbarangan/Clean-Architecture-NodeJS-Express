@@ -5,7 +5,8 @@ const editSalesperson = ({ salespersonDB, salespersonEntity }) => {
       return salespersonDB.editSalesperson({
         id: id,
         firstname: result.firstname,
-        lastname: result.lastname
+        lastname: result.lastname,
+        contact: result.contact
       });
     };
   };

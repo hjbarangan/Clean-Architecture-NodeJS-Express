@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS "sales_invoice" (
 CREATE TABLE IF NOT EXISTS "mechanics" (
     "mechanic_id" SERIAL PRIMARY KEY,
     "firstname" VARCHAR(150),
-    "middlename" VARCHAR(150),
     "lastname" VARCHAR(150));
 
 
@@ -96,6 +95,12 @@ INSERT INTO cars (serial_number, make, model, color, year, car_for_sale) VALUES 
 INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale,price) VALUES ('123hehe', 'Toyota', 'Vios', 'Red', '2021', 'Yes', 2333300) RETURNING *;
 
 UPDATE cars SET status = false WHERE car_id = 46 RETURNING *
+Select * from cars where not status in (false) ORDER BY car_id DESC;
+
+--! Empty table and restart the ID
+TRUNCATE parts_used RESTART IDENTITY CASCADE;
+
+--* Changes in Tables
 ALTER TABLE cars
   ADD price numeric;
 
@@ -117,4 +122,26 @@ ADD status boolean;
 ALTER TABLE salespersons
 ADD status boolean;
 
+--* september 1, alterations
+
+ALTER TABLE cars
+  ADD created_at TIME WITHOUT TIME ZONE,
+  ADD updated_at TIME WITHOUT TIME ZONE;
+
+ALTER TABLE mechanics
+  ADD created_at TIME WITHOUT TIME ZONE,
+  ADD updated_at TIME WITHOUT TIME ZONE,
+  ADD status boolean;
+
+ALTER TABLE service_ticket
+  ADD created_at TIME WITHOUT TIME ZONE,
+  ADD updated_at TIME WITHOUT TIME ZONE,
+  ADD status boolean;  
+
+ALTER TABLE salespersons
+  ADD created_at TIME WITHOUT TIME ZONE,
+  ADD updated_at TIME WITHOUT TIME ZONE;
+
+ALTER TABLE customers
+  ADD updated_at TIME WITHOUT TIME ZONE,
 

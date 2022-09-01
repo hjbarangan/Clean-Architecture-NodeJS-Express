@@ -4,12 +4,13 @@ const salespersonData = ({ dbs }) => {
     getSalespersonById,
     addSalesperson,
     editSalesperson,
-    softDeleteSalesperson
+    softDeleteSalesperson,
   });
 
   async function getAllSalespersons() {
     const connect = await dbs();
-    const sql = "SELECT * FROM salespersons";
+    const sql =
+      "SELECT * FROM salespersons WHERE NOT status IN (false) ORDER BY salesperson_id DESC";
     return connect.query(sql);
   }
 
@@ -22,10 +23,11 @@ const salespersonData = ({ dbs }) => {
 
   async function addSalesperson(salesperson) {
     const connect = await dbs();
-    const { firstname, lastname, contact} = salesperson;
+    const { firstname, lastname, contact } = salesperson;
     const params = [firstname, lastname, contact];
+    console.log(params);
     const sql =
-      "INSERT INTO salespersons (firstname, lastname, contact) VALUES ( $1, $2, $3) RETURNING *;";
+      "INSERT INTO salespersons (firstname, lastname, contact, status, created_at, updated_at) VALUES ( $1, $2, $3, true, localtimestamp, localtimestamp) RETURNING *;";
     return connect.query(sql, params);
   }
 
@@ -33,19 +35,18 @@ const salespersonData = ({ dbs }) => {
     const connect = await dbs();
     const { firstname, lastname, contact, id } = salesperson;
     const sql =
-      "UPDATE salespersons SET firstname = $1, lastname = $2, contact = $3 WHERE salesperson_id = $4 RETURNING *";
+      "UPDATE salespersons SET firstname = $1, lastname = $2, contact = $3, updated_at = localtimestamp WHERE salesperson_id = $4 RETURNING *";
     const params = [firstname, lastname, contact, id];
     return connect.query(sql, params);
   }
 
-async function softDeleteSalesperson(id) {
-  const connect = await dbs();
-  const sql =
-    "UPDATE salespersons SET status = false WHERE salesperson_id = $1 RETURNING *";
-  const params = [id];
-  return connect.query(sql, params);
-}
-
+  async function softDeleteSalesperson(id) {
+    const connect = await dbs();
+    const sql =
+      "UPDATE salespersons SET status = false WHERE salesperson_id = $1 RETURNING *";
+    const params = [id];
+    return connect.query(sql, params);
+  }
 };
 
 module.exports = salespersonData;

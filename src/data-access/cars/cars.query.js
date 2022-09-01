@@ -10,7 +10,7 @@ const carData = ({ dbs }) => {
 
   async function getAllCars() {
     const connect = await dbs();
-    const sql = "SELECT * FROM cars";
+    const sql = "SELECT * FROM cars WHERE NOT status IN (false) ORDER BY car_id DESC";
     return connect.query(sql);
   }
 
@@ -25,7 +25,7 @@ const carData = ({ dbs }) => {
     const connect = await dbs();
     const { serial_number, brand, model, color, year, car_for_sale, price } = car;
     const sql =
-      "INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale, price) VALUES ( $1, $2, $3, $4, $5, $6, $7) RETURNING *;";
+      "INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale, price, status, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, true, localtimestamp, localtimestamp) RETURNING *;";
     const params = [serial_number, brand, model, color, year, car_for_sale, price];
     return connect.query(sql, params);
   }
@@ -34,7 +34,7 @@ const carData = ({ dbs }) => {
     const connect = await dbs();
     const { serial_number, brand, model, color, year, car_for_sale, price, id } = car;
     const sql =
-      "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , car_for_sale = $6, price = $7 WHERE car_id = $8 RETURNING *";
+      "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , car_for_sale = $6, price = $7, updated_at = localtimestamp WHERE car_id = $8 RETURNING *";
     const params = [serial_number, brand, model, color, year, car_for_sale, price, id];
     return connect.query(sql, params);
   }

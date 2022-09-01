@@ -4,12 +4,13 @@ const customerData = ({ dbs }) => {
     getCustomerById,
     addCustomer,
     editCustomer,
-    softDeleteCustomer
+    softDeleteCustomer,
   });
 
   async function getAllCustomers() {
     const connect = await dbs();
-    const sql = "SELECT * FROM customers";
+    const sql =
+      "SELECT * FROM customers  WHERE NOT status IN (false) ORDER BY customer_id DESC";
     return connect.query(sql);
   }
 
@@ -25,7 +26,7 @@ const customerData = ({ dbs }) => {
     const { firstname, lastname, address, contact } = customer;
     const params = [firstname, lastname, address, contact];
     const sql =
-      "INSERT INTO customers (firstname, lastname, address, contact, created_date) VALUES ( $1, $2, $3, $4, localtimestamp) RETURNING *;";
+      "INSERT INTO customers (firstname, lastname, address, contact, status, created_date, updated_at) VALUES ( $1, $2, $3, $4, true, localtimestamp, localtimestamp) RETURNING *;";
     return connect.query(sql, params);
   }
 
@@ -33,7 +34,7 @@ const customerData = ({ dbs }) => {
     const connect = await dbs();
     const { firstname, lastname, address, contact, id } = customer;
     const sql =
-      "UPDATE customers SET firstname = $1, lastname = $2, address = $3, contact = $4 WHERE customer_id = $5 RETURNING *";
+      "UPDATE customers SET firstname = $1, lastname = $2, address = $3, contact = $4, updated_at = localtimestamp WHERE customer_id = $5 RETURNING *";
     const params = [firstname, lastname, address, contact, id];
     return connect.query(sql, params);
   }
@@ -45,7 +46,6 @@ const customerData = ({ dbs }) => {
     const params = [id];
     return connect.query(sql, params);
   }
-
 };
 
 module.exports = customerData;

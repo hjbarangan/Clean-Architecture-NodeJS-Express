@@ -5,7 +5,8 @@ const addSalesperson = ({ salespersonDB, salespersonEntity }) => {
       
       return salespersonDB.addSalesperson({
         firstname: result.firstname,
-        lastname: result.lastname
+        lastname: result.lastname,
+        contact: result.contact
     });
 
     };

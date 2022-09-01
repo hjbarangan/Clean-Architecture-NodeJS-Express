@@ -8,13 +8,13 @@ const invoiceData = ({ dbs }) => {
 
   async function getAllInvoices() {
     const connect = await dbs();
-    const sql = "SELECT * FROM sales_invoice";
+    const sql = "SELECT * FROM sales_invoice ORDER BY invoice_id DESC";
     return connect.query(sql);
   }
 
   async function getInvoiceById(id) {
     const connect = await dbs();
-    const sql = "SELECT * FROM sales_invoice WHERE sales_invoice_id = $1";
+    const sql = "SELECT * FROM sales_invoice WHERE invoice_id = $1";
     const params = [id];
     return connect.query(sql, params);
   }

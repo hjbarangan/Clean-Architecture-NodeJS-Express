@@ -1,6 +1,6 @@
 const makeSalespersonEntity = ({}) => {
   return function createSalesperson(salesperson) {
-    const { firstname, lastname } = salesperson;
+    const { firstname, lastname, contact} = salesperson;
 
     //conditions
     if (!firstname) {
@@ -9,10 +9,14 @@ const makeSalespersonEntity = ({}) => {
     if (!lastname) {
       throw new Error("Enter Salesperson Lastname");
     }
+    if(!contact) {
+      throw new Error("Enter Salesperson Contact");
+    }
 
     return Object.freeze({
       firstname,
       lastname,
+      contact
     });
   };
 };
