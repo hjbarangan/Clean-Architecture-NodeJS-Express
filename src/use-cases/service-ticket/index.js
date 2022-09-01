@@ -3,7 +3,7 @@ const ticketEntity = require("../../entities/ticket/index");
 
 const createTicket = require("./add-ticket.usecase");
 const viewTicket = require("./view-ticket.usecase");
-const viewAllTickets = require("./view-all-ticket.usecase");
+const viewAllTickets = require("./view-all-tickets.usecase");
 
 const createTicketUseCase = createTicket({ ticketDB, ticketEntity });
 const viewTicketUseCase = viewTicket({ ticketDB, ticketEntity });

@@ -2,7 +2,7 @@ const {
   createTicketUseCase,
   viewTicketUseCase,
   viewAllTicketsUseCase,
-} = require("../../use-cases/ticket/index");
+} = require("../../use-cases/service-ticket/index");
 
 const createTicketController = require("./add-service-ticket.controller");
 const fetchTicketDetailsController = require("./get-ticket-details.controller");
