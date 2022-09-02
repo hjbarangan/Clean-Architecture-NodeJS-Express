@@ -1,4 +1,4 @@
-const fetchCustomersCountController = ({ viewCustomersCountUseCase }) => {
+const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
       "Content-Type": "application/json",
@@ -11,7 +11,7 @@ const fetchCustomersCountController = ({ viewCustomersCountUseCase }) => {
         ...info,
         source,
       };
-      const customers = await viewCustomersCountUseCase(toView);
+      const customers = await viewCustomerCountUseCase(toView);
 
       return {
         headers: {

@@ -8,6 +8,7 @@ const editCustomer = ({ customerDB, customerEntity }) => {
       lastname: result.lastname,
       address: result.address,
       contact: result.contact,
+      updated_at: result.updated_at
     });
   };
 };

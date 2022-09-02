@@ -26,7 +26,7 @@ const customerData = ({ dbs }) => {
     const { firstname, lastname, address, contact } = customer;
     const params = [firstname, lastname, address, contact];
     const sql =
-      "INSERT INTO customers (firstname, lastname, address, contact, status, created_date, updated_at) VALUES ( $1, $2, $3, $4, true, localtimestamp, localtimestamp) RETURNING *;";
+      "INSERT INTO customers (firstname, lastname, address, contact, status, created_at, updated_at) VALUES ( $1, $2, $3, $4, true, localtimestamp, localtimestamp) RETURNING *;";
     return connect.query(sql, params);
   }
 

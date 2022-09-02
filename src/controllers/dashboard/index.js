@@ -12,7 +12,7 @@ const fetchMonthlyRevenueController = require("./get-monthly-revenue.controller"
 const fetchTopSellersController = require("./get-top-sellers.controller");
 
 const getCustomersCountController = fetchCustomersCountController({
-  viewCustomersCountUseCase,
+  viewCustomerCountUseCase,
 });
 const getSalesNumberController = fetchSalesNumberController({
   viewSalesNumberUseCase,

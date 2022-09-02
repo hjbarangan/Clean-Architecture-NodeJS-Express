@@ -1,5 +1,5 @@
-const ticketDB = require("../../data-access/ticket/index");
-const ticketEntity = require("../../entities/ticket/index");
+const ticketDB = require("../../data-access/service-tickets/index");
+const ticketEntity = require("../../entities/service-ticket/index");
 
 const createTicket = require("./add-ticket.usecase");
 const viewTicket = require("./view-ticket.usecase");

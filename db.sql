@@ -164,3 +164,50 @@ UPDATE sales_invoice
 SET total_amount = cars.price FROM cars
 WHERE sales_invoice.car_id = cars.car_id RETURNING invoice_id, sales_invoice.car_id, customer_id, salesperson_id, total_amount;
 
+--* JOIN sales_invoice and cars
+SELECT invoice_id, invoice_number, transaction_date ,price FROM sales_invoice O JOIN cars C ON O.car_id = C.car_id;
+
+--* Three Tables using JOIN
+select t1.name, t2.image_id, t3.path
+from table1 t1 
+inner join table2 t2 on t1.person_id = t2.person_id
+inner join table3 t3 on t2.image_id=t3.image_id
+
+--* RETURN DATA FROM GENERATED SALES INVOICE (ARRAY)
+SELECT S.invoice_number, C.firstname, C.lastname, A.price, A.serial_number, A.brand, A.model, A.color
+FROM sales_invoice S 
+INNER JOIN customers C ON S.customer_id = C.customer_id
+INNER JOIN cars A ON S.car_id = A.car_id;
+
+--* RETURN DATA FROM GENERATED SALES INVOICE (ID)
+SELECT S.invoice_number, C.firstname, C.lastname, A.price, A.serial_number, A.brand, A.model, A.color
+FROM sales_invoice S 
+INNER JOIN customers C ON S.customer_id = C.customer_id
+INNER JOIN cars A ON S.car_id = A.car_id WHERE invoice_id = 2;
+
+--* UPDATE CAR AVAILABILTY AFTER INSERTING THE INVOICE 
+
+
+
+--* GET TOP SELLING BRANDS WITH JOIN SELECT
+--? not sure tho
+
+SELECT C.brand as carBrand, sum(C.price) as BrandSales, count(C.car_id) 
+from sales_invoice S
+inner join cars C on S.car_id = C.car_id
+GROUP BY C.brand 
+ORDER by BrandSales desc 
+limit 10;
+
+--* GET SUM FROM JOIN SELECT (SALES_INVOICE AND CAR)
+
+SELECT SUM(C.price) as month_revenue
+FROM sales_invoice S
+inner join cars C on S.car_id = C.car_id
+WHERE transaction_date  >= DATE_TRUNC('month', CURRENT_DATE);
+
+
+
+-- SELECT * FROM (SELECT "Description", DATE_TRUNC(\'month\', "InvoiceDate") AS "Month", "Quantity", 
+-- ROW_NUMBER() OVER (PARTITION BY DATE_TRUNC(\'month\',"InvoiceDate") ORDER BY "Quantity" DESC) AS "MonthlyRank" FROM "RetailData" 
+-- GROUP BY "Description", "Month", "Quantity") "Ranks" WHERE "MonthlyRank" <= 10;
