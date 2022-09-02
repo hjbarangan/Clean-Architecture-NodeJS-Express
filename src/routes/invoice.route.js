@@ -9,7 +9,7 @@ const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
 
 router.post("/invoice/create",authMiddleware, makeExpressCallback(postInvoiceController));
-router.get("/invoice/:id", authMiddleware, makeExpressCallback(getInvoiceByIdController));
+router.get("/invoice/view/:id", authMiddleware, makeExpressCallback(getInvoiceByIdController));
 router.get("/invoice", authMiddleware, makeExpressCallback(getAllInvoicesController));
 
 module.exports = router;

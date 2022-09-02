@@ -14,7 +14,7 @@ router.post(
   makeExpressCallback(postTicketController)
 );
 router.get(
-  "/ticket/:id",
+  "/ticket/view/:id",
   authMiddleware,
   makeExpressCallback(getTicketByIdController)
 );

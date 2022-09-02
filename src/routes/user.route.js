@@ -6,7 +6,7 @@ const makeExpressCallback = require("../express-callback/index");
 
 router.post("/register", makeExpressCallback(postUserController));
 router.post("/login", makeExpressCallback(loginUserController));
-router.get("/user-details", makeExpressCallback(getUserByIdController));
+router.get("/user-details/:id", makeExpressCallback(getUserByIdController));
 // router.put("/user/edit/:id", makeExpressCallback(putUserController))
 router.get("/users",  makeExpressCallback(getAllUsersController));
 
