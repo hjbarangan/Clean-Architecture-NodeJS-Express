@@ -21,7 +21,7 @@ const addUserController = ({ addUserUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { users },
+          body:  users ,
         };
       } catch (e) {
         console.log(e);

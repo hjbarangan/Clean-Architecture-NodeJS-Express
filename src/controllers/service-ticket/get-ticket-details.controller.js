@@ -22,7 +22,7 @@ const fetchTicketDetailsController = ({ viewTicketUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { ticket },
+          body:  ticket ,
         };
       } catch (e) {
         console.log(e);

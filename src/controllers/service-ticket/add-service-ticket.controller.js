@@ -18,7 +18,7 @@ const createTicketController = ({ createTicketUseCase }) => {
           "Content-Type": "application/json",
         },
         statusCode: 200,
-        body: { service_ticket },
+        body:  service_ticket ,
       };
     } catch (e) {
       console.log(e);

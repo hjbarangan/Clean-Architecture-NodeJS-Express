@@ -22,7 +22,7 @@ const fetchAllInvoicesController = ({ viewAllInvoicesUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { invoice },
+          body:  invoice ,
         };
       } catch (e) {
         console.log(e);

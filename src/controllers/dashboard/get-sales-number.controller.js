@@ -19,7 +19,7 @@ const  fetchSalesNumberController = ({ viewSalesNumberUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { salesNumber },
+          body:  salesNumber ,
         };
       } catch (e) {
         console.log(e);

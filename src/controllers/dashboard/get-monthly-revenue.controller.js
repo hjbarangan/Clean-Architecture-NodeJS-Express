@@ -18,7 +18,7 @@ const fetchMonthlyRevenueController = ({ viewMonthlyRevenueUseCase }) => {
           "Content-Type": "application/json",
         },
         statusCode: 200,
-        body: { monthlyRevenue },
+        body:  monthlyRevenue ,
       };
     } catch (e) {
       console.log(e);

@@ -21,7 +21,7 @@ const editCustomerController = ({ editCustomerUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { response },
+          body:  response ,
         };
       } catch (e) {
         console.log(e);

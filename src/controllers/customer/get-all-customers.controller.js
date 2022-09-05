@@ -22,7 +22,7 @@ const fetchAllCustomersController = ({ viewAllCustomersUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { customers },
+          body:  customers ,
         };
       } catch (e) {
         console.log(e);

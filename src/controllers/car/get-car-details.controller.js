@@ -22,7 +22,7 @@ const fetchCarDetailsController = ({ viewCarUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { cars },
+          body:  cars ,
         };
       } catch (e) {
         console.log(e);

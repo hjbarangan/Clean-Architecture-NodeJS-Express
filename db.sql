@@ -110,9 +110,6 @@ ALTER TABLE customers
 ALTER TABLE salespersons
 ADD contact varchar(20);
 
-ALTER TABLE invoice
-ADD total numeric;
-
 ALTER TABLE cars
 ADD status boolean;
 
@@ -123,27 +120,35 @@ ALTER TABLE salespersons
 ADD status boolean;
 
 --* september 1, alterations
+ALTER TABLE cars
+  ADD price numeric;
+
+ALTER TABLE salespersons
+ADD contact varchar(20);
 
 ALTER TABLE cars
-  ADD created_at TIME WITHOUT TIME ZONE,
-  ADD updated_at TIME WITHOUT TIME ZONE;
+  ADD created_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD updated_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD status boolean;
 
 ALTER TABLE mechanics
-  ADD created_at TIME WITHOUT TIME ZONE,
-  ADD updated_at TIME WITHOUT TIME ZONE,
+  ADD created_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD updated_at TIMESTAMP WITHOUT TIME ZONE,
   ADD status boolean;
 
 ALTER TABLE service_ticket
-  ADD created_at TIME WITHOUT TIME ZONE,
-  ADD updated_at TIME WITHOUT TIME ZONE,
+  ADD created_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD updated_at TIMESTAMP WITHOUT TIME ZONE,
   ADD status boolean;  
 
 ALTER TABLE salespersons
-  ADD created_at TIME WITHOUT TIME ZONE,
-  ADD updated_at TIME WITHOUT TIME ZONE;
+  ADD created_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD updated_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD status boolean;
 
 ALTER TABLE customers
-  ADD updated_at TIME WITHOUT TIME ZONE,
+  ADD updated_at TIMESTAMP WITHOUT TIME ZONE,
+  ADD status boolean;
 
 ALTER TABLE sales_invoice
   ADD total_amount NUMERIC;

@@ -21,7 +21,7 @@ const addSalespersonController = ({ addSalespersonUseCase }) => {
             "Content-Type": "application/json",
           },
           statusCode: 200,
-          body: { salespersons },
+          body: salespersons ,
         };
       } catch (e) {
         console.log(e);

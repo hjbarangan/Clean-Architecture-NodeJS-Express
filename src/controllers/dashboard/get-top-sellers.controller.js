@@ -18,7 +18,7 @@ const fetchTopSellersController = ({ viewTopSellersUseCase }) => {
           "Content-Type": "application/json",
         },
         statusCode: 200,
-        body: { topSellers },
+        body:  topSellers ,
       };
     } catch (e) {
       console.log(e);
