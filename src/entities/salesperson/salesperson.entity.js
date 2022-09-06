@@ -1,4 +1,10 @@
 const makeSalespersonEntity = ({}) => {
+
+  function containsSpecialChars(string) {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(string);
+  }
+
   return function createSalesperson(salesperson) {
     const { firstname, lastname, contact} = salesperson;
 
@@ -12,6 +18,10 @@ const makeSalespersonEntity = ({}) => {
       throw new Error("Enter Salesperson Contact");
     }
 
+    if (containsSpecialChars(firstname) || containsSpecialChars(lastname)) {
+      throw new Error("Name should not contain any special character");
+    }
+    
     return Object.freeze({
       firstname,
       lastname,
