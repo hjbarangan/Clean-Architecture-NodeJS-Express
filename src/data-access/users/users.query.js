@@ -32,7 +32,7 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
     const connect = await dbs();
     const { email, password, firstname, lastname } = user;
     const sql =
-      "INSERT INTO users (email, password, firstname, lastname ) VALUES ( $1, $2, $3, $4 ) RETURNING *;";
+      "INSERT INTO users (email, password, firstname, lastname, created_at, updated_at) VALUES ( $1, $2, $3, $4, localtimestamp, localtimestamp) RETURNING *;";
 
     let hashedPassword = await encryptPassword(password);
 
@@ -46,7 +46,7 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
     const connect = await dbs();
     const { email, password, firstname, lastname, id } = user;
     const sql =
-      "UPDATE users SET email = $1, password = $2, firstname = $3, lastname = $4,  updated_at = NOW() WHERE user_id = $5 RETURNING *";
+      "UPDATE users SET email = $1, password = $2, firstname = $3, lastname = $4,  updated_at = localtimestamp WHERE user_id = $5 RETURNING *";
     const params = [email, password, firstname, lastname, id];
     return connect.query(sql, params);
   }

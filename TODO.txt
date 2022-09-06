@@ -2,7 +2,9 @@
 
 [/] dashboard.query
 [/] service ticket module
-[] upsert query in cars module
+
+//TODO (09/06/2022):
+[/] upsert query in cars module
 [] generate invoice number (incremented)
 [] add if conditions for validation:
     email address should have @ symbol, 
@@ -11,5 +13,3 @@
     incorrect credentials
 [] api testing using mocha, chai
 
-
-note: atleast two or three of the todos should be accomplished by 9/2/2022

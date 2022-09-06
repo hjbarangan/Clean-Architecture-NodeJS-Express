@@ -5,7 +5,7 @@ const carData = ({ dbs }) => {
     addCar,
     editCar,
     softDeleteCar,
-    findBySerial,
+    findBySerial
   });
 
   async function getAllCars() {
