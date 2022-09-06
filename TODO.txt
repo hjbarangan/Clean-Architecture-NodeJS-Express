@@ -12,4 +12,11 @@
     incorrect credentials
 [/] generate invoice number (incremented)
 [] api testing using mocha, chai
+    * With Invalid Token
+    * With Token But Incomplete Data
+    * With Invalid Token and Incomplete Data
+
+[] add mechanic module
+[] service ticket must be generated
+
 

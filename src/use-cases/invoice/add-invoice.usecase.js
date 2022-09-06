@@ -1,15 +1,15 @@
 const createInvoice = ({ invoiceDB, invoiceEntity }) => {
     return async function postInvoice(info) {
       const result = invoiceEntity(info);
-      const invoiceExists = await invoiceDB.findByInvoiceNumber(result.invoice_number);
+      // const invoiceExists = await invoiceDB.findByInvoiceNumber(result.invoice_number);
   
-      if (invoiceExists.rowCount !== 0) {
-        const result = {
-          msg: "Invoice Number already exists",
-          car: invoiceExists.rows,
-        };
-        return result;
-      }
+      // if (invoiceExists.rowCount !== 0) {
+      //   const result = {
+      //     msg: "Invoice Number already exists",
+      //     car: invoiceExists.rows,
+      //   };
+      //   return result;
+      // }
   
       return invoiceDB.createInvoice({
         invoice_id: result.invoice_id,
