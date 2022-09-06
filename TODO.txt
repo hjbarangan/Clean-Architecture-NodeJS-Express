@@ -5,11 +5,11 @@
 
 //TODO (09/06/2022):
 [/] upsert query in cars module
-[] generate invoice number (incremented)
-[] add if conditions for validation:
+[/] add if conditions for validation:
     email address should have @ symbol, 
-    password must have 8 characters with number and uppercase,
+    password must have 8 characters,
     names should not contain any numbers or special character,
     incorrect credentials
+[/] generate invoice number (incremented)
 [] api testing using mocha, chai
 

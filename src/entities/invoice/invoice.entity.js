@@ -1,27 +1,20 @@
 const makeInvoiceEntity = ({}) => {
   return function createCustomer(invoice) {
-    const { invoice_number, car_id, customer_id, salesperson_id } = invoice;
-
-    if (!invoice_number) {
-      throw new Error("Enter Invoice Number");
-    }
+    const { car_id, customer_id, salesperson_id } = invoice;
 
     if (!car_id) {
-      throw new Error("Where's your car dude?");
+      throw new Error("Car is required");
     }
 
     if (!customer_id) {
-      throw new Error("Y'all should have a customer");
+      throw new Error("Customer is required");
     }
 
     if (!salesperson_id) {
-      throw new Error(
-        "Bruh, You can't buy a car without my homie salesperson!"
-      );
+      throw new Error("Salesperson is required");
     }
 
     return Object.freeze({
-      invoice_number,
       car_id,
       customer_id,
       salesperson_id,

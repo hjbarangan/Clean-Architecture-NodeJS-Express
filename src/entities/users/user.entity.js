@@ -4,15 +4,23 @@ const makeUserEntity = ({}) => {
     return specialChars.test(string);
   }
 
+  function validEmail(email) {
+    const emailFormat = /\S+@\S+\.\S+/;
+    return emailFormat.test(email);
+  }
+
+  function containsNumbers (string) {
+    const numbers = /[0-9]/
+    return numbers.test(string)
+  }
+
+
   return function createUser(user) {
     const { email, password, firstname, lastname } = user;
 
-    // const emailFormat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-    // const passwordValidator = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-
-    // if (!email.match(emailFormat)) {
-    //   throw new Error("Email should be a valid email!");
-    // }
+    if (!validEmail(email)) {
+      throw new Error("Email should be a valid email!");
+    }
 
     if (!email) {
       throw new Error("User must have email!");
@@ -22,13 +30,9 @@ const makeUserEntity = ({}) => {
       throw new Error("User must have password!");
     }
 
-    if (password.length < 7) {
-      throw new Error("Password length must be atleast 7 characters!");
+    if (password.length < 8) {
+      throw new Error("Password length must be atleast 8 characters!");
     }
-
-    // if (!password.match(passwordValidator)){
-    //   throw new Error("Password must contain atleast one numeric digit and a special character!")
-    // }
 
     if (!firstname) {
       throw new Error("User must have firstname!");
@@ -40,6 +44,10 @@ const makeUserEntity = ({}) => {
 
     if (containsSpecialChars(firstname) || containsSpecialChars(lastname)) {
       throw new Error("Name should not contain any special character");
+    }
+
+    if (containsNumbers(firstname) || containsNumbers(lastname)) {
+      throw new Error("Name should not contain numbers!")
     }
 
     return Object.freeze({

@@ -22,15 +22,25 @@ const invoiceData = ({ dbs, carDB }) => {
   async function createInvoice(data) {
     const connect = await dbs();
 
+    const { car_id, customer_id, salesperson_id } = data;
+
+    //* GET LAST GENERATED NUMBER
+
+    const getLastNoSQL = "SELECT MAX(invoice_id) FROM sales_invoice";
+
+    const test = await connect.query(getLastNoSQL);
+    const lastID = test.rows[0].max;
+    const addLeadingZeros = String(lastID).padStart(5, "0");
+    const generatedInvoiceNo = `INV-${addLeadingZeros}`;
+
     //* INSERT INTO INVOICE
-    const { invoice_number, car_id, customer_id, salesperson_id, invoice_id } = data;
-    const params = [invoice_number, car_id, customer_id, salesperson_id];
+
+    const params = [generatedInvoiceNo, car_id, customer_id, salesperson_id];
+
     const sql =
       "INSERT INTO sales_invoice (invoice_number, car_id, customer_id, salesperson_id, transaction_date) VALUES ( $1, $2, $3, $4, NOW()) RETURNING *;";
 
     await connect.query(sql, params);
-
-    //TODO: UPDATE CAR_FOR_SALE OF THE CAR SOLD INTO NO
 
     const updateParams = [car_id];
     const updateSQL = "UPDATE cars SET car_for_sale = 'No' WHERE car_id = $1";
@@ -38,11 +48,14 @@ const invoiceData = ({ dbs, carDB }) => {
     await connect.query(updateSQL, updateParams);
 
     const invoiceTransactionSQL =
-      "SELECT s.invoice_number, s.transaction_date, c.price, c.serial_number, c.brand, c.model FROM sales_invoice s JOIN cars c ON c.car_id = s.car_id WHERE s.invoice_id = $1";
-    const invoiceTransactionParams = [invoice_id];
+      "SELECT s.invoice_number, s.transaction_date, c.price, c.serial_number, c.brand, c.model FROM sales_invoice s JOIN cars c ON c.car_id = s.car_id WHERE s.invoice_number = $1";
+    const invoiceTransactionParams = [generatedInvoiceNo];
 
-    const viewTransaction =  await connect.query(invoiceTransactionSQL, invoiceTransactionParams);
-    return viewTransaction.rows;
+    const viewTransaction = await connect.query(
+      invoiceTransactionSQL,
+      invoiceTransactionParams
+    );
+    return viewTransaction.rows[0];
   }
 
   async function findByInvoiceNumber(invoice_number) {
