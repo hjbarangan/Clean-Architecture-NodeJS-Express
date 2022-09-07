@@ -21,8 +21,34 @@ const ticketData = ({ dbs }) => {
 
   async function createTicket(service_ticket) {
     const connect = await dbs();
-    const { service_ticket_number, date_received, comments, date_returned, car_id, customer_id, created_at, updated_at, status } = service_ticket;
-    const params = [service_ticket_number, date_received, comments, date_returned, car_id, customer_id, created_at, updated_at, status];
+    const {
+      date_received,
+      comments,
+      date_returned,
+      car_id,
+      customer_id,
+      created_at,
+      updated_at,
+      status,
+    } = service_ticket;
+
+    const getLastTicketSQL = "SELECT MAX(ticket_id) FROM service_ticket;";
+    const lastTicket = await connect.query(getLastTicketSQL);
+    const addLeadingZeros = String(lastTicket.rows[0].max).padStart(5, "0");
+    const generatedTicketNo = `Ticket-${addLeadingZeros}`;
+
+    const params = [
+      generatedTicketNo,
+      date_received,
+      comments,
+      date_returned,
+      car_id,
+      customer_id,
+      created_at,
+      updated_at,
+      status,
+    ];
+
     const sql =
       "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, created_at, updated_at, status) VALUES ( $1, $2, $3, $4, $5, $6, localtimestamp, localtimestamp, true) RETURNING *;";
     return connect.query(sql, params);
