@@ -12,7 +12,7 @@ const makeExpressCallback = require("../express-callback/index");
 
 router.post("/customers/add", authMiddleware, makeExpressCallback(postCustomerController));
 router.put("/customers/edit/:id", authMiddleware, makeExpressCallback(putCustomerController));
-router.get("/customers", makeExpressCallback(getAllCustomersController));
+router.get("/customers", authMiddleware, makeExpressCallback(getAllCustomersController));
 router.get(
   "/customers/view/:id", authMiddleware,
   makeExpressCallback(getCustomerByIdController)
