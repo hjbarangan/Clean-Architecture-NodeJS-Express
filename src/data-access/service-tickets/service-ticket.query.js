@@ -29,7 +29,7 @@ const ticketData = ({ dbs }) => {
       customer_id,
       created_at,
       updated_at,
-      status,
+      is_active,
     } = service_ticket;
 
     const getLastTicketSQL = "SELECT MAX(ticket_id) FROM service_ticket;";
@@ -46,11 +46,11 @@ const ticketData = ({ dbs }) => {
       customer_id,
       created_at,
       updated_at,
-      status,
+      is_active,
     ];
 
     const sql =
-      "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, created_at, updated_at, status) VALUES ( $1, $2, $3, $4, $5, $6, localtimestamp, localtimestamp, true) RETURNING *;";
+      "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, $5, $6, localtimestamp, localtimestamp, true) RETURNING *;";
     return connect.query(sql, params);
   }
 

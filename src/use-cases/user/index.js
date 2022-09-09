@@ -7,12 +7,14 @@ const editUser = require("./edit-user.usecase");
 const viewUser = require("./view-user.usecase");
 const viewAllUsers = require("./view-all-users.usecase");
 const loginUser = require("./login-user.usecase");
+const softDelUser = require("./soft-delete-user.usecase");
 
 const addUserUseCase = addUser({ userDB, userEntity });
 const editUserUseCase = editUser({ userDB, userEntity });
 const viewAllUsersUseCase = viewAllUsers({ userDB });
 const viewUserUseCase = viewUser({ userDB });
 const loginUserUseCase = loginUser({ userDB, userLoginEntity, jwtGenerate });
+const softDeleteUserUseCase = softDelUser({ userDB });
 
 const userServices = Object.freeze({
   addUserUseCase,
@@ -20,6 +22,7 @@ const userServices = Object.freeze({
   viewAllUsersUseCase,
   viewUserUseCase,
   loginUserUseCase,
+  softDeleteUserUseCase,
 });
 
 module.exports = userServices;
@@ -30,4 +33,5 @@ module.exports = {
   viewAllUsersUseCase,
   viewUserUseCase,
   loginUserUseCase,
+  softDeleteUserUseCase,
 };

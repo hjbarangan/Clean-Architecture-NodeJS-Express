@@ -4,6 +4,7 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
     getUserById,
     addUser,
     editUser,
+    softDeleteUser,
     findByEmail,
     userLogin,
   });
@@ -32,7 +33,7 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
     const connect = await dbs();
     const { email, password, firstname, lastname } = user;
     const sql =
-      "INSERT INTO users (email, password, firstname, lastname, created_at, updated_at) VALUES ( $1, $2, $3, $4, localtimestamp, localtimestamp) RETURNING *;";
+      "INSERT INTO users (email, password, firstname, lastname, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, localtimestamp, localtimestamp, true) RETURNING *;";
 
     let hashedPassword = await encryptPassword(password);
 
@@ -48,6 +49,13 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
     const sql =
       "UPDATE users SET email = $1, password = $2, firstname = $3, lastname = $4,  updated_at = localtimestamp WHERE user_id = $5 RETURNING *";
     const params = [email, password, firstname, lastname, id];
+    return connect.query(sql, params);
+  }
+
+  async function softDeleteUser(id){
+    const connect = await dbs();
+    const sql = "UPDATE users SET is_active = false, inactive_at = localtimestamp WHERE user_id = $1 RETURNING *"  
+    const params = [id]
     return connect.query(sql, params);
   }
 
@@ -77,10 +85,10 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
           (result.lastname = user.rows[0].lastname),
           (result.email = user.rows[0].email),
           (result.password = user.rows[0].password);
-
+        console.log(result);
         return result;
       } else {
-        return ({msg: "Incorrect Credentials"});
+        return { msg: "Incorrect Credentials" };
       }
     } catch (error) {
       console.log(error);

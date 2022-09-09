@@ -10,7 +10,7 @@ const mechanicData = ({ dbs }) => {
     async function getAllMechanics() {
       const connect = await dbs();
       const sql =
-        "SELECT * FROM mechanics WHERE NOT status IN (false) ORDER BY mechanic_id DESC";
+        "SELECT * FROM mechanics WHERE NOT is_active IN (false) ORDER BY mechanic_id DESC";
       return connect.query(sql);
     }
   
@@ -27,7 +27,7 @@ const mechanicData = ({ dbs }) => {
       const params = [firstname, lastname, contact];
       console.log(params);
       const sql =
-        "INSERT INTO mechanics (firstname, lastname, contact, status, created_at, updated_at) VALUES ( $1, $2, $3, true, localtimestamp, localtimestamp) RETURNING *;";
+        "INSERT INTO mechanics (firstname, lastname, contact, is_active, created_at, updated_at) VALUES ( $1, $2, $3, true, localtimestamp, localtimestamp) RETURNING *;";
       return connect.query(sql, params);
     }
   
@@ -43,7 +43,7 @@ const mechanicData = ({ dbs }) => {
     async function softDeleteMechanic(id) {
       const connect = await dbs();
       const sql =
-        "UPDATE mechanics SET status = false WHERE mechanic_id = $1 RETURNING *";
+        "UPDATE mechanics SET is_active = false, inactive_at = localtimestamp WHERE mechanic_id = $1 RETURNING *";
       const params = [id];
       return connect.query(sql, params);
     }

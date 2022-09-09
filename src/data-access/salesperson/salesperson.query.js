@@ -10,7 +10,7 @@ const salespersonData = ({ dbs }) => {
   async function getAllSalespersons() {
     const connect = await dbs();
     const sql =
-      "SELECT * FROM salespersons WHERE NOT status IN (false) ORDER BY salesperson_id DESC";
+      "SELECT * FROM salespersons WHERE NOT is_active IN (false) ORDER BY salesperson_id DESC";
     return connect.query(sql);
   }
 
@@ -27,7 +27,7 @@ const salespersonData = ({ dbs }) => {
     const params = [firstname, lastname, contact];
     console.log(params);
     const sql =
-      "INSERT INTO salespersons (firstname, lastname, contact, status, created_at, updated_at) VALUES ( $1, $2, $3, true, localtimestamp, localtimestamp) RETURNING *;";
+      "INSERT INTO salespersons (firstname, lastname, contact, is_active, created_at, updated_at) VALUES ( $1, $2, $3, true, localtimestamp, localtimestamp) RETURNING *;";
     return connect.query(sql, params);
   }
 
@@ -43,7 +43,7 @@ const salespersonData = ({ dbs }) => {
   async function softDeleteSalesperson(id) {
     const connect = await dbs();
     const sql =
-      "UPDATE salespersons SET status = false WHERE salesperson_id = $1 RETURNING *";
+      "UPDATE salespersons SET is_active = false, inactive_at = localtimestamp WHERE salesperson_id = $1 RETURNING *";
     const params = [id];
     return connect.query(sql, params);
   }

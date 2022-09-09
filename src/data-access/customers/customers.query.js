@@ -10,7 +10,7 @@ const customerData = ({ dbs }) => {
   async function getAllCustomers() {
     const connect = await dbs();
     const sql =
-      "SELECT * FROM customers  WHERE NOT status IN (false) ORDER BY customer_id DESC";
+      "SELECT * FROM customers  WHERE NOT is_active IN (false) ORDER BY customer_id DESC";
     return connect.query(sql);
   }
 
@@ -26,7 +26,7 @@ const customerData = ({ dbs }) => {
     const { firstname, lastname, address, contact } = customer;
     const params = [firstname, lastname, address, contact];
     const sql =
-      "INSERT INTO customers (firstname, lastname, address, contact, status, created_at, updated_at) VALUES ( $1, $2, $3, $4, true, localtimestamp, localtimestamp) RETURNING *;";
+      "INSERT INTO customers (firstname, lastname, address, contact, is_active, created_at, updated_at) VALUES ( $1, $2, $3, $4, true, localtimestamp, localtimestamp) RETURNING *;";
     return connect.query(sql, params);
   }
 
@@ -42,7 +42,7 @@ const customerData = ({ dbs }) => {
   async function softDeleteCustomer(id) {
     const connect = await dbs();
     const sql =
-      "UPDATE customers SET status = false WHERE customer_id = $1 RETURNING *";
+      "UPDATE customers SET is_active = false, inactive_at = localtimestamp WHERE customer_id = $1 RETURNING *";
     const params = [id];
     return connect.query(sql, params);
   }

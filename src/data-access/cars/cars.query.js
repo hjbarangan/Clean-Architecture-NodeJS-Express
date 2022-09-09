@@ -10,7 +10,7 @@ const carData = ({ dbs }) => {
 
   async function getAllCars() {
     const connect = await dbs();
-    const sql = "SELECT * FROM cars WHERE NOT status IN (false) ORDER BY car_id DESC";
+    const sql = "SELECT * FROM cars WHERE NOT is_active IN (false) ORDER BY car_id DESC";
     return connect.query(sql);
   }
 
@@ -25,7 +25,7 @@ const carData = ({ dbs }) => {
     const connect = await dbs();
     const { serial_number, brand, model, color, year, car_for_sale, price } = car;
     const sql =
-      "INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale, price, status, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, true, localtimestamp, localtimestamp) RETURNING *;";
+      "INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale, price, is_active, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, true, localtimestamp, localtimestamp) RETURNING *;";
     const params = [serial_number, brand, model, color, year, car_for_sale, price];
     return connect.query(sql, params);
   }
@@ -42,7 +42,7 @@ const carData = ({ dbs }) => {
   async function softDeleteCar(id) {
     const connect = await dbs();
     const sql =
-      "UPDATE cars SET status = false WHERE car_id = $1 RETURNING *";
+      "UPDATE cars SET is_active = false, inactive_at = localtimestamp WHERE car_id = $1 RETURNING *";
     const params = [id];
     return connect.query(sql, params);
   }

@@ -1,5 +1,5 @@
 const mechanicDB = require("../../data-access/mechanic/index");
-const mechanicEntity = require("../../entities/mechanic/index");
+const mechanicEntity = require("../../entities/mechanics/index");
 
 const addMechanic = require("./add-mechanic.usecase");
 const editMechanic = require("./edit-mechanic.usecase");

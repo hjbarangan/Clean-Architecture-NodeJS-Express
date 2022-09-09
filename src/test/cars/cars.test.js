@@ -47,7 +47,7 @@
 //          description: "Test",
 //          is_office_staff: 'f',
 //          is_vacant: 't',
-//          status: 'active'
+//          is_active: 'active'
 //       }
 
 //       expect(() => makePosition(position)).toThrow('Please enter position name.')
@@ -61,7 +61,7 @@
 //          description: "Test",
 //          is_office_staff: 'f',
 //          is_vacant: 't',
-//          status: 'active'
+//          is_active: 'active'
 //       }
 
 //       expect(() => makePosition(position)).toThrow('Please enter which team the position belongs.')
@@ -75,7 +75,7 @@
 //          description: "Test",
 //          is_office_staff: undefined,
 //          is_vacant: 't',
-//          status: 'active'
+//          is_active: 'active'
 //       }
 
 //       expect(() => makePosition(position)).toThrow('Please enter if position is office staff or not.')
