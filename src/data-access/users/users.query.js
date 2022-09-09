@@ -80,7 +80,7 @@ const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
 
         return result;
       } else {
-        return false;
+        return ({msg: "Incorrect Credentials"});
       }
     } catch (error) {
       console.log(error);
