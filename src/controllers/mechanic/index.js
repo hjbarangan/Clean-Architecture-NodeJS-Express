@@ -8,7 +8,7 @@ const {
   
   const addMechanicController = require("./add-mechanic.controller");
   const editMechanicController = require("./edit-mechanic.controller");
-  const fetchAllMechanicsController = require("./get-all-salesperson.controller");
+  const fetchAllMechanicsController = require("./get-all-mechanics.controller");
   const fetchMechanicDetailsController = require("./get-mechanic-details.controller");
   const deleteMechanicController = require("./soft-delete-mechanic.controller")
   

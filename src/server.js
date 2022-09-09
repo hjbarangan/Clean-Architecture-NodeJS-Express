@@ -12,6 +12,7 @@ const salespersonRoutes = require("./routes/salesperson.route")
 const invoiceRoutes = require("./routes/invoice.route")
 const dashboardRoutes = require("./routes/dashboard.route")
 const ticketRoutes = require("./routes/service-ticket.route")
+const mechanicRoutes = require("./routes/mechanic.route")
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(salespersonRoutes);
 app.use(invoiceRoutes);
 app.use(dashboardRoutes);
 app.use(ticketRoutes);
+app.use(mechanicRoutes);
 
 const PORT = process.env.PORT || 3000;
 
