@@ -11,15 +11,16 @@
     names should not contain any numbers or special character,
     incorrect credentials
 [/] generate invoice number (incremented)
+
+
+[/] add mechanic module
+[/] service ticket must be generated
+[] test all endpoints using postman
+[/] Fix the login once the password is incorrect (tentative)
 [] api testing using mocha, chai
     * With Invalid Token
     * With Token But Incomplete Data
     * With Invalid Token and Incomplete Data
-
-[/] add mechanic module
-[/] service ticket must be generated
-[] Fix the login once the password is incorrect
-
 
 
 

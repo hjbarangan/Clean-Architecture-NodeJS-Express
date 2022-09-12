@@ -30,6 +30,10 @@ const makeCarEntity = ({}) => {
       throw new Error("Car must have car price!");
     }
 
+    if (isNaN(price)) {
+      throw new Error("Price should be a number!");
+    }
+
     return Object.freeze({
       serial_number,
       brand,
@@ -37,7 +41,7 @@ const makeCarEntity = ({}) => {
       color,
       year,
       car_for_sale,
-      price
+      price,
     });
   };
 };

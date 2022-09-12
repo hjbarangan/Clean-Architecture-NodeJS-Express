@@ -1,46 +1,35 @@
-const loginUser = ({ userDB, userLoginEntity, jwtGenerate }) => {
+const loginUser = ({userDB, userLoginEntity, jwtGenerate, comparePassword}) => {
   return async function postLoginUser(info) {
     const result = userLoginEntity(info);
     const userExists = await userDB.findByEmail(result.email);
+    let token = "";
 
     if (userExists.rowCount == 0) {
-      const result = {
-        msg: "Email does not exist!",
-      };
+      const result = { msg: "User does not exist!" };
       return result;
     }
 
+    const validPass = await comparePassword(
+      result.password,
+      userExists.rows[0].password
+    );
 
-    
+    if (validPass) {
+      token = jwtGenerate(userExists.rows[0].user_id);
+      console.log("\x1b[35m%s\x1b[0m", { token: token });
+    } else {
+      throw new Error("Incorrect Password");
+    }
 
+    //@TENTATIVE: fix the response token or add password validation here
 
-    //DONE: return the generated token
-
-    const token = jwtGenerate(userExists.rows[0].user_id);
-    console.log("\x1b[35m%s\x1b[0m", {token: token});
-    // console.log("\x1b[36m%s\x1b[0m", userExists.rows[0]);
-
-    //TODO: fix the response token or add password validation here 
-   
-    
-    return userDB.userLogin({
-      user_id: result.user_id,
-      email: result.email,
-      password: result.password,
-      firstname: result.firstname,
-      lastname: result.lastname,
-    });
-
-
-
-    return ({
+    return {
       token: token,
-      user_id: result.user_id,
-      email: result.email,
-      password: result.password,
-    });
-    
+      user_id: userExists.rows[0].user_id,
+      email: userExists.rows[0].email,
+      firstname: userExists.rows[0].firstname,
+      lastname: userExists.rows[0].lastname,
+    };
   };
-
 };
 module.exports = loginUser;
