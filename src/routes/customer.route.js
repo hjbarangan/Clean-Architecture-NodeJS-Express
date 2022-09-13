@@ -17,7 +17,7 @@ router.get(
   "/customers/view/:id", authMiddleware,
   makeExpressCallback(getCustomerByIdController)
 );
-router.patch("/customers/delete/:id", authMiddleware, makeExpressCallback(softDeleteCustomerController))
+router.patch("/customers/delete/:id",  makeExpressCallback(softDeleteCustomerController))
 
 
 module.exports = router;
