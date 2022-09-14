@@ -36,48 +36,65 @@
 
 // Sample test for clean architecture
 
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const server = require("../../server");
 
-// const makePosition = require('../../../src/entities/positions/app')
-// describe('Add position', () => {
-//    it('must not be able to add without a position name', () => {
+chai.use(chaiHttp);
+chai.expect();
+const makeCarEntity = require("../../entities/cars/car.entity/index");
 
-//       let position = {
-//          name: undefined,
-//          teams_id: 1,
-//          description: "Test",
-//          is_office_staff: 'f',
-//          is_vacant: 't',
-//          is_active: 'active'
-//       }
+describe("Test Add Car", () => {
+  it("must not be able to add without a serial number", () => {
+    chai.request(server).post("/cars/add").send(car);
+    let car = {
+      serial_number: undefined,
+      brand: "Toyota",
+      model: "Raize",
+      color: "Red",
+      year: "2000",
+      price: 50000,
+    };
 
-//       expect(() => makePosition(position)).toThrow('Please enter position name.')
-//    })
+    expect(() => makeCarEntity(car)).toThrow("Car must have serial number");
+  });
 
-//    it('must have a team', () => {
+  it("must have a brand", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: undefined,
+      model: "Raize",
+      color: "Red",
+      year: "2020",
+      price: 4000000,
+    };
 
-//       let position = {
-//          name: 'DevOps',
-//          teams_id: undefined,
-//          description: "Test",
-//          is_office_staff: 'f',
-//          is_vacant: 't',
-//          is_active: 'active'
-//       }
+    expect(() => makeCarEntity(car)).toThrow("Car must have brand!");
+  });
 
-//       expect(() => makePosition(position)).toThrow('Please enter which team the position belongs.')
-//    })
+  it("must have a model", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: "Toyota",
+      model: undefined,
+      color: "Red",
+      year: "2020",
+      price: 4000000,
+    };
 
-//    it('must have a boolean value for is_office_staff', () => {
+    expect(() => makeCarEntity(car)).toThrow("Car must have a model!");
+  });
 
-//       let position = {
-//          name: 'DevOps',
-//          teams_id: 1,
-//          description: "Test",
-//          is_office_staff: undefined,
-//          is_vacant: 't',
-//          is_active: 'active'
-//       }
+  it("must have a color", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: "Toyota",
+      model: "Raize",
+      color: undefined,
+      year: "2020",
+      price: 4000000,
+    };
 
-//       expect(() => makePosition(position)).toThrow('Please enter if position is office staff or not.')
-//    })
-// })
+    expect(() => makeCarEntity(car)).toThrow("Car must have color!");
+  });
+});
