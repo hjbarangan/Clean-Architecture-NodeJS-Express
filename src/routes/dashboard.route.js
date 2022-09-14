@@ -20,12 +20,10 @@ router.get(
 );
 router.get(
   "/top-sellers",
-
   makeExpressCallback(getTopSellersController)
 );
 router.get(
   "/sales-number",
-
   makeExpressCallback(getSalesNumberController)
 );
 

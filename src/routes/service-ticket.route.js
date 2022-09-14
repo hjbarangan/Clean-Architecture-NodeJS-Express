@@ -10,17 +10,12 @@ const makeExpressCallback = require("../express-callback/index");
 
 router.post(
   "/ticket/create",
-  authMiddleware,
   makeExpressCallback(postTicketController)
 );
 router.get(
   "/ticket/view/:id",
-  authMiddleware,
   makeExpressCallback(getTicketByIdController)
 );
-router.get(
-  "/ticket",
-  makeExpressCallback(getAllTicketsController)
-);
+router.get("/ticket", makeExpressCallback(getAllTicketsController));
 
 module.exports = router;
