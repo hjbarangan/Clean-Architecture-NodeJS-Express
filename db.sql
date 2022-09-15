@@ -104,6 +104,10 @@ TRUNCATE parts_used RESTART IDENTITY CASCADE;
 ALTER TABLE cars
   ADD price numeric;
 
+  ALTER TABLE service_ticket
+  ADD mechanic_id SERIAL REFERENCES "mechanic_id"
+
+
 ALTER TABLE customers
   ADD created_date TIME WITHOUT TIME ZONE;
 
@@ -192,7 +196,11 @@ INNER JOIN cars A ON S.car_id = A.car_id WHERE invoice_id = 2;
 
 --* UPDATE CAR AVAILABILTY AFTER INSERTING THE INVOICE 
 
-
+SELECT S.invoice_id, S.invoice_number, C.firstname, C.lastname, A.price, A.serial_number, A.brand, A.model, A.color, SP.firstname AS salesperson firstname, SP.lastname
+FROM sales_invoice S 
+INNER JOIN customers C ON S.customer_id = C.customer_id
+INNER JOIN cars A ON S.car_id = A.car_id
+INNER JOIN salespersons SP ON S.salesperson_id = SP.salesperson_id;
 
 --* GET TOP SELLING BRANDS WITH JOIN SELECT
 --? not sure tho

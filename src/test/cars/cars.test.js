@@ -36,17 +36,10 @@
 
 // Sample test for clean architecture
 
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const server = require("../../server");
-
-chai.use(chaiHttp);
-chai.expect();
-const makeCarEntity = require("../../entities/cars/car.entity/index");
+const makeCarEntity = require("../../entities/cars/index");
 
 describe("Test Add Car", () => {
   it("must not be able to add without a serial number", () => {
-    chai.request(server).post("/cars/add").send(car);
     let car = {
       serial_number: undefined,
       brand: "Toyota",
@@ -54,6 +47,7 @@ describe("Test Add Car", () => {
       color: "Red",
       year: "2000",
       price: 50000,
+      car_for_sale: "Yes",
     };
 
     expect(() => makeCarEntity(car)).toThrow("Car must have serial number");
@@ -67,6 +61,7 @@ describe("Test Add Car", () => {
       color: "Red",
       year: "2020",
       price: 4000000,
+      car_for_sale: "Yes",
     };
 
     expect(() => makeCarEntity(car)).toThrow("Car must have brand!");
@@ -80,9 +75,10 @@ describe("Test Add Car", () => {
       color: "Red",
       year: "2020",
       price: 4000000,
+      car_for_sale: "Yes",
     };
 
-    expect(() => makeCarEntity(car)).toThrow("Car must have a model!");
+    expect(() => makeCarEntity(car)).toThrow("Car must have model!");
   });
 
   it("must have a color", () => {
@@ -93,8 +89,65 @@ describe("Test Add Car", () => {
       color: undefined,
       year: "2020",
       price: 4000000,
+      car_for_sale: "Yes",
     };
 
     expect(() => makeCarEntity(car)).toThrow("Car must have color!");
+  });
+
+  it("must have a year", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: "Toyota",
+      model: "Raize",
+      color: "Red",
+      year: undefined,
+      price: 4000000,
+      car_for_sale: "Yes",
+    };
+
+    expect(() => makeCarEntity(car)).toThrow("Car must have year!");
+  });
+
+  it("must have a price", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: "Toyota",
+      model: "Raize",
+      color: "Red",
+      year: "2020",
+      price: undefined,
+      car_for_sale: "Yes",
+    };
+
+    expect(() => makeCarEntity(car)).toThrow("Car must have car price!");
+  });
+
+  it("must have a car status", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: "Toyota",
+      model: "Raize",
+      color: "Red",
+      year: "2020",
+      price: 5000000,
+      car_for_sale: undefined,
+    };
+
+    expect(() => makeCarEntity(car)).toThrow("Car must have car status!");
+  });
+
+  it("price must be a number", () => {
+    let car = {
+      serial_number: "H371KSLF",
+      brand: "Toyota",
+      model: "Raize",
+      color: "Red",
+      year: "2020",
+      price: "One million, Five Hundred Thousand",
+      car_for_sale: "Yes",
+    };
+
+    expect(() => makeCarEntity(car)).toThrow("Price should be a number!");
   });
 });

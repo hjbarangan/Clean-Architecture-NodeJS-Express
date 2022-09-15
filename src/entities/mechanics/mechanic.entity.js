@@ -9,25 +9,25 @@ const makeMechanicEntity = ({}) => {
       return numbers.test(string)
     }
   
-    return function createMechanic(salesperson) {
-      const { firstname, lastname, contact} = salesperson;
+    return function createMechanic(mechanic) {
+      const { firstname, lastname, contact} = mechanic;
   
       if (!firstname) {
-        throw new Error("Enter Salesperson Firstname");
+        throw new Error("Mechanic's firstname is required.");
       }
       if (!lastname) {
-        throw new Error("Enter Salesperson Lastname");
+        throw new Error("Mechanic's lastname is required.");
       }
       if(!contact) {
-        throw new Error("Enter Salesperson Contact");
+        throw new Error("Mechanic's contact number is required.");
       }
   
       if (containsSpecialChars(firstname) || containsSpecialChars(lastname)) {
-        throw new Error("Name should not contain any special character");
+        throw new Error("Name should not contain any special character.");
       }
   
       if (containsNumbers(firstname) || containsNumbers(lastname)) {
-        throw new Error("Name should not contain numbers!")
+        throw new Error("Name should not contain numbers")
       }
       
       return Object.freeze({

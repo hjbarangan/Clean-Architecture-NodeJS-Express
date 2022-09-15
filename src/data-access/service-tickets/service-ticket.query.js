@@ -27,16 +27,18 @@ const ticketData = ({ dbs }) => {
       date_returned,
       car_id,
       customer_id,
-      created_at,
-      updated_at,
-      is_active,
+      mechanic_id,
     } = service_ticket;
 
-    const getLastTicketSQL = "SELECT MAX(ticket_id) FROM service_ticket;";
-    const lastTicket = await connect.query(getLastTicketSQL);
-    const addLeadingZeros = String(lastTicket.rows[0].max).padStart(5, "0");
-    const generatedTicketNo = `Ticket-${addLeadingZeros}`;
+    const getLastTicketSQL =
+      "SELECT MAX(service_ticket_id) FROM service_ticket;";
 
+    const lastTicket = await connect.query(getLastTicketSQL);
+    let getLastTicketSQLIncrement = lastTicket.rows[0].max + 1;
+
+    const addLeadingZeros = String(getLastTicketSQLIncrement).padStart(5, "0");
+    const generatedTicketNo = `Ticket-${addLeadingZeros}`;
+    console.log(getLastTicketSQLIncrement);
     const params = [
       generatedTicketNo,
       date_received,
@@ -44,13 +46,11 @@ const ticketData = ({ dbs }) => {
       date_returned,
       car_id,
       customer_id,
-      created_at,
-      updated_at,
-      is_active,
+      mechanic_id,
     ];
 
     const sql =
-      "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, $5, $6, localtimestamp, localtimestamp, true) RETURNING *;";
+      "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, mechanic_id, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, $5, $6, $7, localtimestamp, localtimestamp, true) RETURNING *;";
     return connect.query(sql, params);
   }
 
