@@ -36,7 +36,7 @@
 
 // Sample test for clean architecture
 
-const makeCarEntity = require("../../entities/cars/index");
+const makeCarEntity = require("../../../entities/cars/index");
 
 describe("Test Add Car", () => {
   it("must not be able to add without a serial number", () => {

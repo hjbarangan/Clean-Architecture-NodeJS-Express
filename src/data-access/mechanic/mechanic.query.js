@@ -35,7 +35,7 @@ const mechanicData = ({ dbs }) => {
       const connect = await dbs();
       const { firstname, lastname, contact, id } = mechanic;
       const sql =
-        "UPDATE mechanics SET firstname = $1, lastname = $2, contact = $j, updated_at = localtimestamp WHERE mechanic_id = $4 RETURNING *";
+        "UPDATE mechanics SET firstname = $1, lastname = $2, contact = $3, updated_at = localtimestamp WHERE mechanic_id = $4 RETURNING *";
       const params = [firstname, lastname, contact, id];
       return connect.query(sql, params);
     }

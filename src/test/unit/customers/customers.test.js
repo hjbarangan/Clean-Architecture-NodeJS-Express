@@ -1,4 +1,4 @@
-const makeCustomerEntity = require("../../entities/customers/index");
+const makeCustomerEntity = require("../../../entities/customers/index");
 
 describe("Test Add Customer", () => {
   it("must not be able to add without a firstname", () => {
