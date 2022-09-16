@@ -12,7 +12,7 @@ const makeExpressCallback = require("../express-callback/index");
 
 router.post("/mechanic/add", makeExpressCallback(postMechanicController));
 router.put("/mechanic/edit/:id", makeExpressCallback(putMechanicController));
-router.get("/mechanic/:id",  makeExpressCallback(getMechanicByIdController));
+router.get("/mechanic/view/:id",  makeExpressCallback(getMechanicByIdController));
 router.get("/mechanic", makeExpressCallback(getAllMechanicController));
 router.patch("/mechanic/delete/:id", makeExpressCallback(softDeleteMechanicController))
 

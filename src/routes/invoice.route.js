@@ -8,8 +8,8 @@ const {
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
 
-router.post("/invoice/create",authMiddleware, makeExpressCallback(postInvoiceController));
-router.get("/invoice/view/:id", authMiddleware, makeExpressCallback(getInvoiceByIdController));
-router.get("/invoice", authMiddleware, makeExpressCallback(getAllInvoicesController));
+router.post("/invoice/create", makeExpressCallback(postInvoiceController));
+router.get("/invoice/view/:id", makeExpressCallback(getInvoiceByIdController));
+router.get("/invoice",  makeExpressCallback(getAllInvoicesController));
 
 module.exports = router;

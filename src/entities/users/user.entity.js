@@ -23,7 +23,7 @@ const makeUserEntity = ({}) => {
     }
 
     if (!email) {
-      throw new Error("User must have email!");
+      throw new Error("User should have an email!");
     }
 
     if (!password) {
@@ -35,11 +35,11 @@ const makeUserEntity = ({}) => {
     }
 
     if (!firstname) {
-      throw new Error("User must have firstname!");
+      throw new Error("User must have a firstname!");
     }
 
     if (!lastname) {
-      throw new Error("User must have lastname!");
+      throw new Error("User must have a lastname!");
     }
 
     if (containsSpecialChars(firstname) || containsSpecialChars(lastname)) {

@@ -43,7 +43,7 @@ const salespersonData = ({ dbs }) => {
   async function softDeleteSalesperson(id) {
     const connect = await dbs();
     const sql =
-      "UPDATE salespersons SET is_active = false, inactive_at = localtimestamp WHERE salesperson_id = $1 RETURNING *";
+      "UPDATE salespersons SET is_active = false WHERE salesperson_id = $1 RETURNING *";
     const params = [id];
     return connect.query(sql, params);
   }

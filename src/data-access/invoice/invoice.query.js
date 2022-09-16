@@ -1,4 +1,4 @@
-const invoiceData = ({ dbs, carDB }) => {
+const invoiceData = ({ dbs }) => {
   return Object.freeze({
     getAllInvoices,
     createInvoice,
@@ -8,7 +8,9 @@ const invoiceData = ({ dbs, carDB }) => {
 
   async function getAllInvoices() {
     const connect = await dbs();
-    const sql = "SELECT * FROM sales_invoice ORDER BY invoice_id DESC";
+    // const sql = "SELECT * FROM sales_invoice ORDER BY invoice_id DESC";
+    const sql = "SELECT S.invoice_id, S.invoice_number, S.transaction_date, CONCAT(C.firstname, ' ', C.lastname) AS customer_name, CONCAT(SP.firstname, ' ', SP.lastname) AS salesperson_name, A.price, A.serial_number, A.brand, A.model, A.color FROM sales_invoice S" +
+    " INNER JOIN customers C ON S.customer_id = C.customer_id INNER JOIN cars A ON S.car_id = A.car_id INNER JOIN salespersons SP ON S.salesperson_id = SP.salesperson_id;";
     return connect.query(sql);
   }
 
@@ -28,9 +30,9 @@ const invoiceData = ({ dbs, carDB }) => {
 
     const getLastNoSQL = "SELECT MAX(invoice_id) FROM sales_invoice";
 
-    const test = await connect.query(getLastNoSQL);
-    const lastID = test.rows[0].max;
-    const addLeadingZeros = String(lastID).padStart(5, "0");
+    const lastNo = await connect.query(getLastNoSQL);
+    const lastIDIncrement = lastNo.rows[0].max + 1;
+    const addLeadingZeros = String(lastIDIncrement).padStart(5, "0");
     const generatedInvoiceNo = `INV-${addLeadingZeros}`;
 
     //* INSERT INTO INVOICE
@@ -48,14 +50,14 @@ const invoiceData = ({ dbs, carDB }) => {
     await connect.query(updateSQL, updateParams);
 
     const invoiceTransactionSQL =
-      "SELECT s.invoice_number, s.transaction_date, c.price, c.serial_number, c.brand, c.model FROM sales_invoice s JOIN cars c ON c.car_id = s.car_id WHERE s.invoice_number = $1";
+      "SELECT s.invoice_id, s.invoice_number, s.transaction_date, c.price, c.serial_number, c.brand, c.model FROM sales_invoice s JOIN cars c ON c.car_id = s.car_id WHERE s.invoice_number = $1";
     const invoiceTransactionParams = [generatedInvoiceNo];
 
     const viewTransaction = await connect.query(
       invoiceTransactionSQL,
       invoiceTransactionParams
     );
-    return viewTransaction.rows[0];
+    return viewTransaction.rows;
   }
 
   async function findByInvoiceNumber(invoice_number) {

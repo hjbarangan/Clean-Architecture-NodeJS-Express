@@ -1,12 +1,18 @@
-const loginUser = ({userDB, userLoginEntity, jwtGenerate, comparePassword}) => {
+const loginUser = ({
+  userDB,
+  userLoginEntity,
+  jwtGenerate,
+  comparePassword,
+}) => {
   return async function postLoginUser(info) {
     const result = userLoginEntity(info);
     const userExists = await userDB.findByEmail(result.email);
     let token = "";
 
     if (userExists.rowCount == 0) {
-      const result = { msg: "User does not exist!" };
-      return result;
+      throw new Error("User does not exist!");
+      // const result = { msg: "User does not exist!" };
+      // return result;
     }
 
     const validPass = await comparePassword(
@@ -18,7 +24,7 @@ const loginUser = ({userDB, userLoginEntity, jwtGenerate, comparePassword}) => {
       token = jwtGenerate(userExists.rows[0].user_id);
       // console.log("\x1b[35m%s\x1b[0m", { token: token });
     } else {
-      throw new Error("Incorrect Password");
+      throw new Error("Incorrect Password!");
     }
 
     //@TENTATIVE: fix the response token or add password validation here

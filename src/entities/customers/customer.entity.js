@@ -4,36 +4,36 @@ const makeCustomerEntity = ({}) => {
     return specialChars.test(string);
   }
 
-  function containsNumbers (string) {
-    const numbers = /[0-9]/
-    return numbers.test(string)
+  function containsNumbers(string) {
+    const numbers = /[0-9]/;
+    return numbers.test(string);
   }
 
   return function createCustomer(customer) {
     const { firstname, lastname, contact, address } = customer;
 
     if (!firstname) {
-      throw new Error("Enter Customer's Firstname");
+      throw new Error("Customer's firstname is required.");
     }
 
     if (!lastname) {
-      throw new Error("Enter Customer's Lastname");
+      throw new Error("Customer's lastname is required.");
     }
 
     if (!contact) {
-      throw new Error("Enter Customer's Contact Number");
+      throw new Error("Customer's contact number is required.");
     }
 
     if (!address) {
-      throw new Error("Enter Customer's Address");
+      throw new Error("Customer's address is required.");
     }
 
     if (containsSpecialChars(firstname) || containsSpecialChars(lastname)) {
-      throw new Error("Name should not contain any special character");
+      throw new Error("Name should not contain any special character.");
     }
 
     if (containsNumbers(firstname) || containsNumbers(lastname)) {
-      throw new Error("Name should not contain numbers!")
+      throw new Error("Name should not contain any numbers.");
     }
 
     return Object.freeze({

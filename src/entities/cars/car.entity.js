@@ -3,7 +3,7 @@ const makeCarEntity = ({}) => {
     const { serial_number, brand, model, color, year, car_for_sale, price } = car;
 
     if (!serial_number) {
-      throw new Error("Car must have serial_number!");
+      throw new Error("Car must have serial number!");
     }
 
     if (!brand) {

@@ -17,7 +17,7 @@ router.get("/user-details/:id", makeExpressCallback(getUserByIdController));
 router.put("/user/edit/:id", makeExpressCallback(putUserController));
 router.get("/users", makeExpressCallback(getAllUsersController));
 router.patch(
-  "/user/delete/:id",
+  "/user/delete/:id", authMiddleware,
   makeExpressCallback(softDeleteUserController)
 );
 
