@@ -1,4 +1,4 @@
-const userData = ({ dbs, encryptPassword, comparePassword, jwtGenerate }) => {
+const userData = ({ dbs, encryptPassword, comparePassword }) => {
   return Object.freeze({
     getAllUsers,
     getUserById,

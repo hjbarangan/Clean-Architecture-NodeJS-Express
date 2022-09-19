@@ -9,7 +9,7 @@ const loginUser = ({
     const userExists = await userDB.findByEmail(result.email);
     let token = "";
 
-    if (userExists.rowCount == 0) {
+    if (userExists.rowCount === 0) {
       throw new Error("User does not exist!");
       // const result = { msg: "User does not exist!" };
       // return result;
@@ -26,8 +26,6 @@ const loginUser = ({
     } else {
       throw new Error("Incorrect Password!");
     }
-
-    //@TENTATIVE: fix the response token or add password validation here
 
     return {
       token: token,

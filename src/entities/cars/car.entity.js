@@ -1,37 +1,43 @@
 const makeCarEntity = ({}) => {
+
   return function createCar(car) {
     const { serial_number, brand, model, color, year, car_for_sale, price } = car;
 
     if (!serial_number) {
-      throw new Error("Car must have serial number!");
+      throw new Error('Car must have serial number!');
     }
 
     if (!brand) {
-      throw new Error("Car must have brand!");
+      throw new Error('Car must have brand!');
     }
 
     if (!model) {
-      throw new Error("Car must have model!");
+      throw new Error('Car must have model!');
     }
 
     if (!color) {
-      throw new Error("Car must have color!");
+      throw new Error('Car must have color!');
     }
 
     if (!year) {
-      throw new Error("Car must have year!");
+      throw new Error('Car must have year!');
     }
 
+    if (isNaN(year)) {
+      throw new Error('Invalid Year!');
+    }
+
+
     if (!car_for_sale) {
-      throw new Error("Car must have car status!");
+      throw new Error('Car must have car status!');
     }
 
     if (!price) {
-      throw new Error("Car must have car price!");
+      throw new Error('Car must have car price!');
     }
 
     if (isNaN(price)) {
-      throw new Error("Price should be a number!");
+      throw new Error('Price should be a number!');
     }
 
     return Object.freeze({
