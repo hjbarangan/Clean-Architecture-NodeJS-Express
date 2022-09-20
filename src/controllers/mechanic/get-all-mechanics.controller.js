@@ -16,7 +16,7 @@ const fetchAllMechanicsController = ({ viewAllMechanicUseCase }) => {
           
         };
         const mechanic = await viewAllMechanicUseCase(toView);
-        console.log(mechanic);
+        // console.log(mechanic);
         return {
           headers: {
             "Content-Type": "application/json",

@@ -16,7 +16,7 @@ const fetchAllSalespersonsController = ({ viewAllSalespersonUseCase }) => {
           
         };
         const salesperson = await viewAllSalespersonUseCase(toView);
-        console.log(salesperson);
+        // console.log(salesperson);
         return {
           headers: {
             "Content-Type": "application/json",
