@@ -2,9 +2,9 @@ require("tls").DEFAULT_MIN_VERSION = "TLSv1";
 const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
-// const path = require("path");
+const path = require("path");
 const helmet = require("helmet");
-
+const fs = require('fs')
 const carRoutes = require("./routes/car.route");
 const customerRoutes = require("./routes/customer.route");
 const userRoutes = require("./routes/user.route")
@@ -20,10 +20,17 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-app.use(cors());
+ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(logger(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer"', { stream: accessLogStream }))
+//logs for console
 app.use(logger("dev"));
+
+
 app.use(helmet());
 
 app.use(carRoutes);
