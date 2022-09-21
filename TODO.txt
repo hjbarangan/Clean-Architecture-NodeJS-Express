@@ -16,13 +16,16 @@
 [/] add mechanic module
 [/] service ticket must be generated
 [/] Fix the login once the password is incorrect (tentative)
-[] test all endpoints using postman
-[] api testing using mocha, chai
+[/] test all endpoints using postman
+[/] Join Query in Invoice (Fetch the data according to the foreign key)
+[/] Add mechanic ID
+[/] Fix incremented numbers in ticket and invoice
+
+
+[ ] Fix Serial Number Bug
+[ ] Try image upload in car module
+[ ] api integration testing using mocha, chai
     * With Invalid Token
     * With Token But Incomplete Data
     * With Invalid Token and Incomplete Data
 
-[/] Join Query in Invoice (Fetch the data according to the foreign key)
-[/] Add mechanic ID
-[/] Fix incremented numbers in ticket and invoice
-[ ] Fix Serial Number Bug
