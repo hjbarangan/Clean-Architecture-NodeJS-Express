@@ -6,16 +6,13 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: clean-api
-    volumes:
-      - ./clean-arch-API:/usr/src/app
-      - api-modules:/usr/src/app/node_modules
     ports:
-      - 4000:4000
+      - 4000:5000
 
   db:
     image: 'postgres'
     ports: 
-    - '5435:5432'
+    - '5433:5432'
     environment:
       POSTGRES_PASSWORD: 'admin'
       POSTGRES_USER: 'postgres'
@@ -26,5 +23,4 @@ services:
 
 
 volumes:
- api-modules:
  data:

@@ -11,14 +11,14 @@ COPY package*.json ./
 #RUN npm config set proxy http://192.168.36.35:3128
 
 RUN npm config set registry https://registry.npmjs.org/
-RUN npm config set http-proxy http://172.16.1.6:3128
-RUN npm config set https-proxy http://172.16.1.6:3128
-RUN npm config set proxy http://172.16.1.6:3128
+# RUN npm config set http-proxy http://172.16.1.6:3128
+# RUN npm config set https-proxy http://172.16.1.6:3128
+# RUN npm config set proxy http://172.16.1.6:3128
 
 
 RUN npm install
 COPY . .
 
-EXPOSE 4000
+# EXPOSE 4000
 
 CMD [ "npm", "start" ]
