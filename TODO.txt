@@ -22,8 +22,10 @@
 [/] Fix incremented numbers in ticket and invoice
 
 
-[ ] Fix Serial Number Bug
-[ ] Try image upload in car module
+[?] Fix Serial Number Bug
+[/] Try image upload in car module
+[/] Add Service Module
+[ ] Add service in service ticket module
 [ ] api integration testing using mocha, chai
     * With Invalid Token
     * With Token But Incomplete Data
