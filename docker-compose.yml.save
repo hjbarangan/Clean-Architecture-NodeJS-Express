@@ -1,8 +1,8 @@
-version: '3'
+ersion: '3'
 services:
   api:
     build:
-      context: .
+      context: ../clean-arch-API
       dockerfile: Dockerfile
     restart: unless-stopped
     container_name: clean-api
