@@ -1,20 +1,10 @@
-const editUser = ({ userDB, userEntity }) => {
-  return async function putCar({ id, info }) {
-    const result = userEntity(info);
-    const userExists = await userDB.findByEmail(result.email);
-
-    if (userExists.rowCount !== 0) {
-      const result = {
-        msg: "Email already exists",
-        user: userExists.rows,
-      };
-      return result;
-    }
+const editUser = ({ userDB, userUpdateEntity }) => {
+  return async function putUser({ id, firstname, lastname }) {
+    const result =  userUpdateEntity({firstname, lastname });
+   
 
     return userDB.editUser({
       id: id,
-      email: result.email,
-      password: result.password,
       firstname: result.firstname,
       lastname: result.lastname,
     });

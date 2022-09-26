@@ -4,9 +4,10 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
     getUserById,
     addUser,
     editUser,
+    changeUserPassword,
     softDeleteUser,
     findByEmail,
-    userLogin,
+    userLogin
   });
 
   async function getAllUsers() {
@@ -43,19 +44,34 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
     return connect.query(sql, params);
   }
 
+  //DONE: change it into name
   async function editUser(user) {
     const connect = await dbs();
-    const { email, password, firstname, lastname, id } = user;
+    const { firstname, lastname, id } = user;
     const sql =
-      "UPDATE users SET email = $1, password = $2, firstname = $3, lastname = $4,  updated_at = localtimestamp WHERE user_id = $5 RETURNING *";
-    const params = [email, password, firstname, lastname, id];
+      "UPDATE users SET firstname = $1, lastname = $2,  updated_at = localtimestamp WHERE user_id = $3 RETURNING *";
+    const params = [firstname, lastname, id];
+    console.log(params);
     return connect.query(sql, params);
   }
 
-  async function softDeleteUser(id){
+  //DONE: change password
+  async function changeUserPassword({ password, id }) {
     const connect = await dbs();
-    const sql = "UPDATE users SET is_active = false, inactive_at = localtimestamp WHERE user_id = $1 RETURNING *"  
-    const params = [id]
+
+    const sql =
+      "UPDATE users SET password = $1, updated_at = localtimestamp WHERE user_id = $2 RETURNING *";
+    let hashedPassword = await encryptPassword(password);
+    console.log(hashedPassword);
+    const params = [hashedPassword, id];
+    return connect.query(sql, params);
+  }
+
+  async function softDeleteUser(id) {
+    const connect = await dbs();
+    const sql =
+      "UPDATE users SET is_active = false, inactive_at = localtimestamp WHERE user_id = $1 RETURNING *";
+    const params = [id];
     return connect.query(sql, params);
   }
 
@@ -75,7 +91,7 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
       console.log({
         password: password,
         encryptedPassword: user.rows[0].password,
-        isItValid: validPassword,
+        isItValid: validPassword
       });
 
       let result = {};

@@ -10,7 +10,7 @@ const ticketData = ({ dbs }) => {
     const connect = await dbs()
     // const sql = "SELECT * FROM service_ticket ORDER BY service_ticket_id DESC"
     const sql = "SELECT T.service_ticket_id, T.service_ticket_number, T.date_returned, T.date_received, T.comments, CONCAT(C.firstname, ' ', C.lastname) AS customer_name, CONCAT(M.firstname, ' ', M.lastname) AS mechanic_name,  A.serial_number, A.brand, A.model FROM service_ticket T" +
-    " INNER JOIN customers C ON T.customer_id = C.customer_id INNER JOIN cars A ON T.car_id = A.car_id INNER JOIN mechanics M ON T.mechanic_id = M.mechanic_id ORDER BY t.service_ticket_id DESC;";
+    " INNER JOIN customers C ON T.customer_id = C.customer_id INNER JOIN cars A ON T.car_id = A.car_id INNER JOIN mechanics M ON T.mechanic_id = M.mechanic_id INNER JOIN services S ON S.service_id = T.service_id ORDER BY t.service_ticket_id DESC;";
     return connect.query(sql)
   }
 
@@ -29,7 +29,8 @@ const ticketData = ({ dbs }) => {
       date_returned,
       car_id,
       customer_id,
-      mechanic_id
+      mechanic_id,
+      service_id
     } = service_ticket
 
     const getLastTicketSQL =
@@ -47,11 +48,12 @@ const ticketData = ({ dbs }) => {
       date_returned,
       car_id,
       customer_id,
-      mechanic_id
+      mechanic_id,
+      service_id
     ]
 
     const sql =
-      "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, mechanic_id, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, $5, $6, $7, localtimestamp, localtimestamp, true) RETURNING *;"
+      "INSERT INTO service_ticket (service_ticket_number, date_received, comments, date_returned, car_id, customer_id, mechanic_id, service_id, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, localtimestamp, localtimestamp, true) RETURNING *;"
 
     //insert here the joined tables
 

@@ -21,6 +21,7 @@ const createTicket = ({ ticketDB, ticketEntity }) => {
       car_id: result.car_id,
       customer_id: result.customer_id,
       mechanic_id: result.mechanic_id,
+      service_id: result.service_id,
       created_at: result.created_at,
       updated_at: result.updated_at,
     });

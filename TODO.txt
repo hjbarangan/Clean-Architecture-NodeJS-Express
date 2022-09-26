@@ -25,9 +25,15 @@
 [?] Fix Serial Number Bug
 [/] Try image upload in car module
 [/] Add Service Module
-[ ] Add service in service ticket module
+[/] Add service in service ticket module
+[/] Fix User Edit Endpoint
+[/] Fix Change Password Endpoint
+[/] Add Condition if the user account is already inactive in User Login 
+[] Add new column brand_new 
 [ ] api integration testing using mocha, chai
     * With Invalid Token
     * With Token But Incomplete Data
     * With Invalid Token and Incomplete Data
 
+Bugs:
+[/] (FIXED) TypeError: controller is not a function in Change Password Endpoints

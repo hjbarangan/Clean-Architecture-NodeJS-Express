@@ -2,7 +2,7 @@ const loginUser = ({
   userDB,
   userLoginEntity,
   jwtGenerate,
-  comparePassword,
+  comparePassword
 }) => {
   return async function postLoginUser(info) {
     const result = userLoginEntity(info);
@@ -13,6 +13,10 @@ const loginUser = ({
       throw new Error("User does not exist!");
       // const result = { msg: "User does not exist!" };
       // return result;
+    }
+
+    if (userExists.rows[0].is_active === false) {
+      throw new Error("User is already inactive!");
     }
 
     const validPass = await comparePassword(
@@ -32,7 +36,7 @@ const loginUser = ({
       user_id: userExists.rows[0].user_id,
       email: userExists.rows[0].email,
       firstname: userExists.rows[0].firstname,
-      lastname: userExists.rows[0].lastname,
+      lastname: userExists.rows[0].lastname
     };
   };
 };
