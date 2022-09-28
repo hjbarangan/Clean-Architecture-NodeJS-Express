@@ -17,6 +17,7 @@ const addCar = ({ carDB, carEntity }) => {
       model: result.model,
       color: result.color,
       year: result.year,
+      brand_new: result.brand_new,
       car_for_sale: result.car_for_sale,
       price: result.price
     });

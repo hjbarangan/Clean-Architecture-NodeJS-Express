@@ -23,8 +23,9 @@ const editCar = ({ carDB, carEntity }) => {
         brand: result.brand,
         model: result.model,
         color: result.color,
+        price: result.price,
         year: result.year,
-        car_for_sale: result.car_for_sale,
+        brand_new: result.brand_new
       });
     };
   };

@@ -32,18 +32,12 @@ const carData = ({ dbs }) => {
 
   async function addCar(car) {
     const connect = await dbs();
-    const { serial_number, brand, model, color, year, car_for_sale, price } =
+    const { serial_number, brand, model, color, year, price, brand_new } =
       car;
     const sql =
-      "INSERT INTO cars (serial_number, brand, model, color, year, car_for_sale, price, is_active, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, true, localtimestamp, localtimestamp) RETURNING *;";
+      "INSERT INTO cars (serial_number, brand, model, color, year, price, brand_new, car_for_sale, is_active, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, 'Yes', true, localtimestamp, localtimestamp) RETURNING *;";
     const params = [
-      serial_number,
-      brand,
-      model,
-      color,
-      year,
-      car_for_sale,
-      price,
+      serial_number, brand, model, color, year, price, brand_new
     ];
     return connect.query(sql, params);
   }
@@ -56,19 +50,19 @@ const carData = ({ dbs }) => {
       model,
       color,
       year,
-      car_for_sale,
+      brand_new,
       price,
       id,
     } = car;
     const sql =
-      "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , car_for_sale = $6, price = $7, updated_at = localtimestamp WHERE car_id = $8 RETURNING *";
+      "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , brand_new = $6, price = $7, updated_at = localtimestamp WHERE car_id = $8 RETURNING *";
     const params = [
       serial_number,
       brand,
       model,
       color,
       year,
-      car_for_sale,
+     brand_new,
       price,
       id,
     ];
