@@ -37,3 +37,7 @@
 
 Bugs:
 [/] (FIXED) TypeError: controller is not a function in Change Password Endpoints
+
+
+[] edit / delete ticket
+[] password in edit user

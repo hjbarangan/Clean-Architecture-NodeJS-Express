@@ -10,10 +10,10 @@ const {
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
 
-router.post("/mechanic/add", makeExpressCallback(postMechanicController));
-router.put("/mechanic/edit/:id", makeExpressCallback(putMechanicController));
+router.post("/mechanic/add", authMiddleware, makeExpressCallback(postMechanicController));
+router.put("/mechanic/edit/:id", authMiddleware, makeExpressCallback(putMechanicController));
 router.get("/mechanic/view/:id",  makeExpressCallback(getMechanicByIdController));
-router.get("/mechanic", makeExpressCallback(getAllMechanicController));
-router.patch("/mechanic/delete/:id", makeExpressCallback(softDeleteMechanicController))
+router.get("/mechanic", authMiddleware, makeExpressCallback(getAllMechanicController));
+router.patch("/mechanic/delete/:id", authMiddleware , makeExpressCallback(softDeleteMechanicController))
 
 module.exports = router;

@@ -11,19 +11,19 @@ const authMiddleware = require("../middleware/index");
 const makeExpressCallback = require("../express-callback/index");
 
 router.get(
-  "/customers-count",
+  "/customers-count", authMiddleware ,
   makeExpressCallback(getCustomersCountController)
 );
 router.get(
-  "/monthly-revenue",
+  "/monthly-revenue", authMiddleware ,
   makeExpressCallback(getMonthlyRevenueController)
 );
 router.get(
-  "/top-sellers",
+  "/top-sellers", authMiddleware ,
   makeExpressCallback(getTopSellersController)
 );
 router.get(
-  "/sales-number",
+  "/sales-number", authMiddleware ,
   makeExpressCallback(getSalesNumberController)
 );
 

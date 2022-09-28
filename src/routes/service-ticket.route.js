@@ -18,4 +18,6 @@ router.get(
 );
 router.get("/ticket", makeExpressCallback(getAllTicketsController));
 
+//TODO: EDIT AND DELETE TICKET
+
 module.exports = router;
