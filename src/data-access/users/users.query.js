@@ -49,7 +49,7 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
     const connect = await dbs();
     const { firstname, lastname, password, id } = user;
     const sql =
-      "UPDATE users SET firstname = $1, lastname = $2, password = $3 updated_at = localtimestamp WHERE user_id = $4 RETURNING *";
+      "UPDATE users SET firstname = $1, lastname = $2, password = $3, updated_at = localtimestamp WHERE user_id = $4 RETURNING *";
     const params = [firstname, lastname, password, id];
     console.log(params);
     return connect.query(sql, params);

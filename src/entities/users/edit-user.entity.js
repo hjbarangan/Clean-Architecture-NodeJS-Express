@@ -1,5 +1,5 @@
 const makeUserUpdateEntity = ({}) => {
-  return function updateUser({ firstname, lastname }) {
+  return function updateUser({ firstname, lastname, password }) {
 
     if (!firstname) {
       throw new Error("Enter Firstname!");

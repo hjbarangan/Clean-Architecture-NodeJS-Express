@@ -25,6 +25,7 @@ router.put(
   "/ticket/edit/:id",
   makeExpressCallback(putTicketController)
 );
+
 router.patch(
   "/ticket/delete/:id",
   makeExpressCallback(softDeleteTicketController)
