@@ -8,10 +8,14 @@ const makeUserUpdateEntity = ({}) => {
     if (!lastname) {
       throw new Error("Enter Lastname!");
     }
+    if (!password) {
+      throw new Error("Enter Password!");
+    }
 
     return Object.freeze({
       firstname,
-      lastname
+      lastname,
+      password
     });
   };
 };

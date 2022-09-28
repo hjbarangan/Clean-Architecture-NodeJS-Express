@@ -3,6 +3,8 @@ const ticketData = ({ dbs }) => {
     getAllTickets,
     getTicketById,
     createTicket,
+    editTicket,
+    softDeleteTicket,
     findByTicketNumber
   })
 
@@ -76,6 +78,36 @@ const ticketData = ({ dbs }) => {
     const params = [service_ticket_number]
     return connect.query(sql, params)
   }
+
+
+async function editTicket(ticket) {
+  const connect = await dbs();
+  const {  date_received,
+    comments,
+    date_returned,
+    car_id,
+    customer_id,
+    mechanic_id,
+    service_id, id } = ticket;
+  const sql =
+    "UPDATE service_ticket SET date_received = $1, date_returned = $2, comments = $3, car_id = $4, customer_id = $5, mechanic_id = $6, service_id = 7, updated_at = localtimestamp WHERE service_ticket_id = $8 RETURNING *";
+  const params = [ date_received,
+    comments,
+    date_returned,
+    car_id,
+    customer_id,
+    mechanic_id,
+    service_id, id];
+  return connect.query(sql, params);
 }
+
+async function softDeleteTicket(id) {
+  const connect = await dbs();
+  const sql =
+    "UPDATE service_ticket SET is_active = false WHERE service_ticket_id = $1 RETURNING *";
+  const params = [id];
+  return connect.query(sql, params);
+}
+};
 
 module.exports = ticketData
