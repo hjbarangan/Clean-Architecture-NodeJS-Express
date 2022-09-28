@@ -38,15 +38,15 @@ app.use(
 //logs for console
 app.use(logger("dev"));
 app.use(helmet());
-app.use("api", carRoutes);
-app.use("api", customerRoutes);
-app.use("api", userRoutes);
-app.use("api", salespersonRoutes);
-app.use("api", invoiceRoutes);
-app.use("api", dashboardRoutes);
-app.use("api", ticketRoutes);
-app.use("api", mechanicRoutes);
-app.use("api", serviceRoutes);
+app.use("/api", carRoutes);
+app.use("/api", customerRoutes);
+app.use("/api", userRoutes);
+app.use("/api", salespersonRoutes);
+app.use("/api", invoiceRoutes);
+app.use("/api", dashboardRoutes);
+app.use("/api", ticketRoutes);
+app.use("/api", mechanicRoutes);
+app.use("/api", serviceRoutes);
 
 const PORT = process.env.PORT || 3000;
 
