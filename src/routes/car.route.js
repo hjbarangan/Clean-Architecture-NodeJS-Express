@@ -4,11 +4,11 @@ const { postCarController, putCarController, getAllCarsController, getCarByIdCon
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index")
 
-router.post("/car/add", makeExpressCallback(postCarController));
-router.put("/car/edit/:id",  makeExpressCallback(putCarController) );
-router.get("/car", makeExpressCallback(getAllCarsController));
-router.get("/car/view/:id",  makeExpressCallback(getCarByIdController));
-router.patch("/car/delete/:id",  makeExpressCallback(softDeleteCarController));
-router.get("/car/for-sale", makeExpressCallback(getAllCarsForSaleController))
+router.post("/car/add", authMiddleware, makeExpressCallback(postCarController));
+router.put("/car/edit/:id", authMiddleware,  makeExpressCallback(putCarController) );
+router.get("/car", authMiddleware, makeExpressCallback(getAllCarsController));
+router.get("/car/view/:id", authMiddleware,  makeExpressCallback(getCarByIdController));
+router.patch("/car/delete/:id", authMiddleware,  makeExpressCallback(softDeleteCarController));
+router.get("/car/for-sale", authMiddleware, makeExpressCallback(getAllCarsForSaleController))
 
 module.exports = router;

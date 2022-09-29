@@ -1,7 +1,7 @@
 const tokenChecker = ({ jwt, SECRET_KEY }) => {
   function checker(req, res, next) {
     const token = req.header("Authorization")
-    console.log(token)
+    // console.log(token)
 
     if (!token) {
       console.log("Auth error")

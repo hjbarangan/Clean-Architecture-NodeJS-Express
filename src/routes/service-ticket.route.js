@@ -11,14 +11,14 @@ const authMiddleware = require("../middleware/index");
 const makeExpressCallback = require("../express-callback/index");
 
 router.post(
-  "/ticket/create",
+  "/ticket/create", authMiddleware,
   makeExpressCallback(postTicketController)
 );
 router.get(
-  "/ticket/view/:id",
+  "/ticket/view/:id", authMiddleware,
   makeExpressCallback(getTicketByIdController)
 );
-router.get("/ticket", makeExpressCallback(getAllTicketsController));
+router.get("/ticket", authMiddleware, makeExpressCallback(getAllTicketsController));
 
 //TODO: EDIT AND DELETE TICKET
 router.put(

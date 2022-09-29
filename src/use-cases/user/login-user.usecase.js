@@ -7,7 +7,7 @@ const loginUser = ({
   return async function postLoginUser(info) {
     const result = userLoginEntity(info);
     const userExists = await userDB.findByEmail(result.email);
-    let token = "";
+    let token;
 
     if (userExists.rowCount === 0) {
       throw new Error("User does not exist!");
