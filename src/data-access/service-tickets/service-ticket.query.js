@@ -13,7 +13,7 @@ const ticketData = ({ dbs }) => {
     // const sql = "SELECT * FROM service_ticket ORDER BY service_ticket_id DESC"
     const sql =
       "SELECT T.service_ticket_id, T.service_ticket_number, T.date_returned, T.date_received, T.comments, CONCAT(C.firstname, ' ', C.lastname) AS customer_name, CONCAT(M.firstname, ' ', M.lastname) AS mechanic_name,  A.serial_number, A.brand, A.model FROM service_ticket T" +
-      " INNER JOIN customers C ON T.customer_id = C.customer_id INNER JOIN cars A ON T.car_id = A.car_id INNER JOIN mechanics M ON T.mechanic_id = M.mechanic_id INNER JOIN services S ON S.service_id = T.service_id ORDER BY t.service_ticket_id DESC;";
+      " INNER JOIN customers C ON T.customer_id = C.customer_id INNER JOIN cars A ON T.car_id = A.car_id INNER JOIN mechanics M ON T.mechanic_id = M.mechanic_id INNER JOIN services S ON S.service_id = T.service_id WHERE T.is_active = true ORDER BY t.service_ticket_id DESC;";
     return connect.query(sql);
   }
 

@@ -12,7 +12,7 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
 
   async function getAllUsers() {
     const connect = await dbs();
-    const sql = "SELECT * FROM users";
+    const sql = "SELECT * FROM users WHERE NOT is_active IN (false) ORDER BY user_id DESC";
     return connect.query(sql);
   }
 
@@ -25,7 +25,7 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
 
   async function findByEmail(email) {
     const connect = await dbs();
-    const sql = "SELECT * FROM users WHERE email = $1";
+    const sql = "SELECT * FROM users WHERE email = $1 ";
     const params = [email];
     return connect.query(sql, params);
   }
@@ -50,7 +50,8 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
     const { firstname, lastname, password, id } = user;
     const sql =
       "UPDATE users SET firstname = $1, lastname = $2, password = $3, updated_at = localtimestamp WHERE user_id = $4 RETURNING *";
-    const params = [firstname, lastname, password, id];
+      let hashedPassword = await encryptPassword(password);
+    const params = [firstname, lastname, hashedPassword, id];
     console.log(params);
     return connect.query(sql, params);
   }
