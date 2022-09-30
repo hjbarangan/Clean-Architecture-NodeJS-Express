@@ -22,12 +22,12 @@ router.get("/ticket", authMiddleware, makeExpressCallback(getAllTicketsControlle
 
 //TODO: EDIT AND DELETE TICKET
 router.put(
-  "/ticket/edit/:id",
+  "/ticket/edit/:id", authMiddleware, 
   makeExpressCallback(putTicketController)
 );
 
 router.patch(
-  "/ticket/delete/:id",
+  "/ticket/delete/:id", authMiddleware,
   makeExpressCallback(softDeleteTicketController)
 );
 module.exports = router;

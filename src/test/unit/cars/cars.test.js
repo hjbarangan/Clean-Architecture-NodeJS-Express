@@ -1,38 +1,4 @@
-// const user_email =
-// const user_password =
 
-// describe("Logging in user (department head & PG)", () => {
-//     //
-//     test("loginUser() - must have a email and password. Account doesn't exists.", async () => {
-//       const email = "dummy@gmail.com";
-//       const password = "dummy";
-//       const data = await app.loginUser(email, password);
-//       expect(data).toBe("Error");
-//     });
-//     //
-//     test("loginUser() - no email entered, just password.", async () => {
-//       const email = "";
-//       const password = admin_password;
-//       const data = await app.loginUser(email, password);
-//       expect(data).toBe("Error");
-//     });
-//     //
-//     test("loginUser() - no password entered, just email.", async () => {
-//       const email = admin_email;
-//       const password = "";
-//       const data = await app.loginUser(email, password);
-//       expect(data).toBe("Error");
-//     });
-//     //
-//     test("loginUser() - must have a email and password. Account exists.", async () => {
-//       const email = admin_email;
-//       const password = admin_password;
-//       const data = await app.loginUser(email, password);
-//       const result = data.patched;
-
-//       expect(result).not.toBe(0);
-//     });
-//   });
 
 // Sample test for clean architecture
 
@@ -123,7 +89,7 @@ describe("Test Add Car", () => {
     expect(() => makeCarEntity(car)).toThrow("Car must have car price!");
   });
 
-  it("must have a car status", () => {
+  it("indicate whether it is brand new or second hand", () => {
     let car = {
       serial_number: "H371KSLF",
       brand: "Toyota",
@@ -131,10 +97,10 @@ describe("Test Add Car", () => {
       color: "Red",
       year: "2020",
       price: 5000000,
-      car_for_sale: undefined,
+      brand_new: undefined,
     };
 
-    expect(() => makeCarEntity(car)).toThrow("Car must have car status!");
+    expect(() => makeCarEntity(car)).toThrow("Is car brand new or second hand?");
   });
 
   it("price must be a number", () => {
