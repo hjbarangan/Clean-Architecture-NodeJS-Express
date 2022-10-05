@@ -16,7 +16,7 @@ const loginUser = require("./login-user.usecase");
 const softDelUser = require("./soft-delete-user.usecase");
 
 const addUserUseCase = addUser({ userDB, userEntity });
-const editUserUseCase = editUser({ userDB,  userUpdateEntity });
+const editUserUseCase = editUser({ userDB, userUpdateEntity });
 const viewAllUsersUseCase = viewAllUsers({ userDB });
 const viewUserUseCase = viewUser({ userDB });
 const changePasswordUseCase = changePassword({ userDB, changePasswordEntity });

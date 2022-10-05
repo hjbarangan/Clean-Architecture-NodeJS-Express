@@ -62,10 +62,10 @@ const carData = ({ dbs }) => {
 
   async function editCar(car) {
     const connect = await dbs();
-    const { serial_number, brand, model, color, year, brand_new, price, id } =
+    const { serial_number, brand, model, color, year, brand_new, price, image_file, id } =
       car;
     const sql =
-      "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , brand_new = $6, price = $7, updated_at = localtimestamp WHERE car_id = $8 RETURNING *";
+      "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , brand_new = $6, price = $7, image_file = $8,  updated_at = localtimestamp WHERE car_id = $9 RETURNING *";
     const params = [
       serial_number,
       brand,
@@ -74,6 +74,7 @@ const carData = ({ dbs }) => {
       year,
       brand_new,
       price,
+      image_file,
       id
     ];
     return connect.query(sql, params);

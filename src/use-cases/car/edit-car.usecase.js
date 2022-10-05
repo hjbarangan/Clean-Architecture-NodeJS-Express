@@ -13,9 +13,6 @@ const editCar = ({ carDB, carEntity }) => {
       //   return result;
       // }
 
-      // if (carExists.rows[0].serial_number === result.serial_number) {
-      //  return ({msg: "Serial Number already exists"});
-      // }
   
       return carDB.editCar({
         id: id,
@@ -25,7 +22,8 @@ const editCar = ({ carDB, carEntity }) => {
         color: result.color,
         price: result.price,
         year: result.year,
-        brand_new: result.brand_new
+        brand_new: result.brand_new,
+        image_file: result.image_file,
       });
     };
   };

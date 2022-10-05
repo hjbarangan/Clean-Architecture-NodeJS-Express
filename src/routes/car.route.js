@@ -7,7 +7,7 @@ const makeExpressCallback = require("../express-callback/index")
 
 
 router.post("/car/add", authMiddleware, upload.single("image_file"),  makeExpressCallback(postCarController));
-router.put("/car/edit/:id", authMiddleware,  makeExpressCallback(putCarController) );
+router.put("/car/edit/:id", authMiddleware, upload.single("image_file"), makeExpressCallback(putCarController) );
 router.get("/car", authMiddleware, makeExpressCallback(getAllCarsController));
 router.get("/car/view/:id", authMiddleware,  makeExpressCallback(getCarByIdController));
 router.patch("/car/delete/:id", authMiddleware,  makeExpressCallback(softDeleteCarController));
