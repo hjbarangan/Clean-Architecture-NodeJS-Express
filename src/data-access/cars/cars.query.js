@@ -6,7 +6,7 @@ const carData = ({ dbs }) => {
     addCar,
     editCar,
     softDeleteCar,
-    findBySerial,
+    findBySerial
   });
 
   async function getAllCars() {
@@ -32,28 +32,38 @@ const carData = ({ dbs }) => {
 
   async function addCar(car) {
     const connect = await dbs();
-    const { serial_number, brand, model, color, year, price, brand_new } =
-      car;
-    const sql =
-      "INSERT INTO cars (serial_number, brand, model, color, year, price, brand_new, car_for_sale, is_active, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, 'Yes', true, localtimestamp, localtimestamp) RETURNING *;";
-    const params = [
-      serial_number, brand, model, color, year, price, brand_new
-    ];
-    return connect.query(sql, params);
-  }
-
-  async function editCar(car) {
-    const connect = await dbs();
     const {
       serial_number,
       brand,
       model,
       color,
       year,
-      brand_new,
       price,
-      id,
+      brand_new,
+      image_file
     } = car;
+
+    const sql =
+      "INSERT INTO cars (serial_number, brand, model, color, year, price, brand_new, image_file, car_for_sale, is_active, created_at, updated_at) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, 'Yes', true, localtimestamp, localtimestamp) RETURNING *;";
+
+    const params = [
+      serial_number,
+      brand,
+      model,
+      color,
+      year,
+      price,
+      brand_new,
+      image_file
+    ];
+
+    return connect.query(sql, params);
+  }
+
+  async function editCar(car) {
+    const connect = await dbs();
+    const { serial_number, brand, model, color, year, brand_new, price, id } =
+      car;
     const sql =
       "UPDATE cars SET serial_number = $1, brand = $2, model = $3, color = $4, year = $5 , brand_new = $6, price = $7, updated_at = localtimestamp WHERE car_id = $8 RETURNING *";
     const params = [
@@ -62,9 +72,9 @@ const carData = ({ dbs }) => {
       model,
       color,
       year,
-     brand_new,
+      brand_new,
       price,
-      id,
+      id
     ];
     return connect.query(sql, params);
   }

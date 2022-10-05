@@ -1,7 +1,7 @@
 const makeCarEntity = ({}) => {
 
   return function createCar(car) {
-    const { serial_number, brand, model, color, year, car_for_sale, price, brand_new } = car;
+    const { serial_number, brand, model, color, year, car_for_sale, price, brand_new, image_file } = car;
 
     if (!serial_number) {
       throw new Error('Car must have serial number!');
@@ -40,6 +40,10 @@ const makeCarEntity = ({}) => {
       throw new Error('Is car brand new or second hand?');
     }
 
+    if(!image_file) {
+      throw new Error('Image should be provided!');
+    }
+
     return Object.freeze({
       serial_number,
       brand,
@@ -48,7 +52,8 @@ const makeCarEntity = ({}) => {
       year,
       car_for_sale,
       price,
-      brand_new
+      brand_new,
+      image_file
     });
   };
 };

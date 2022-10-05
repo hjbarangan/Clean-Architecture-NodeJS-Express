@@ -1,6 +1,6 @@
 const addCar = ({ carDB, carEntity }) => {
-  return async function postCar(info) {
-    const result = carEntity(info);
+  return async function postCar(info, image_file) {
+    const result = carEntity(info, image_file);
     const carExists = await carDB.findBySerial(result.serial_number);
 
     if (carExists.rowCount !== 0) {
@@ -19,7 +19,8 @@ const addCar = ({ carDB, carEntity }) => {
       year: result.year,
       brand_new: result.brand_new,
       car_for_sale: result.car_for_sale,
-      price: result.price
+      price: result.price,
+      image_file: result.image_file
     });
   };
 };

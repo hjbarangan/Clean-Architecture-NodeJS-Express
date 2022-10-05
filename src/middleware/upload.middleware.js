@@ -5,7 +5,7 @@ const path = require("path")
 // Multer File upload settings
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const DIR = "src/uploads"
+    const DIR = "uploads"
     if (!fs.existsSync(DIR)) {
       fs.mkdirSync(DIR)
     }

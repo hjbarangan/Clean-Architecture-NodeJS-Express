@@ -37,7 +37,9 @@ app.use(
 );
 //logs for console
 app.use(logger("dev"));
-app.use(helmet());
+app.use(helmet({crossOriginResourcePolicy: false}))
+app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")) )
+
 app.use("/api", carRoutes);
 app.use("/api", customerRoutes);
 app.use("/api", userRoutes);
