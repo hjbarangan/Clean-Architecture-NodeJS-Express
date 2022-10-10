@@ -5,6 +5,7 @@ const serviceData = ({ dbs }) => {
       addService,
       editService,
       softDeleteService,
+      findByServiceName
     });
   
     async function getAllServices() {
@@ -47,6 +48,14 @@ const serviceData = ({ dbs }) => {
       const params = [id];
       return connect.query(sql, params);
     }
+
+    async function findByServiceName(service_name) {
+      const connect = await dbs();
+      const sql = "SELECT * FROM services WHERE service_name = $1";
+      const params = [service_name];
+      return connect.query(sql, params);
+    }
+
   };
   
   module.exports = serviceData;
