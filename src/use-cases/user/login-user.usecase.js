@@ -11,8 +11,6 @@ const loginUser = ({
 
     if (userExists.rowCount === 0) {
       throw new Error("User does not exist!");
-      // const result = { msg: "User does not exist!" };
-      // return result;
     }
 
     if (userExists.rows[0].is_active === false) {

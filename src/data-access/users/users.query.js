@@ -40,30 +40,27 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
 
     const params = [email, hashedPassword, firstname, lastname];
 
-    console.log(params);
     return connect.query(sql, params);
   }
 
-  //DONE: change it into name
+
   async function editUser(user) {
     const connect = await dbs();
     const { firstname, lastname, password, id } = user;
     const sql =
       "UPDATE users SET firstname = $1, lastname = $2, password = $3, updated_at = localtimestamp WHERE user_id = $4 RETURNING *";
-      let hashedPassword = await encryptPassword(password);
+    let hashedPassword = await encryptPassword(password);
     const params = [firstname, lastname, hashedPassword, id];
-    console.log(params);
     return connect.query(sql, params);
   }
 
-  //DONE: change password
+
   async function changeUserPassword({ password, id }) {
     const connect = await dbs();
 
     const sql =
       "UPDATE users SET password = $1, updated_at = localtimestamp WHERE user_id = $2 RETURNING *";
     let hashedPassword = await encryptPassword(password);
-    console.log(hashedPassword);
     const params = [hashedPassword, id];
     return connect.query(sql, params);
   }

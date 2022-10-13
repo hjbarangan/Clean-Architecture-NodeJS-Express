@@ -26,7 +26,6 @@ const serviceData = ({ dbs }) => {
       const connect = await dbs();
       const { service_name, hourly_rate } = service;
       const params = [service_name, hourly_rate];
-      console.log(params);
       const sql =
         "INSERT INTO services ( service_name, hourly_rate, is_active, created_at, updated_at) VALUES ( $1, $2, true, localtimestamp, localtimestamp) RETURNING *;";
       return connect.query(sql, params);

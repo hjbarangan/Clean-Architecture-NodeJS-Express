@@ -3,7 +3,7 @@ const softDelService = ({ serviceDB }) => {
     const { id } = info;
 
     const result = await serviceDB.softDeleteService(id);
-    return result.rows;
+    return { message: "Service Deleted Successfully", data: result.rows };
   };
 };
 

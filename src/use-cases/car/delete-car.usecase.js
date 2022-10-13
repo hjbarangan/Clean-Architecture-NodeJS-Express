@@ -11,7 +11,7 @@ const softDelCar = ({ carDB, fs }) => {
         }
       };
 
-    return { msg: "Deleted Successfully", data: result.rows };
+    return { message: "Car Deleted Successfully", data: result.rows };
   };
 };
 

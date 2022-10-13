@@ -3,7 +3,7 @@ const softDelMechanic = ({ mechanicDB }) => {
       const { id } = info;
   
       const result = await mechanicDB.softDeleteMechanic(id);
-      return result.rows;
+      return { message: "Mechanic Deleted Successfully", data: result.rows };
     };
   };
   

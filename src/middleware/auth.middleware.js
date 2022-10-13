@@ -1,10 +1,8 @@
 const tokenChecker = ({ jwt, SECRET_KEY }) => {
   function checker(req, res, next) {
     const token = req.header("Authorization")
-    // console.log(token)
 
     if (!token) {
-      console.log("You need to login first.")
       return res.status(401).json({ message: "You need to login first." })
     }
 
@@ -14,7 +12,7 @@ const tokenChecker = ({ jwt, SECRET_KEY }) => {
       next()
     } catch (err) {
       console.error(err)
-      res.status(400).send({ message: "Invalid Token" })
+      res.status(401).send({ message: "Invalid Token" })
     }
   }
   return checker

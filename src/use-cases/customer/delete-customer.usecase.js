@@ -3,7 +3,7 @@ const softDelCustomer = ({ customerDB }) => {
       const { id } = info;
   
       const result = await customerDB.softDeleteCustomer(id);
-      return result.rows;
+      return { message: "Customer Deleted Successfully", data: result.rows };
     };
   };
   

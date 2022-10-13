@@ -3,7 +3,7 @@ const softDelTicket = ({ ticketDB }) => {
       const { id } = info;
   
       const result = await ticketDB.softDeleteTicket(id);
-      return result.rows;
+      return { message: "Service Ticket Deleted Successfully", data: result.rows };
     };
   };
   

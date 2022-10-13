@@ -1,5 +1,6 @@
 node_modules
 access.log
 .env
+truncate-script.sql
 uploads
 src/uploads

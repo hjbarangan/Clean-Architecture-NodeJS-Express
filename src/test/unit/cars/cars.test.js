@@ -1,7 +1,3 @@
-
-
-// Sample test for clean architecture
-
 const makeCarEntity = require("../../../entities/cars/index");
 
 describe("Test Add Car", () => {

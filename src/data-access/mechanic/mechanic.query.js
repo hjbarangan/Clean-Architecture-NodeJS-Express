@@ -25,7 +25,6 @@ const mechanicData = ({ dbs }) => {
       const connect = await dbs();
       const { firstname, lastname, contact } = mechanic;
       const params = [firstname, lastname, contact];
-      console.log(params);
       const sql =
         "INSERT INTO mechanics (firstname, lastname, contact, is_active, created_at, updated_at) VALUES ( $1, $2, $3, true, localtimestamp, localtimestamp) RETURNING *;";
       return connect.query(sql, params);

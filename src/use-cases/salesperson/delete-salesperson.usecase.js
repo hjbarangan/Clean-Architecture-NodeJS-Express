@@ -3,7 +3,7 @@ const softDelSalesperson = ({ salespersonDB }) => {
       const { id } = info;
   
       const result = await salespersonDB.softDeleteSalesperson(id);
-      return result.rows;
+      return { message: "Salesperson Deleted Successfully", data: result.rows };
     };
   };
   
