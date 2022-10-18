@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "jest src/test/ --detectOpenHandles --forceExit",
+    "test:unit": "jest src/test/unit --detectOpenHandles --forceExit",
     "lint": "eslint --fix .eslintrc \"**/*.js\""
   },
   "keywords": [],
