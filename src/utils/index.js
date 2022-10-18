@@ -13,7 +13,7 @@ const jwtGenerate = jwtGenerator({ jwt, SECRET_KEY });
 const authService = Object.freeze({
   encryptPassword,
   comparePassword,
-  jwtGenerate,
+  jwtGenerate
 });
 
 module.exports = authService;

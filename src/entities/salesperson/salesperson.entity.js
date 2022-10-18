@@ -32,7 +32,7 @@ const makeSalespersonEntity = ({}) => {
     return Object.freeze({
       firstname,
       lastname,
-      contact,
+      contact
     });
   };
 };

@@ -1,11 +1,9 @@
 const viewUser = ({ userDB }) => {
-    return async function viewUser(info) {
-      const { id } = info;
-  
-      const result = await userDB.getUserById(id);
-      return result.rows;
-    };
+  return async function viewUser(info) {
+    const { id } = info;
+    const result = await userDB.getUserById(id);
+    return result.rows;
   };
-  
-  module.exports = viewUser;
-  
+};
+
+module.exports = viewUser;

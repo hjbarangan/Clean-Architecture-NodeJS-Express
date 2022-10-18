@@ -8,7 +8,7 @@ const makeExpressCallback = (controller) => {
       method: req.method,
       path: req.path,
       protocol: req.protocol,
-      host: req.get('host'),
+      host: req.get("host"),
       file: req.file, // for upload image
       headers: {
         "Content-Type": req.get("Content-Type"),
@@ -16,18 +16,18 @@ const makeExpressCallback = (controller) => {
         "User-Agent": req.get("User-Agent"),
         "Access-Control-Allow-Origin": "*"
       }
-    }
+    };
     controller(httpRequest)
       .then((httpResponse) => {
         if (httpResponse.headers) {
-          res.set("Access-Control-Allow-Origin", "*")
-          res.set(httpResponse.headers)
+          res.set("Access-Control-Allow-Origin", "*");
+          res.set(httpResponse.headers);
         }
-        res.type("json")
-        res.status(httpResponse.statusCode).send(httpResponse.body)
+        res.type("json");
+        res.status(httpResponse.statusCode).send(httpResponse.body);
       })
-      .catch((e) => res.sendStatus(500))
-  }
-}
+      .catch((e) => res.sendStatus(500));
+  };
+};
 
-module.exports = makeExpressCallback
+module.exports = makeExpressCallback;

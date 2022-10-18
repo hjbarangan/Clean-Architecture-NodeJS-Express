@@ -6,12 +6,12 @@ const addCar = ({ carDB, carEntity }) => {
     if (carExists.rowCount !== 0) {
       const result = {
         msg: "Serial Number already exists",
-        car: carExists.rows,
+        car: carExists.rows
       };
       return result;
     }
 
-    return carDB.addCar({
+    const data = await carDB.addCar({
       serial_number: result.serial_number,
       brand: result.brand,
       model: result.model,
@@ -22,8 +22,11 @@ const addCar = ({ carDB, carEntity }) => {
       price: result.price,
       image_file: result.image_file
     });
+
+    return {
+      msg: "Car Added Successfully",
+      data: data.rows
+    };
   };
 };
 module.exports = addCar;
-
-

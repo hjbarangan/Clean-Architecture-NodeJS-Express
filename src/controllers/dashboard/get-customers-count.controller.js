@@ -1,7 +1,7 @@
 const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     };
     try {
       const { source = {}, ...info } = httpRequest.body;
@@ -9,16 +9,16 @@ const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
       source.browser = httpRequest.headers["User-Agent"];
       const toView = {
         ...info,
-        source,
+        source
       };
       const customers = await viewCustomerCountUseCase(toView);
 
       return {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         statusCode: 200,
-        body:  customers ,
+        body: customers
       };
     } catch (e) {
       console.log(e);
@@ -26,8 +26,8 @@ const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
         headers,
         statusCode: 400,
         body: {
-          error: e.message,
-        },
+          error: e.message
+        }
       };
     }
   };

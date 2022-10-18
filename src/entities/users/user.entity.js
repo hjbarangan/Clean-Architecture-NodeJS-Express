@@ -9,11 +9,10 @@ const makeUserEntity = ({}) => {
     return emailFormat.test(email);
   }
 
-  function containsNumbers (string) {
-    const numbers = /[0-9]/
-    return numbers.test(string)
+  function containsNumbers(string) {
+    const numbers = /[0-9]/;
+    return numbers.test(string);
   }
-
 
   return function createUser(user) {
     const { email, password, firstname, lastname } = user;
@@ -47,14 +46,14 @@ const makeUserEntity = ({}) => {
     }
 
     if (containsNumbers(firstname) || containsNumbers(lastname)) {
-      throw new Error("Name should not contain numbers!")
+      throw new Error("Name should not contain numbers!");
     }
 
     return Object.freeze({
       email,
       password,
       firstname,
-      lastname,
+      lastname
     });
   };
 };

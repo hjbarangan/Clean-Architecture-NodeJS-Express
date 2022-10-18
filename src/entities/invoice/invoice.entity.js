@@ -17,7 +17,7 @@ const makeInvoiceEntity = ({}) => {
     return Object.freeze({
       car_id,
       customer_id,
-      salesperson_id,
+      salesperson_id
     });
   };
 };

@@ -9,7 +9,7 @@ const config = {
   host: process.env.PG_HOST,
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 2000
 };
 
 const pool = new pg.Pool(config);

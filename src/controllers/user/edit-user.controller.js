@@ -1,7 +1,7 @@
 const editUserController = ({ editUserUseCase }) => {
   return async function get(httpRequest) {
     const headers = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     };
     try {
       const { source = {}, ...info } = httpRequest.body;
@@ -10,17 +10,17 @@ const editUserController = ({ editUserUseCase }) => {
       const toView = {
         ...info,
         source,
-        id: httpRequest.params.id,
+        id: httpRequest.params.id
       };
-      // console.log(toView);
+    
       const response = await editUserUseCase(toView);
 
       return {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         statusCode: 200,
-        body:  response ,
+        body: response
       };
     } catch (e) {
       console.log(e);
@@ -28,8 +28,8 @@ const editUserController = ({ editUserUseCase }) => {
         headers,
         statusCode: 400,
         body: {
-          error: e.message,
-        },
+          error: e.message
+        }
       };
     }
   };

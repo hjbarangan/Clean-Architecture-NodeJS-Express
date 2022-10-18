@@ -1,6 +1,6 @@
 const editCustomer = ({ customerDB, customerEntity }) => {
-  return async function putCustomer({ id, ...customerInfo }) {
-    const result = customerEntity(customerInfo);
+  return async function putCustomer({ id, ...info }) {
+    const result = customerEntity(info);
 
     return customerDB.editCustomer({
       id: id,

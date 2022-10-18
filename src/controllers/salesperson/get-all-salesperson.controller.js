@@ -1,41 +1,36 @@
-
 const fetchAllSalespersonsController = ({ viewAllSalespersonUseCase }) => {
-
-    return async function getAll(httpRequest) {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      try {
-        
-        const { source = {}, ...info } = httpRequest.body;
-        source.ip = httpRequest.ip;
-        source.browser = httpRequest.headers["User-Agent"];
-        const toView = {
-          ...info,
-          source,
-          
-        };
-        const salesperson = await viewAllSalespersonUseCase(toView);
-        // console.log(salesperson);
-        return {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          statusCode: 200,
-          body:  salesperson ,
-        };
-      } catch (e) {
-        console.log(e);
-        return {
-          headers,
-          statusCode: 400,
-          body: {
-            error: e.message,
-          },
-        };
-      }
+  return async function getAll(httpRequest) {
+    const headers = {
+      "Content-Type": "application/json"
     };
-  
-  }
-  
-  module.exports = fetchAllSalespersonsController;
+    try {
+      const { source = {}, ...info } = httpRequest.body;
+      source.ip = httpRequest.ip;
+      source.browser = httpRequest.headers["User-Agent"];
+      const toView = {
+        ...info,
+        source
+      };
+      const salesperson = await viewAllSalespersonUseCase(toView);
+      // console.log(salesperson);
+      return {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        statusCode: 200,
+        body: salesperson
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        headers,
+        statusCode: 400,
+        body: {
+          error: e.message
+        }
+      };
+    }
+  };
+};
+
+module.exports = fetchAllSalespersonsController;

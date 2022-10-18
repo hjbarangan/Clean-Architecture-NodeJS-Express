@@ -14,7 +14,7 @@ const dashboardServices = Object.freeze({
   viewTopSellersUseCase,
   viewCustomerCountUseCase,
   viewMonthlyRevenueUseCase,
-  viewSalesNumberUseCase,
+  viewSalesNumberUseCase
 });
 
 module.exports = dashboardServices;
@@ -23,5 +23,5 @@ module.exports = {
   viewTopSellersUseCase,
   viewCustomerCountUseCase,
   viewMonthlyRevenueUseCase,
-  viewSalesNumberUseCase,
+  viewSalesNumberUseCase
 };

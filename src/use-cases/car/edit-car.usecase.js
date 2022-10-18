@@ -1,6 +1,6 @@
 const editCar = ({ carDB, carEntity }) => {
-    return async function putCar({id, ...carInfo}) {
-      const result = carEntity(carInfo);
+    return async function putCar({id, ...info}) {
+      const result = carEntity(info);
       // const carExists = await carDB.findBySerial(result.serial_number, id);
   
     
@@ -14,7 +14,7 @@ const editCar = ({ carDB, carEntity }) => {
       // }
 
   
-      return carDB.editCar({
+     const data = await carDB.editCar({
         id: id,
         serial_number: result.serial_number,
         brand: result.brand,
@@ -25,6 +25,12 @@ const editCar = ({ carDB, carEntity }) => {
         brand_new: result.brand_new,
         image_file: result.image_file,
       });
+
+      return {
+        msg: "Car Updated Successfully",
+        data: data.rows
+      }
+
     };
   };
   module.exports = editCar;

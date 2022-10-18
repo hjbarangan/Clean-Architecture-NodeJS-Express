@@ -4,7 +4,6 @@ const makeServiceEntity = ({}) => {
     return specialChars.test(string);
   }
 
-
   return function createService(service) {
     const { service_name, hourly_rate } = service;
 
@@ -18,7 +17,6 @@ const makeServiceEntity = ({}) => {
     if (containsSpecialChars(service_name)) {
       throw new Error("Service Name should not contain any special character.");
     }
-
 
     return Object.freeze({
       service_name,

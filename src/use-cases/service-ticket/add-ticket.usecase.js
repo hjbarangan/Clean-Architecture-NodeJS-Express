@@ -1,17 +1,6 @@
 const createTicket = ({ ticketDB, ticketEntity }) => {
   return async function postTicket(info) {
     const result = ticketEntity(info);
-    // const ticketExists = await ticketDB.findByTicketNumber(
-    //   result.ticket_number
-    // );
-
-    // if (ticketExists.rowCount !== 0) {
-    //   const result = {
-    //     msg: "Ticket Number already exists",
-    //     car: ticketExists.rows,
-    //   };
-    //   return result;
-    // }
 
     return ticketDB.createTicket({
       ticket_number: result.service_ticket_number,
@@ -23,7 +12,7 @@ const createTicket = ({ ticketDB, ticketEntity }) => {
       mechanic_id: result.mechanic_id,
       service_id: result.service_id,
       created_at: result.created_at,
-      updated_at: result.updated_at,
+      updated_at: result.updated_at
     });
   };
 };

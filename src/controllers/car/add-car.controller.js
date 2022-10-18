@@ -1,25 +1,24 @@
 const addCarController = ({ addCarUseCase }) => {
   return async function post(httpRequest) {
     try {
-      const { source = {},  ...info } = httpRequest.body
-      source.ip = httpRequest.ip
-      source.browser = httpRequest.headers["User-Agent"]
+      const { source = {}, ...info } = httpRequest.body;
+      source.ip = httpRequest.ip;
+      source.browser = httpRequest.headers["User-Agent"];
 
       if (httpRequest.headers["Referer"]) {
-        source.referrer = httpRequest.headers["Referrer"]
+        source.referrer = httpRequest.headers["Referrer"];
       }
 
-      //image upload
       // const image_file = `${httpRequest.protocol}://${httpRequest.host}/${httpRequest.file.path.replace(/\\/g,"/")}`
-      const image_file = httpRequest.file.path.replace(/\\/g,"/")
+      const image_file = httpRequest.file.path.replace(/\\/g, "/");
 
       const response = {
         ...info,
         source,
         image_file
-      }
+      };
 
-      const cars = await addCarUseCase(response)
+      const cars = await addCarUseCase(response);
 
       return {
         headers: {
@@ -27,9 +26,9 @@ const addCarController = ({ addCarUseCase }) => {
         },
         statusCode: 200,
         body: cars
-      }
+      };
     } catch (err) {
-      console.log(err)
+      console.log(err);
 
       return {
         headers: {
@@ -39,9 +38,9 @@ const addCarController = ({ addCarUseCase }) => {
         body: {
           error: err.message
         }
-      }
+      };
     }
-  }
-}
+  };
+};
 
-module.exports = addCarController
+module.exports = addCarController;

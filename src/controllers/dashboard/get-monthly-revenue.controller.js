@@ -1,7 +1,7 @@
 const fetchMonthlyRevenueController = ({ viewMonthlyRevenueUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     };
     try {
       const { source = {}, ...info } = httpRequest.body;
@@ -9,16 +9,16 @@ const fetchMonthlyRevenueController = ({ viewMonthlyRevenueUseCase }) => {
       source.browser = httpRequest.headers["User-Agent"];
       const toView = {
         ...info,
-        source,
+        source
       };
       const monthlyRevenue = await viewMonthlyRevenueUseCase(toView);
 
       return {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         statusCode: 200,
-        body:  monthlyRevenue ,
+        body: monthlyRevenue
       };
     } catch (e) {
       console.log(e);
@@ -26,8 +26,8 @@ const fetchMonthlyRevenueController = ({ viewMonthlyRevenueUseCase }) => {
         headers,
         statusCode: 400,
         body: {
-          error: e.message,
-        },
+          error: e.message
+        }
       };
     }
   };

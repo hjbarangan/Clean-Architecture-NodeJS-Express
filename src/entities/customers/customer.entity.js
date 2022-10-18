@@ -40,7 +40,7 @@ const makeCustomerEntity = ({}) => {
       firstname,
       lastname,
       contact,
-      address,
+      address
     });
   };
 };

@@ -9,13 +9,13 @@ const createInvoiceUseCase = createInvoice({ invoiceDB, invoiceEntity });
 const viewInvoiceUseCase = viewInvoice({ invoiceDB, invoiceEntity });
 const viewAllInvoicesUseCase = viewAllInvoices({
   invoiceDB,
-  invoiceEntity,
+  invoiceEntity
 });
 
 const invoiceServices = Object.freeze({
   createInvoiceUseCase,
   viewInvoiceUseCase,
-  viewAllInvoicesUseCase,
+  viewAllInvoicesUseCase
 });
 
 module.exports = invoiceServices;
@@ -23,5 +23,5 @@ module.exports = invoiceServices;
 module.exports = {
   createInvoiceUseCase,
   viewInvoiceUseCase,
-  viewAllInvoicesUseCase,
+  viewAllInvoicesUseCase
 };

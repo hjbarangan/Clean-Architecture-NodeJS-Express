@@ -1,9 +1,8 @@
-//usecase
 const {
   viewTopSellersUseCase,
   viewMonthlyRevenueUseCase,
   viewCustomerCountUseCase,
-  viewSalesNumberUseCase,
+  viewSalesNumberUseCase
 } = require("../../use-cases/dashboard/index");
 
 const fetchCustomersCountController = require("./get-customers-count.controller");
@@ -12,21 +11,21 @@ const fetchMonthlyRevenueController = require("./get-monthly-revenue.controller"
 const fetchTopSellersController = require("./get-top-sellers.controller");
 
 const getCustomersCountController = fetchCustomersCountController({
-  viewCustomerCountUseCase,
+  viewCustomerCountUseCase
 });
 const getSalesNumberController = fetchSalesNumberController({
-  viewSalesNumberUseCase,
+  viewSalesNumberUseCase
 });
 const getMonthlyRevenueController = fetchMonthlyRevenueController({
-  viewMonthlyRevenueUseCase,
+  viewMonthlyRevenueUseCase
 });
 const getTopSellersController = fetchTopSellersController({
-  viewTopSellersUseCase,
+  viewTopSellersUseCase
 });
 
 module.exports = {
   getCustomersCountController,
   getSalesNumberController,
   getMonthlyRevenueController,
-  getTopSellersController,
+  getTopSellersController
 };

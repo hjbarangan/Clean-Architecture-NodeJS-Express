@@ -1,9 +1,8 @@
 const viewAllMechanic = ({ mechanicDB }) => {
-    return async function viewMechanics() {
-      const result = await mechanicDB.getAllMechanics();
-      return result.rows;
-    };
+  return async function viewMechanics() {
+    const result = await mechanicDB.getAllMechanics();
+    return result.rows;
   };
-  
-  module.exports = viewAllMechanic;
-  
+};
+
+module.exports = viewAllMechanic;

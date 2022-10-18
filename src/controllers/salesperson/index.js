@@ -10,22 +10,24 @@ const addSalespersonController = require("./add-salesperson.controller");
 const editSalespersonController = require("./edit-salesperson.controller");
 const fetchAllSalespersonsController = require("./get-all-salesperson.controller");
 const fetchSalespersonDetailsController = require("./get-salesperson-details.controller");
-const deleteSalespersonController = require("./soft-delete-salesperson.controller")
+const deleteSalespersonController = require("./soft-delete-salesperson.controller");
 
 const postSalespersonController = addSalespersonController({
-  addSalespersonUseCase,
+  addSalespersonUseCase
 });
 const putSalespersonController = editSalespersonController({
-  editSalespersonUseCase,
+  editSalespersonUseCase
 });
 const getAllSalespersonController = fetchAllSalespersonsController({
-  viewAllSalespersonUseCase,
+  viewAllSalespersonUseCase
 });
 const getSalespersonByIdController = fetchSalespersonDetailsController({
-  viewSalespersonUseCase,
+  viewSalespersonUseCase
 });
 
-const softDeleteSalespersonController = deleteSalespersonController({softDeleteSalespersonUseCase})
+const softDeleteSalespersonController = deleteSalespersonController({
+  softDeleteSalespersonUseCase
+});
 
 const controller = Object.freeze({
   postSalespersonController,

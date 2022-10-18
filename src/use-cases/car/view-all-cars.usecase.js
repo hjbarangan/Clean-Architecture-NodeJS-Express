@@ -1,9 +1,8 @@
 const viewAllCars = ({ carDB }) => {
-    return async function viewCars() {
-      const result = await carDB.getAllCars();
-      return result.rows;
-    };
+  return async function viewCars() {
+    const result = await carDB.getAllCars();
+    return result.rows;
   };
-  
-  module.exports = viewAllCars;
-  
+};
+
+module.exports = viewAllCars;

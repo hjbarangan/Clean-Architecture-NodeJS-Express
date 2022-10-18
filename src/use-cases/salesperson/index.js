@@ -9,11 +9,11 @@ const softDelSalesperson = require("./delete-salesperson.usecase");
 
 const addSalespersonUseCase = addSalesperson({
   salespersonDB,
-  salespersonEntity,
+  salespersonEntity
 });
 const editSalespersonUseCase = editSalesperson({
   salespersonDB,
-  salespersonEntity,
+  salespersonEntity
 });
 const viewSalespersonUseCase = viewSalesperson({ salespersonDB });
 const viewAllSalespersonUseCase = viewAllSalesperson({ salespersonDB });
@@ -24,7 +24,7 @@ const salespersonService = Object.freeze({
   editSalespersonUseCase,
   viewSalespersonUseCase,
   viewAllSalespersonUseCase,
-  softDeleteSalespersonUseCase,
+  softDeleteSalespersonUseCase
 });
 
 module.exports = salespersonService;
@@ -34,5 +34,5 @@ module.exports = {
   editSalespersonUseCase,
   viewSalespersonUseCase,
   viewAllSalespersonUseCase,
-  softDeleteSalespersonUseCase,
+  softDeleteSalespersonUseCase
 };

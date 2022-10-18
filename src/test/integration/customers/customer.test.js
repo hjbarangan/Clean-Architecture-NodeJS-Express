@@ -1,10 +1,10 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const app = require('../../../server')
+const app = "http://localhost:5000"
 chai.should();
 chai.use(chaiHttp);
 
-describe("Customers API", () => {
+describe("Customers API Endpoints", () => {
 
   let token;
 

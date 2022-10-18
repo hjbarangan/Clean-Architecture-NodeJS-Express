@@ -1,7 +1,7 @@
 const createTicketController = ({ createTicketUseCase }) => {
   return async function post(httpRequest) {
     const headers = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     };
     try {
       const { source = {}, ...info } = httpRequest.body;
@@ -9,16 +9,16 @@ const createTicketController = ({ createTicketUseCase }) => {
       source.browser = httpRequest.headers["User-Agent"];
       const toView = {
         ...info,
-        source,
+        source
       };
       const service_ticket = await createTicketUseCase(toView);
 
       return {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         statusCode: 200,
-        body:  service_ticket ,
+        body: service_ticket
       };
     } catch (e) {
       console.log(e);
@@ -26,8 +26,8 @@ const createTicketController = ({ createTicketUseCase }) => {
         headers,
         statusCode: 400,
         body: {
-          error: e.message,
-        },
+          error: e.message
+        }
       };
     }
   };

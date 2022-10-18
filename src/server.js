@@ -13,11 +13,14 @@ const invoiceRoutes = require("./routes/invoice.route");
 const dashboardRoutes = require("./routes/dashboard.route");
 const ticketRoutes = require("./routes/service-ticket.route");
 const mechanicRoutes = require("./routes/mechanic.route");
-const serviceRoutes = require("./routes/service.route")
+const serviceRoutes = require("./routes/service.route");
 // create a write stream (in append mode)
-const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
-  flags: "a"
-});
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  {
+    flags: "a"
+  }
+);
 
 const app = express();
 
@@ -37,8 +40,8 @@ app.use(
 );
 //logs for console
 app.use(logger("dev"));
-app.use(helmet({crossOriginResourcePolicy: false}))
-app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")) )
+app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use("/api", carRoutes);
 app.use("/api", customerRoutes);

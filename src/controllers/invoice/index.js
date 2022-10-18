@@ -1,7 +1,7 @@
 const {
   createInvoiceUseCase,
   viewInvoiceUseCase,
-  viewAllInvoicesUseCase,
+  viewAllInvoicesUseCase
 } = require("../../use-cases/invoice/index");
 
 const createInvoiceController = require("./add-invoice.controller");
@@ -10,16 +10,16 @@ const fetchAllInvoicesController = require("./get-all-invoice.controller");
 
 const postInvoiceController = createInvoiceController({ createInvoiceUseCase });
 const getAllInvoicesController = fetchAllInvoicesController({
-  viewAllInvoicesUseCase,
+  viewAllInvoicesUseCase
 });
 const getInvoiceByIdController = fetchInvoiceDetailsController({
-  viewInvoiceUseCase,
+  viewInvoiceUseCase
 });
 
 const controller = Object.freeze({
   postInvoiceController,
   getAllInvoicesController,
-  getInvoiceByIdController,
+  getInvoiceByIdController
 });
 
 module.exports = controller;
@@ -27,5 +27,5 @@ module.exports = controller;
 module.exports = {
   postInvoiceController,
   getAllInvoicesController,
-  getInvoiceByIdController,
+  getInvoiceByIdController
 };

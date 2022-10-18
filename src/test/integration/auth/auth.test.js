@@ -1,11 +1,11 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const app = require('../../../server')
+const app = "http://localhost:5000"
 chai.should();
 chai.use(chaiHttp);
 
 describe("Login Test", () => {
-  it("It should login a user and should return all the customers", async () => {
+  it("It should login a user", async () => {
     const response = await chai
       .request(app)
       .post("/api/login")

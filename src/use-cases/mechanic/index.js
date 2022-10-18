@@ -9,11 +9,11 @@ const softDelMechanic = require("./delete-mechanic.usecase");
 
 const addMechanicUseCase = addMechanic({
   mechanicDB,
-  mechanicEntity,
+  mechanicEntity
 });
 const editMechanicUseCase = editMechanic({
   mechanicDB,
-  mechanicEntity,
+  mechanicEntity
 });
 const viewMechanicUseCase = viewMechanic({ mechanicDB });
 const viewAllMechanicUseCase = viewAllMechanic({ mechanicDB });
@@ -24,7 +24,7 @@ const mechanicService = Object.freeze({
   editMechanicUseCase,
   viewMechanicUseCase,
   viewAllMechanicUseCase,
-  softDeleteMechanicUseCase,
+  softDeleteMechanicUseCase
 });
 
 module.exports = mechanicService;
@@ -34,5 +34,5 @@ module.exports = {
   editMechanicUseCase,
   viewMechanicUseCase,
   viewAllMechanicUseCase,
-  softDeleteMechanicUseCase,
+  softDeleteMechanicUseCase
 };
