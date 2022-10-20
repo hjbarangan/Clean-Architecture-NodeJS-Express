@@ -1,5 +1,5 @@
 const addCustomerController = ({ addCustomerUseCase }) => {
-  return async function post(httpRequest) {
+  return async function post(httpRequest, redisClient) {
     const headers = {
       "Content-Type": "application/json"
     };
@@ -11,6 +11,14 @@ const addCustomerController = ({ addCustomerUseCase }) => {
         ...info,
         source
       };
+
+      let key = "customers_list";
+      let deleteKey = await redisClient.clearKey(key);
+
+      if (deleteKey) {
+        console.log(deleteKey);
+      }
+
       const customers = await addCustomerUseCase(toView);
 
       return {
