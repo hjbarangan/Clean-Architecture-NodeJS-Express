@@ -1,5 +1,5 @@
 const deleteCustomerController = ({ softDeleteCustomerUseCase }) => {
-  return async function get(httpRequest) {
+  return async function get(httpRequest, redisClient) {
     const headers = {
       "Content-Type": "application/json"
     };
@@ -12,7 +12,14 @@ const deleteCustomerController = ({ softDeleteCustomerUseCase }) => {
         source,
         id: httpRequest.params.id
       };
-      // console.log(toView);
+
+      let key = "customers_list";
+      let deleteKey = await redisClient.clearKey(key);
+
+      if (deleteKey) {
+        console.log(deleteKey);
+      }
+
       const response = await softDeleteCustomerUseCase(toView);
 
       return {

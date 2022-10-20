@@ -1,3 +1,4 @@
+const redisClient = require("../data-access/_redis/index");
 const makeExpressCallback = (controller) => {
   return (req, res) => {
     const httpRequest = {
@@ -17,7 +18,7 @@ const makeExpressCallback = (controller) => {
         "Access-Control-Allow-Origin": "*"
       }
     };
-    controller(httpRequest)
+    controller(httpRequest, redisClient)
       .then((httpResponse) => {
         if (httpResponse.headers) {
           res.set("Access-Control-Allow-Origin", "*");
