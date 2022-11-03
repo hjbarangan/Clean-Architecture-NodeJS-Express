@@ -4,3 +4,4 @@ access.log
 truncate-script.sql
 uploads
 src/uploads
+package-lock.json
