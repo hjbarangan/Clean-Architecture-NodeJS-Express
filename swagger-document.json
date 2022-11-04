@@ -1,0 +1,659 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Dealership API",
+    "description": "Document the API using Swagger",
+    "termsOfService": "http://example.com/terms/",
+    "contact": {
+      "name": "Herzlia Jane",
+      "email": "herzlia@example.com"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Local Server"
+    },
+    {
+      "url": "http://localhost:4000/api",
+      "description": "Development Server"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "API Endpoint to login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Email address of the user"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password of the user account"
+                  }
+                }
+              },
+              "example": {
+                "email": "jaemin@gmail.com",
+                "password": "admin123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Generated JSON web token for authorization"
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "description": "User ID of the user account"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email address of the user"
+                    },
+                    "firstname": {
+                      "type": "string",
+                      "description": "Firstname of the user"
+                    },
+                    "lastname": {
+                      "type": "string",
+                      "description": "Lastname of the user"
+                    }
+                  }
+                },
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoyLCJpYXQiOjE2Njc1MzA3MjIsImV4cCI6MTY2NzYxNzEyMn0.RIKrPVUdktdVLO2T-loeMOw230eY65uHNObnpvMAniU",
+                  "user_id": 2,
+                  "email": "jaemin@gmail.com",
+                  "firstname": "Jaemin",
+                  "lastname": "Na"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "API Endpoint to list all the users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "integer",
+                      "description": "Incremented ID of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email address of the user"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password of the user account"
+                    },
+                    "firstname": {
+                      "type": "string",
+                      "description": "Firstname of the user"
+                    },
+                    "lastname": {
+                      "type": "string",
+                      "description": "Lastname of the user"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "Timestamp of the user account when it was created."
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "Timestamp of the user account when it was last updated."
+                    },
+                    "is_active": {
+                      "type": "string",
+                      "description": "Status of the user account"
+                    },
+                    "inactive_at": {
+                      "type": "string",
+                      "description": "Timestamp of the user account when it was deactivated."
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "user_id": 10,
+                    "email": "admin12345@gmail.com",
+                    "password": "$2b$10$KNIi7MhutD0/e9/VizEYV.pfAN3VIJV307u54ar7KnoloUyflPnjS",
+                    "firstname": "Admin",
+                    "lastname": "One",
+                    "created_at": "2022-10-14T02:03:54.732Z",
+                    "updated_at": "2022-10-14T02:03:54.732Z",
+                    "is_active": true,
+                    "inactive_at": null
+                  },
+                  {
+                    "user_id": 9,
+                    "email": "admin1234@gmail.com",
+                    "password": "$2b$10$PUEY1YkBthZNad1h4TcELeTGpm2at/pYEJ/ZmM0HLSBs38IMlQHjq",
+                    "firstname": "Admin",
+                    "lastname": "One",
+                    "created_at": "2022-10-13T09:57:11.833Z",
+                    "updated_at": "2022-10-13T09:57:11.833Z",
+                    "is_active": true,
+                    "inactive_at": null
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Error:Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Message when user is not authorized to access the endpoint."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "You need to login first."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/user-details/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "API Endpoint to get the details of a user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User ID of the user account",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "integer",
+                      "description": "Incremented ID of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email address of the user"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password of the user account"
+                    },
+                    "firstname": {
+                      "type": "string",
+                      "description": "Firstname of the user"
+                    },
+                    "lastname": {
+                      "type": "string",
+                      "description": "Lastname of the user"
+                    },
+                    "created_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was created."
+                    },
+                    "updated_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was last updated."
+                    },
+                    "is_active": {
+                      "type": "boolean",
+                      "description": "Status of the user account"
+                    },
+                    "inactive_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was deactivated."
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "user_id": 10,
+                    "email": "admin12345@gmail.com",
+                    "password": "$2b$10$KNIi7MhutD0/e9/VizEYV.pfAN3VIJV307u54ar7KnoloUyflPnjS",
+                    "firstname": "Admin",
+                    "lastname": "One",
+                    "created_at": "2022-10-14T02:03:54.732Z",
+                    "updated_at": "2022-10-14T02:03:54.732Z",
+                    "is_active": true,
+                    "inactive_at": null
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Error:Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Message when user is not authorized to access the endpoint."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "You need to login first."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+
+    "/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "API Endpoint to create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Email address of the user"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password of the user account"
+                  },
+                  "firstname": {
+                    "type": "string",
+                    "description": "Firstname of the user"
+                  },
+                  "lastname": {
+                    "type": "string",
+                    "description": "Lastname of the user"
+                  }
+                }
+              },
+              "example": {
+                "email": "jaemin132223@gmail.com",
+                "password": "admin123",
+                "firstname": "Jaemin",
+                "lastname": "Na"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "integer",
+                      "description": "Incremented ID of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email address of the user"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password of the user account"
+                    },
+                    "firstname": {
+                      "type": "string",
+                      "description": "Firstname of the user"
+                    },
+                    "lastname": {
+                      "type": "string",
+                      "description": "Lastname of the user"
+                    },
+                    "created_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was created."
+                    },
+                    "updated_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was last updated."
+                    },
+                    "is_active": {
+                      "type": "boolean",
+                      "description": "Status of the user account"
+                    },
+                    "inactive_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was deactivated."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "User account successfully created.",
+                  "user": [
+                    {
+                      "user_id": 10,
+                      "email": "admin12345@gmail.com",
+                      "password": "$2b$10$KNIi7MhutD0/e9/VizEYV.pfAN3VIJV307u54ar7KnoloUyflPnjS",
+                      "firstname": "Admin",
+                      "lastname": "One",
+                      "created_at": "2022-10-14T02:03:54.732Z",
+                      "updated_at": "2022-10-14T02:03:54.732Z",
+                      "is_active": true,
+                      "inactive_at": null
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/user/edit/{id}": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "API Endpoint to soft delete the user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User ID of the user account",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "description": "Password of the user account"
+                  },
+                  "firstname": {
+                    "type": "string",
+                    "description": "Firstname of the user"
+                  },
+                  "lastname": {
+                    "type": "string",
+                    "description": "Lastname of the user"
+                  }
+                }
+              },
+              "example": {
+                "password": "admin123",
+                "firstname": "Jaemin",
+                "lastname": "Na"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "integer",
+                      "description": "Incremented ID of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email address of the user"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password of the user account"
+                    },
+                    "firstname": {
+                      "type": "string",
+                      "description": "Firstname of the user"
+                    },
+                    "lastname": {
+                      "type": "string",
+                      "description": "Lastname of the user"
+                    },
+                    "created_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was created."
+                    },
+                    "updated_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was last updated."
+                    },
+                    "is_active": {
+                      "type": "boolean",
+                      "description": "Status of the user account"
+                    },
+                    "inactive_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was deactivated."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "User Updated Successfully",
+                  "data": [
+                    {
+                      "user_id": 7,
+                      "email": "admin4gr@gmail.com",
+                      "password": "$2b$10$gtPOfP4ApQ/Jmu7cQz1teeptNVjqFlgCI3kycUxpEVnbzu7cl4LyW",
+                      "firstname": "Herzlia",
+                      "lastname": "Barangan",
+                      "created_at": "2022-09-26T07:40:36.219Z",
+                      "updated_at": "2022-09-26T07:40:36.219Z",
+                      "is_active": false,
+                      "inactive_at": "2022-11-04T09:45:13.636Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error: Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Message when user is not authorized to access the endpoint."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "You need to login first."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+
+    "/user/delete/{id}": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "API Endpoint to soft delete the user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User ID of the user account",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "integer",
+                      "description": "Incremented ID of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email address of the user"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password of the user account"
+                    },
+                    "firstname": {
+                      "type": "string",
+                      "description": "Firstname of the user"
+                    },
+                    "lastname": {
+                      "type": "string",
+                      "description": "Lastname of the user"
+                    },
+                    "created_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was created."
+                    },
+                    "updated_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was last updated."
+                    },
+                    "is_active": {
+                      "type": "boolean",
+                      "description": "Status of the user account"
+                    },
+                    "inactive_at": {
+                      "type": "timestamp",
+                      "description": "Timestamp of the user account when it was deactivated."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "User Deactivated Successfully",
+                  "data": [
+                    {
+                      "user_id": 7,
+                      "email": "admin4gr@gmail.com",
+                      "password": "$2b$10$gtPOfP4ApQ/Jmu7cQz1teeptNVjqFlgCI3kycUxpEVnbzu7cl4LyW",
+                      "firstname": "Herzlia",
+                      "lastname": "Barangan",
+                      "created_at": "2022-09-26T07:40:36.219Z",
+                      "updated_at": "2022-09-26T07:40:36.219Z",
+                      "is_active": false,
+                      "inactive_at": "2022-11-04T09:45:13.636Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error: Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Message when user is not authorized to access the endpoint."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "You need to login first."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  }
+}
