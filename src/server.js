@@ -14,6 +14,7 @@ const dashboardRoutes = require("./routes/dashboard.route");
 const ticketRoutes = require("./routes/service-ticket.route");
 const mechanicRoutes = require("./routes/mechanic.route");
 const serviceRoutes = require("./routes/service.route");
+const partRoutes = require("./routes/parts.route")
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
@@ -52,6 +53,7 @@ app.use("/api", dashboardRoutes);
 app.use("/api", ticketRoutes);
 app.use("/api", mechanicRoutes);
 app.use("/api", serviceRoutes);
+app.use("/api", partRoutes);
 
 const PORT = process.env.PORT || 3000;
 
