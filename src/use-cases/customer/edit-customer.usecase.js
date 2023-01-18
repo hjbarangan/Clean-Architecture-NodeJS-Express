@@ -4,11 +4,10 @@ const editCustomer = ({ customerDB, customerEntity }) => {
 
     return customerDB.editCustomer({
       id: id,
-      firstname: result.firstname,
-      lastname: result.lastname,
+      name: result.name,
       address: result.address,
-      contact: result.contact,
-      updated_at: result.updated_at
+      contact_number: result.contact_number,
+      date_created: result.date_created
     });
   };
 };

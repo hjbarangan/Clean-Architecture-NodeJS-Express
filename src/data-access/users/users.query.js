@@ -6,13 +6,14 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
     editUser,
     changeUserPassword,
     softDeleteUser,
-    findByEmail,
+    findByUsername,
     userLogin
   });
 
   async function getAllUsers() {
     const connect = await dbs();
-    const sql = "SELECT * FROM users WHERE NOT is_active IN (false) ORDER BY user_id DESC";
+    const sql =
+      "SELECT * FROM users WHERE NOT is_active IN (false) ORDER BY user_id DESC";
     return connect.query(sql);
   }
 
@@ -23,43 +24,42 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
     return connect.query(sql, params);
   }
 
-  async function findByEmail(email) {
+e
+  async function findByUsername(username) {
     const connect = await dbs();
-    const sql = "SELECT * FROM users WHERE email = $1 ";
-    const params = [email];
+    const sql = "SELECT * FROM users WHERE username = $1 ";
+    const params = [username];
     return connect.query(sql, params);
   }
 
   async function addUser(user) {
     const connect = await dbs();
-    const { email, password, firstname, lastname } = user;
+    const { name, contact_number, address, username, password, user_role_id } = user;
     const sql =
-      "INSERT INTO users (email, password, firstname, lastname, created_at, updated_at, is_active) VALUES ( $1, $2, $3, $4, localtimestamp, localtimestamp, true) RETURNING *;";
+      "INSERT INTO users (name, contact_number, address, username, password, user_role_id, date_created, is_active) VALUES ( $1, $2, $3, $4, $5, $6, localtimestamp, true) RETURNING *;";
 
     let hashedPassword = await encryptPassword(password);
 
-    const params = [email, hashedPassword, firstname, lastname];
+    const params = [name, contact_number, address, username, hashedPassword, user_role_id];
 
     return connect.query(sql, params);
   }
-
 
   async function editUser(user) {
     const connect = await dbs();
-    const { firstname, lastname, password, id } = user;
+    const { name, contact_number, address, user_role_id, id } = user;
     const sql =
-      "UPDATE users SET firstname = $1, lastname = $2, password = $3, updated_at = localtimestamp WHERE user_id = $4 RETURNING *";
+      "UPDATE users SET name = $1, contact_number = $2, address = $3, user_role_id = $4 WHERE user_id = $5 RETURNING *";
     let hashedPassword = await encryptPassword(password);
-    const params = [firstname, lastname, hashedPassword, id];
+    const params = [name, contact_number, address, user_role_id, id];
     return connect.query(sql, params);
   }
-
 
   async function changeUserPassword({ password, id }) {
     const connect = await dbs();
 
     const sql =
-      "UPDATE users SET password = $1, updated_at = localtimestamp WHERE user_id = $2 RETURNING *";
+      "UPDATE users SET password = $1 WHERE user_id = $2 RETURNING *";
     let hashedPassword = await encryptPassword(password);
     const params = [hashedPassword, id];
     return connect.query(sql, params);
@@ -68,7 +68,7 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
   async function softDeleteUser(id) {
     const connect = await dbs();
     const sql =
-      "UPDATE users SET is_active = false, inactive_at = localtimestamp WHERE user_id = $1 RETURNING *";
+      "UPDATE users SET is_active = false WHERE user_id = $1 RETURNING *";
     const params = [id];
     return connect.query(sql, params);
   }
@@ -76,9 +76,9 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
   async function userLogin(body) {
     try {
       const connect = await dbs();
-      const { email, password } = body;
-      const params = [email];
-      const sql = "SELECT * FROM users WHERE email = $1";
+      const { username, password } = body;
+      const params = [username];
+      const sql = "SELECT * FROM users WHERE username = $1";
       const user = await connect.query(sql, params);
 
       const validPassword = await comparePassword(
@@ -97,7 +97,7 @@ const userData = ({ dbs, encryptPassword, comparePassword }) => {
         (result.id = user.rows[0].user_id),
           (result.firstname = user.rows[0].firstname),
           (result.lastname = user.rows[0].lastname),
-          (result.email = user.rows[0].email),
+          (result.username = user.rows[0].username),
           (result.password = user.rows[0].password);
         console.log(result);
         return result;

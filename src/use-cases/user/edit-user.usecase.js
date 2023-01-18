@@ -1,12 +1,12 @@
 const editUser = ({ userDB, userUpdateEntity }) => {
-  return async function putUser({ id, firstname, lastname, password }) {
-    const result = userUpdateEntity({ firstname, lastname, password });
+  return async function putUser({ id, name, address, contact_number }) {
+    const result = userUpdateEntity({ name, address, contact_number });
 
     return userDB.editUser({
       id: id,
-      firstname: result.firstname,
-      lastname: result.lastname,
-      password: result.password
+      name: result.name,
+      address: result.address,
+      contact_number: result.contact_number
     });
   };
 };

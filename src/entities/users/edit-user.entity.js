@@ -1,20 +1,20 @@
 const makeUserUpdateEntity = ({}) => {
   return function updateUser({ firstname, lastname, password }) {
-    if (!firstname) {
+    if (!name) {
       throw new Error("Enter Firstname!");
     }
 
-    if (!lastname) {
+    if (!address) {
       throw new Error("Enter Lastname!");
     }
-    if (!password) {
+    if (!contact_number) {
       throw new Error("Enter Password!");
     }
 
     return Object.freeze({
-      firstname,
-      lastname,
-      password
+      name,
+      address,
+      contact_number
     });
   };
 };

@@ -1,7 +1,7 @@
 const addUser = ({ userDB, userEntity }) => {
   return async function postUser(info) {
     const result = userEntity(info);
-    const userExists = await userDB.findByEmail(result.email);
+    const userExists = await userDB.findByUsername(result.username);
 
     if (userExists.rowCount !== 0) {
       const result = {
@@ -12,7 +12,7 @@ const addUser = ({ userDB, userEntity }) => {
     }
 
     return userDB.addUser({
-      email: result.email,
+      username: result.username,
       password: result.password,
       firstname: result.firstname,
       lastname: result.lastname

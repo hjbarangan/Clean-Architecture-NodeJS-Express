@@ -3,12 +3,11 @@ const addCustomer = ({ customerDB, customerEntity }) => {
     const result = customerEntity(info);
 
     return customerDB.addCustomer({
-      firstname: result.firstname,
-      lastname: result.lastname,
+      name: result.name,
       address: result.address,
-      contact: result.contact,
-      created_date: result.created_at,
-      updated_at: result.updated_at
+      contact_number: result.contact_number,
+      date_created: result.date_created,
+      is_active: result.is_active
     });
   };
 };

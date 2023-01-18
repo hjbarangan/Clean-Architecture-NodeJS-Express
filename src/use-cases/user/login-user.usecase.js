@@ -6,7 +6,7 @@ const loginUser = ({
 }) => {
   return async function postLoginUser(info) {
     const result = userLoginEntity(info);
-    const userExists = await userDB.findByEmail(result.email);
+    const userExists = await userDB.findByUsername(result.username);
     let token;
 
     if (userExists.rowCount === 0) {
@@ -32,9 +32,10 @@ const loginUser = ({
     return {
       token: token,
       user_id: userExists.rows[0].user_id,
-      email: userExists.rows[0].email,
-      firstname: userExists.rows[0].firstname,
-      lastname: userExists.rows[0].lastname
+      username: userExists.rows[0].username,
+      name: userExists.rows[0].name,
+      address: userExists.rows[0].address,
+      contact_number: userExists.rows[0].contact_number
     };
   };
 };

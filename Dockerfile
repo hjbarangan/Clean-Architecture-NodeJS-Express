@@ -22,3 +22,11 @@ COPY . .
 # EXPOSE 4000
 
 CMD [ "npm", "start" ]
+
+##### PM2
+
+# RUN npm install pm2 -g
+# ENV PM2_PUBLIC_KEY 
+# ENV PM2_SECRET_KEY 
+
+# CMD ["pm2-runtime", "app.js"]

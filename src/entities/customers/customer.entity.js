@@ -1,26 +1,22 @@
 const makeCustomerEntity = ({}) => {
-  function containsSpecialChars(string) {
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    return specialChars.test(string);
-  }
+  // function containsSpecialChars(string) {
+  //   const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  //   return specialChars.test(string);
+  // }
 
-  function containsNumbers(string) {
-    const numbers = /[0-9]/;
-    return numbers.test(string);
-  }
+  // function containsNumbers(string) {
+  //   const numbers = /[0-9]/;
+  //   return numbers.test(string);
+  // }
 
   return function createCustomer(customer) {
-    const { firstname, lastname, contact, address } = customer;
+    const { name, contact_number, address } = customer;
 
-    if (!firstname) {
-      throw new Error("Customer's firstname is required.");
+    if (!name) {
+      throw new Error("Customer's name is required.");
     }
 
-    if (!lastname) {
-      throw new Error("Customer's lastname is required.");
-    }
-
-    if (!contact) {
+    if (!contact_number) {
       throw new Error("Customer's contact number is required.");
     }
 
@@ -28,18 +24,17 @@ const makeCustomerEntity = ({}) => {
       throw new Error("Customer's address is required.");
     }
 
-    if (containsSpecialChars(firstname) || containsSpecialChars(lastname)) {
-      throw new Error("Name should not contain any special character.");
-    }
+    // if (containsSpecialChars(name)) {
+    //   throw new Error("Name should not contain any special character.");
+    // }
 
-    if (containsNumbers(firstname) || containsNumbers(lastname)) {
-      throw new Error("Name should not contain any numbers.");
-    }
+    // if (containsNumbers(name)) {
+    //   throw new Error("Name should not contain any numbers.");
+    // }
 
     return Object.freeze({
-      firstname,
-      lastname,
-      contact,
+      name,
+      contact_number,
       address
     });
   };
