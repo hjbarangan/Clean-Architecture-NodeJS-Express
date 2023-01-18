@@ -1,5 +1,5 @@
 const makeUserRoleEntity = ({}) => {
-  return function createUserRole(role) {
+  return function createUserRole({role}) {
     if (!role) {
       throw new Error("Role is required.");
     }

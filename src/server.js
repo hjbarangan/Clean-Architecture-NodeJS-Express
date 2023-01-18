@@ -5,17 +5,19 @@ const logger = require("morgan");
 const path = require("path");
 const helmet = require("helmet");
 const fs = require("fs");
-const carRoutes = require("./routes/car.route");
-const customerRoutes = require("./routes/customer.route");
-const userRoutes = require("./routes/user.route");
-const salespersonRoutes = require("./routes/salesperson.route");
-const invoiceRoutes = require("./routes/invoice.route");
-const dashboardRoutes = require("./routes/dashboard.route");
-const ticketRoutes = require("./routes/service-ticket.route");
-const mechanicRoutes = require("./routes/mechanic.route");
-const serviceRoutes = require("./routes/service.route");
-const partRoutes = require("./routes/parts.route")
-const userRoleRoutes = require("./routes/user_role.route")
+const routes = require("./routes/index")
+// const carRoutes = require("./routes/car.route");
+// const customerRoutes = require("./routes/customer.route");
+// const userRoutes = require("./routes/user.route");
+// const salespersonRoutes = require("./routes/salesperson.route");
+// const invoiceRoutes = require("./routes/invoice.route");
+// const dashboardRoutes = require("./routes/dashboard.route");
+// const ticketRoutes = require("./routes/service-ticket.route");
+// const mechanicRoutes = require("./routes/mechanic.route");
+// const serviceRoutes = require("./routes/service.route");
+// const partRoutes = require("./routes/parts.route")
+// const userRoleRoutes = require("./routes/user_role.route")
+
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
@@ -45,17 +47,7 @@ app.use(logger("dev"));
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
 
-app.use("/api", carRoutes);
-app.use("/api", customerRoutes);
-app.use("/api", userRoutes);
-app.use("/api", salespersonRoutes);
-app.use("/api", invoiceRoutes);
-app.use("/api", dashboardRoutes);
-app.use("/api", ticketRoutes);
-app.use("/api", mechanicRoutes);
-app.use("/api", serviceRoutes);
-app.use("/api", partRoutes);
-app.use("/api", userRoleRoutes);
+app.use("api", routes)
 
 const PORT = process.env.PORT || 3000;
 
