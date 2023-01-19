@@ -3,10 +3,9 @@ const addPart = ({ partDB, partEntity }) => {
     const result = partEntity(info);
 
     return partDB.addPart({
-      part_number: result.part_number,
-      part_name: result.part_name,
-      purchase_price: result.purchase_price,
-      retail_price: result.retail_price
+      sku_id: result.sku_id,
+      printname: result.printname,
+      barcode: result.barcode,
     });
   };
 };

@@ -1,21 +1,21 @@
 const makePartEntity = ({}) => {
   return function createPart(part) {
-    const { part_name, purchase_price, retail_price } = part;
+    const { sku_id, printname, barcode } = part;
 
-    if (!part_name) {
-      throw new Error("Part name is required.");
+    if (!sku_id) {
+      throw new Error("SKU is required.");
     }
-    if (!purchase_price) {
-      throw new Error("Purchase Price is required.");
+    if (!printname) {
+      throw new Error("Printname is required.");
     }
-    if (!retail_price) {
-      throw new Error("Retail Price is required.");
+    if (!barcode) {
+      throw new Error("Barcode is required.");
     }
 
     return Object.freeze({
-      part_name,
-      purchase_price,
-      retail_price
+      sku_id,
+      printname,
+      barcode
     });
   };
 };

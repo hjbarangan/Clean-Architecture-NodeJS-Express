@@ -1,14 +1,21 @@
 const tokenChecker = ({ jwt, SECRET_KEY }) => {
   function checker(req, res, next) {
-    const token = req.header("Authorization");
+    const bearerHeader = req.header("Authorization");
 
-    if (!token) {
-      return res.status(401).json({ message: "You need to login first." });
+    if (!bearerHeader) {
+      return res
+        .status(403)
+        .json({ message: "A token is required for authentication." });
     }
 
     try {
-      const decoded = jwt.verify(token, SECRET_KEY);
-      req.user = decoded.user;
+      // const decoded = jwt.verify(token, SECRET_KEY);
+      // req.user = decoded.user;
+      // next();
+
+      const bearer = bearerHeader.split(" ");
+      const bearerToken = bearer[1];
+      req.token = bearerToken;
       next();
     } catch (err) {
       console.error(err);

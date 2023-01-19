@@ -1,5 +1,8 @@
 const serviceDB = require("../../data-access/service/index");
-const {serviceItemEntity, serviceEntity} = require("../../entities/services/index");
+const {
+  serviceItemEntity,
+  serviceEntity
+} = require("../../entities/services/index");
 
 const addService = require("./add-service.usecase");
 const editService = require("./edit-service.usecase");
@@ -9,8 +12,8 @@ const softDelService = require("./delete-service.usecase");
 
 
 //Service Item
-const addServiceItem = require("./add-service-item.usecase")
-
+const addServiceItem = require("./add-service-item.usecase");
+const viewAllServiceItems = require("./view-all-service-items.usecase")
 
 
 const addServiceUseCase = addService({
@@ -25,13 +28,13 @@ const viewServiceUseCase = viewService({ serviceDB });
 const viewAllServiceUseCase = viewAllService({ serviceDB });
 const softDeleteServiceUseCase = softDelService({ serviceDB });
 
-
 //Service Item
 const addServiceItemUseCase = addServiceItem({
   serviceDB,
   serviceItemEntity
 });
 
+const viewAllServiceItemsUseCase = viewAllServiceItems({serviceDB, serviceItemEntity})
 
 const serviceService = Object.freeze({
   addServiceUseCase,
@@ -39,7 +42,8 @@ const serviceService = Object.freeze({
   viewServiceUseCase,
   viewAllServiceUseCase,
   softDeleteServiceUseCase,
-  addServiceItemUseCase
+  addServiceItemUseCase,
+  viewAllServiceItemsUseCase
 });
 
 module.exports = serviceService;
@@ -50,5 +54,6 @@ module.exports = {
   viewServiceUseCase,
   viewAllServiceUseCase,
   softDeleteServiceUseCase,
-  addServiceItemUseCase
+  addServiceItemUseCase,
+  viewAllServiceItemsUseCase
 };

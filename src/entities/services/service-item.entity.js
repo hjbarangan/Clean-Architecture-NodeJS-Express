@@ -1,7 +1,7 @@
 const makeServiceItemEntity = ({}) => {
  
   return function createServiceItem(service_item) {
-    const { service_name, unit, cost} = service;
+    const { service_name, unit, cost} = service_item;
 
     if (!service_name) {
       throw new Error("Service name is required.");

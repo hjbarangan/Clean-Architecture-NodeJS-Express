@@ -1,6 +1,0 @@
-Assessment for trainee:
-
-[/] Rename all the columns in db
-[] User roles
-[] SKU
-[] 

@@ -5,7 +5,9 @@ const {
   putServiceController,
   getServiceByIdController,
   getAllServiceController,
-  softDeleteServiceController
+  softDeleteServiceController,
+  postServiceItemController,
+  getAllServiceItemsController
 } = require("../controllers/service/index");
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
@@ -17,10 +19,10 @@ router.get("/service", authMiddleware, makeExpressCallback(getAllServiceControll
 router.patch("/service/delete/:id", authMiddleware, makeExpressCallback(softDeleteServiceController))
 
 //service item
-router.post("/service-item/add", authMiddleware, makeExpressCallback(postServiceController));
+router.post("/service-item/add", authMiddleware, makeExpressCallback(postServiceItemController));
 router.put("/service-item/edit/:id", authMiddleware, makeExpressCallback(putServiceController));
 router.get("/service-item/view/:id", authMiddleware, makeExpressCallback(getServiceByIdController));
-router.get("/service-item", authMiddleware, makeExpressCallback(getAllServiceController));
+router.get("/service-item", authMiddleware, makeExpressCallback(getAllServiceItemsController));
 router.patch("/service-item/delete/:id", authMiddleware, makeExpressCallback(softDeleteServiceController))
 
 

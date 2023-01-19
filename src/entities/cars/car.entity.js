@@ -1,59 +1,33 @@
 const makeCarEntity = ({}) => {
-
   return function createCar(car) {
-    const { serial_number, brand, model, color, year, car_for_sale, price, brand_new, image_file } = car;
+    const { sku_id, model, color, brand_name, serial_number } = car;
 
-    if (!serial_number) {
-      throw new Error('Car must have serial number!');
+    if (!sku_id) {
+      throw new Error("Car must have serial number!");
     }
 
-    if (!brand) {
-      throw new Error('Car must have brand!');
+    if (!serial_number) {
+      throw new Error("Car must have serial number!");
+    }
+
+    if (!brand_name) {
+      throw new Error("Car must have brand!");
     }
 
     if (!model) {
-      throw new Error('Car must have model!');
+      throw new Error("Car must have model!");
     }
 
     if (!color) {
-      throw new Error('Car must have color!');
-    }
-
-    if (!year) {
-      throw new Error('Car must have year!');
-    }
-
-    if (isNaN(year)) {
-      throw new Error('Invalid Year!');
-    }
-
-
-    if (!price) {
-      throw new Error('Car must have car price!');
-    }
-
-    if (isNaN(price)) {
-      throw new Error('Price should be a number!');
-    }
-
-    if (brand_new == null) {
-      throw new Error('Is car brand new or second hand?');
-    }
-
-    if(!image_file) {
-      throw new Error('Image should be provided!');
+      throw new Error("Car must have color!");
     }
 
     return Object.freeze({
       serial_number,
-      brand,
+      brand_name,
       model,
       color,
-      year,
-      car_for_sale,
-      price,
-      brand_new,
-      image_file
+      sku_id
     });
   };
 };

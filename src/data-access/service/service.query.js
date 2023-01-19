@@ -7,7 +7,8 @@ const serviceData = ({ dbs }) => {
       addServiceItem,
       editServiceItem,
       softDeleteServiceItem,
-      findByServiceItemName
+      findByServiceItemName,
+      getAllServiceItems
     });
   
     async function getAllServices() {
@@ -53,12 +54,19 @@ const serviceData = ({ dbs }) => {
       return connect.query(sql, params);
     }
 
+    async function getAllServiceItems() {
+      const connect = await dbs();
+      const sql =
+        "SELECT * FROM service_item ORDER BY service_item_id DESC";
+      return connect.query(sql);
+    }
+
     async function addServiceItem(service_item) {
       const connect = await dbs();
       const { service_name, unit, cost } = service_item;
       const params = [service_name, unit, cost];
       const sql =
-        "INSERT INTO service_item ( sservice_name, unit, cost, is_active, date_created) VALUES ( $1, $2, $3, true, localtimestamp) RETURNING *;";
+        "INSERT INTO service_item ( service_name, unit, cost, is_active, date_created) VALUES ( $1, $2, $3, true, localtimestamp) RETURNING *;";
       return connect.query(sql, params);
     }
 
