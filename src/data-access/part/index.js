@@ -1,7 +1,7 @@
 
 const makeDb = require("../../config/db.config");
-const db = require("./service.query");
+const db = require("./part.query");
 
-const serviceDB = makeDb ({ db });
+const partDB = makeDb ({ db });
 
-module.exports = serviceDB;
+module.exports = partDB;

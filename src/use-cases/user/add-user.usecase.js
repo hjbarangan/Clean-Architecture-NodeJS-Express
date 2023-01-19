@@ -14,9 +14,11 @@ const addUser = ({ userDB, userEntity }) => {
     return userDB.addUser({
       username: result.username,
       password: result.password,
-      firstname: result.firstname,
-      lastname: result.lastname
+      name: result.name,
+      address: result.address,
+      contact_number: result.contact_number,
+      user_role_id: result.user_role_id
     });
   };
-};
+};                                                                                    
 module.exports = addUser;

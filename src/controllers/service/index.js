@@ -3,7 +3,9 @@ const {
   editServiceUseCase,
   viewServiceUseCase,
   viewAllServiceUseCase,
-  softDeleteServiceUseCase
+  softDeleteServiceUseCase,
+  addServiceItemUseCase
+  //addService
 } = require("../../use-cases/service/index");
 
 const addServiceController = require("./add-service.controller");

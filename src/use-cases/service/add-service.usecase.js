@@ -2,15 +2,12 @@ const addService = ({ serviceDB, serviceEntity }) => {
   return async function postService(info) {
     const result = serviceEntity(info);
 
-    const serviceExists = await serviceDB.findByServiceName(result.service_name); 
-  
-    if (serviceExists.rowCount !== 0) {
-       throw new Error("Service already exists");
-    }
     
     return serviceDB.addService({
-      service_name: result.service_name,
-      hourly_rate: result.hourly_rate
+      user_id: result.user_id,
+      customer_id: result.customer_id,
+      serial_number: result.serial_number,
+      status: result.status
     });
   };
 };
