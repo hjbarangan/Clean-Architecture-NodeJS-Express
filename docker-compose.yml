@@ -5,18 +5,18 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    container_name: clean-api
+    container_name: clean-api-v2
     ports:
-      - 4000:5000
+      - 5000:5000
 
   db:
     image: 'postgres'
     ports: 
     - '5433:5432'
     environment:
-      POSTGRES_PASSWORD: 'admin'
+      POSTGRES_PASSWORD: 'postgres'
       POSTGRES_USER: 'postgres'
-      POSTGRES_DB: 'clean_api'
+      POSTGRES_DB: 'dealershipv3'
     volumes:
       - data:/var/lib/postgresql/data
       

@@ -12,11 +12,13 @@ const addCar = ({ carDB, carEntity }) => {
     }
 
     const data = await carDB.addCar({
-      sku_id: result.sku_id,
       serial_number: result.serial_number,
       brand_name: result.brand_name,
       model: result.model,
       color: result.color,
+      qty: result.qty,
+      unit: result.unit,
+      cost: result.cost
     });
 
     return {

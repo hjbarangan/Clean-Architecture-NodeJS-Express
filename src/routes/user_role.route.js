@@ -11,9 +11,9 @@ const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
 
 router.post("/user_role/add", makeExpressCallback(postUserRoleController));
-router.put("/user_role/edit/:id", authMiddleware, makeExpressCallback(putUserRoleController));
+router.patch("/user_role/edit/:id", authMiddleware, makeExpressCallback(putUserRoleController));
 router.get("/user_role/view/:id", authMiddleware, makeExpressCallback(getUserRoleByIdController));
-router.get("/user_role", makeExpressCallback(getAllUserRoleController));
+router.get("/user_roles", makeExpressCallback(getAllUserRoleController));
 router.patch("/user_role/delete/:id", authMiddleware, makeExpressCallback(softDeleteUserRoleController))
 
 module.exports = router;

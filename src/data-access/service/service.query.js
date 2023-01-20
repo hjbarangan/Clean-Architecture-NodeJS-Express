@@ -72,10 +72,10 @@ const serviceData = ({ dbs }) => {
 
     async function editServiceItem(service_item) {
       const connect = await dbs();
-      const { service_name, unit, cost } = service_item;
+      const { service_name, unit, cost, id } = service_item;
       const params = [service_name, unit, cost, id];
       const sql =
-        "UPDATE service SET service_name = $1, hourly_rate = $2, updated_at = localtimestamp WHERE service_id = $3 RETURNING *";
+        "UPDATE service_item SET service_name = $1, unit = $2, cost = $3 WHERE service_item_id = $4 RETURNING *";
      
       return connect.query(sql, params);
     }

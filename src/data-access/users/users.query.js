@@ -47,11 +47,11 @@ e
 
   async function editUser(user) {
     const connect = await dbs();
-    const { name, contact_number, address, user_role_id, id } = user;
+    const { name, contact_number, address, password, user_role_id, id } = user;
     const sql =
-      "UPDATE users SET name = $1, contact_number = $2, address = $3, user_role_id = $4 WHERE user_id = $5 RETURNING *";
+      "UPDATE users SET name = $1, contact_number = $2, address = $3, user_role_id = $4, password = $5 WHERE user_id = $6 RETURNING *";
     let hashedPassword = await encryptPassword(password);
-    const params = [name, contact_number, address, user_role_id, id];
+    const params = [name, contact_number, address, hashedPassword, user_role_id, id];
     return connect.query(sql, params);
   }
 

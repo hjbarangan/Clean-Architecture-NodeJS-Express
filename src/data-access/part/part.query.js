@@ -20,23 +20,42 @@ const partData = ({ dbs }) => {
     return connect.query(sql, params);
   }
 
+  // async function addPart(part) {
+  //   const connect = await dbs();
+  //   const { sku_id, printname, barcode } = part;
+  //   const params = [sku_id, printname, barcode];
+  //   const sql =
+  //     "INSERT INTO product_parts ( sku_id, printname, barcode, date_created) VALUES ( $1, $2, $3, localtimestamp) RETURNING *;";
+  //   return connect.query(sql, params);
+  // }
+
+  //combined qty, unit and cost
   async function addPart(part) {
     const connect = await dbs();
-    const { sku_id, printname, barcode } = part;
-    const params = [sku_id, printname, barcode];
+    const { printname, barcode, qty, unit, cost } = part;
+    const params = [printname, barcode, qty, unit, cost];
     const sql =
-      "INSERT INTO product_parts ( sku_id, printname, barcode, date_created) VALUES ( $1, $2, $3, localtimestamp) RETURNING *;";
+      "INSERT INTO product_parts (printname, barcode, qty, unit, cost, date_created) VALUES ( $1, $2, $3, $4, $5, localtimestamp) RETURNING *;";
     return connect.query(sql, params);
   }
 
   async function editPart(part) {
     const connect = await dbs();
-    const { sku_id, printname, barcode, id } = part;
+    const { printname, barcode, qty, unit, cost, id } = part;
     const sql =
-      "UPDATE product_parts SET sku_id = $1, printname = $2, barcode = $3 WHERE product_parts_id = $4 RETURNING *";
-    const params = [sku_id, printname, barcode, id];
+      "UPDATE product_parts SET printname = $1, barcode = $2, qty = $3, unit = $4, cost = $5  WHERE product_parts_id = $6 RETURNING *";
+    const params = [printname, barcode, qty, unit, cost, id];
     return connect.query(sql, params);
   }
+
+  // async function editPart(part) {
+  //   const connect = await dbs();
+  //   const { sku_id, printname, barcode, id } = part;
+  //   const sql =
+  //     "UPDATE product_parts SET sku_id = $1, printname = $2, barcode = $3 WHERE product_parts_id = $4 RETURNING *";
+  //   const params = [sku_id, printname, barcode, id];
+  //   return connect.query(sql, params);
+  // }
 
   // async function softDeletePart(id) {
   //   const connect = await dbs();

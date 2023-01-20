@@ -21,24 +21,46 @@ const carData = ({ dbs }) => {
     return connect.query(sql, params);
   }
 
+  // async function addCar(car) {
+  //   const connect = await dbs();
+  //   const { sku_id, serial_number, brand_name, model, color } = car;
+
+  //   const sql =
+  //     "INSERT INTO product_car (sku_id, serial_number, brand_name, model, color, date_created) VALUES ( $1, $2, $3, $4, $5, localtimestamp) RETURNING *;";
+
+  //   const params = [sku_id, serial_number, brand_name, model, color];
+
+  //   return connect.query(sql, params);
+  // }
+
+  // async function editCar(car) {
+  //   const connect = await dbs();
+  //   const { sku_id, serial_number, brand_name, model, color, id } = car;
+  //   const sql =
+  //     "UPDATE product_car SET serial_number = $1, brand_name = $2, model = $3, color = $4, sku_id = $5, date_created = localtimestamp WHERE product_car_id = $6 RETURNING *";
+  //   const params = [sku_id, serial_number, brand_name, model, color, id];
+  //   return connect.query(sql, params);
+  // }
+
+  //Combined qty
   async function addCar(car) {
     const connect = await dbs();
-    const { sku_id, serial_number, brand_name, model, color } = car;
+    const { serial_number, brand_name, model, color, unit, cost, qty } = car;
 
     const sql =
-      "INSERT INTO product_car (sku_id, serial_number, brand_name, model, color, date_created) VALUES ( $1, $2, $3, $4, $5, localtimestamp) RETURNING *;";
+      "INSERT INTO product_car (serial_number, brand_name, model, color, unit, cost, qty, date_created) VALUES ( $1, $2, $3, $4, $5, $6, $7, localtimestamp) RETURNING *;";
 
-    const params = [sku_id, serial_number, brand_name, model, color];
+    const params = [serial_number, brand_name, model, color, unit, cost, qty];
 
     return connect.query(sql, params);
   }
 
   async function editCar(car) {
     const connect = await dbs();
-    const { sku_id, serial_number, brand_name, model, color, id } = car;
+    const {serial_number, brand_name, model, color, unit, cost, qty, id } = car;
     const sql =
-      "UPDATE product_car SET serial_number = $1, brand_name = $2, model = $3, color = $4, sku_id = $5, date_created = localtimestamp WHERE product_car_id = $6 RETURNING *";
-    const params = [sku_id, serial_number, brand_name, model, color, id];
+      "UPDATE product_car SET serial_number = $1, brand_name = $2, model = $3, color = $4, unit = $5, cost = $6, qty = $7, date_created = localtimestamp WHERE product_car_id = $8 RETURNING *";
+    const params = [serial_number, brand_name, model, color, unit, cost, qty, id];
     return connect.query(sql, params);
   }
 

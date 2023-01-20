@@ -8,7 +8,9 @@ const editCar = ({ carDB, carEntity }) => {
         brand_name: result.brand_name,
         model: result.model,
         color: result.color,
-        sku_id: result.sku_id,
+        qty: result.qty,
+        unit: result.unit,
+        cost: result.cost
       });
 
       return {

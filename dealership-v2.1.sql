@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS "users"(
   "user_id" SERIAL PRIMARY KEY,
   "name" VARCHAR(100),
@@ -30,8 +29,10 @@ CREATE TABLE IF NOT EXISTS "product_car" (
   "brand_name" VARCHAR(100),
   "model" VARCHAR(100),
   "color" VARCHAR(50),
-  "date_created" DATE,
-  "sku_id" SERIAL REFERENCES "sku"
+  "unit" VARCHAR(100),
+  "cost" VARCHAR(150),
+  "qty" VARCHAR(100),
+  "date_created" DATE -- "sku_id" SERIAL REFERENCES "sku"
 );
 
 CREATE TABLE IF NOT EXISTS "customer"(
@@ -42,7 +43,6 @@ CREATE TABLE IF NOT EXISTS "customer"(
   "date_created" DATE,
   "is_active" BOOLEAN
 );
-
 
 CREATE TABLE IF NOT EXISTS "stockard"(
   "stockard_id" SERIAL PRIMARY KEY,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS "service" (
 CREATE TABLE IF NOT EXISTS "service_item" (
   "service_item_id" SERIAL PRIMARY KEY,
   "service_name" VARCHAR(150),
-  "unit" NUMERIC,
+  "unit" VARCHAR(100),
   "cost" NUMERIC,
   "date_created" DATE,
   "is_active" BOOLEAN
@@ -83,8 +83,10 @@ CREATE TABLE IF NOT EXISTS "product_parts" (
   "product_parts_id" SERIAL PRIMARY KEY,
   "printname" VARCHAR(100),
   "barcode" VARCHAR(100),
-  "date_created" DATE,
-  "sku_id" SERIAL REFERENCES "sku"
+  "qty" VARCHAR(100),
+  "unit" VARCHAR(100),
+  "cost" NUMERIC,
+  "date_created" DATE -- "sku_id" SERIAL REFERENCES "sku"
 );
 
 CREATE TABLE IF NOT EXISTS "quotation" (
@@ -103,8 +105,6 @@ CREATE TABLE IF NOT EXISTS "quotation_line" (
   "sku_id" SERIAL REFERENCES "sku",
   "quotation_id" SERIAL REFERENCES "quotation"
 );
-
-
 
 CREATE TABLE IF NOT EXISTS "billing" (
   "billing_id" SERIAL PRIMARY KEY,
@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS "billing_service_line" (
   "service_item_id" SERIAL REFERENCES "service_item"
 );
 
-
-  ALTER TABLE "users"
-  ADD "user_role_id" SERIAL REFERENCES "user_role"
+ALTER TABLE
+  "users"
+ADD
+  "user_role_id" SERIAL REFERENCES "user_role"

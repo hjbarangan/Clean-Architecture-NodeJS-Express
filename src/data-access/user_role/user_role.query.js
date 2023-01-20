@@ -32,8 +32,8 @@ const serviceData = ({ dbs }) => {
 
   async function editUserRole(user_role) {
     const connect = await dbs();
-    const { role } = user_role;
-    const params = [role];
+    const { role, id } = user_role;
+    const params = [role, id];
     const sql =
       "UPDATE user_role SET role = $1 WHERE user_role_id = $2 RETURNING *";
 

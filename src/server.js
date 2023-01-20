@@ -35,6 +35,10 @@ app.use(logger("dev"));
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
 
+app.get("/api", (req, res) => {
+  res.send("Car dealership API");
+});
+
 app.use("/api", require("./routes/car.route"));
 app.use("/api", require("./routes/customer.route"));
 app.use("/api", require("./routes/user.route"));

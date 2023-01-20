@@ -4,10 +4,11 @@ const editPart = ({ partDB, partEntity }) => {
 
     return partDB.editPart({
       id: id,
-      part_number: result.part_number,
-      part_name: result.part_name,
-      purchase_price: result.purchase_price,
-      retail_price: result.retail_price
+      printname: result.printname,
+      barcode: result.barcode,
+      unit: result.unit,
+      qty: result.qty,
+      cost: result.cost
     });
   };
 };

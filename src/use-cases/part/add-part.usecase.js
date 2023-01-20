@@ -3,9 +3,11 @@ const addPart = ({ partDB, partEntity }) => {
     const result = partEntity(info);
 
     return partDB.addPart({
-      sku_id: result.sku_id,
       printname: result.printname,
       barcode: result.barcode,
+      unit: result.unit,
+      qty: result.qty,
+      cost: result.cost
     });
   };
 };

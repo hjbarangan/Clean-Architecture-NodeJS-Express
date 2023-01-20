@@ -5,7 +5,8 @@ const {
   viewAllServiceUseCase,
   softDeleteServiceUseCase,
   addServiceItemUseCase,
-  viewAllServiceItemsUseCase
+  viewAllServiceItemsUseCase,
+  editServiceItemUseCase
 } = require("../../use-cases/service/index");
 
 const addServiceController = require("./add-service.controller");
@@ -17,6 +18,7 @@ const deleteServiceController = require("./soft-delete-service.controller");
 //Service Item
 const addServiceItemController = require("./add-service-item.controller");
 const fetchAllServiceItemsController = require("./get-all-service-items.controller");
+const editServiceItemController = require("./edit-service-item.controller");
 
 //Service
 const postServiceController = addServiceController({
@@ -44,6 +46,10 @@ const getAllServiceItemsController = fetchAllServiceItemsController({
   viewAllServiceItemsUseCase
 });
 
+const putServiceItemController = editServiceItemController({
+  editServiceItemUseCase
+});
+
 const controller = Object.freeze({
   postServiceController,
   putServiceController,
@@ -51,7 +57,8 @@ const controller = Object.freeze({
   getServiceByIdController,
   softDeleteServiceController,
   postServiceItemController,
-  getAllServiceItemsController
+  getAllServiceItemsController,
+  putServiceItemController
 });
 
 module.exports = controller;
@@ -63,5 +70,6 @@ module.exports = {
   getAllServiceController,
   softDeleteServiceController,
   postServiceItemController,
-  getAllServiceItemsController
+  getAllServiceItemsController,
+  putServiceItemController
 };
