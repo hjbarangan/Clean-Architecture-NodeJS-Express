@@ -11,6 +11,7 @@ const addServiceController = ({ addServiceUseCase }) => {
         ...info,
         source
       };
+      console.log(httpRequest.headers["Authorization"])
       const services = await addServiceUseCase(toView);
 
       return {

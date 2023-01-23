@@ -138,3 +138,14 @@ ALTER TABLE
   "users"
 ADD
   "user_role_id" SERIAL REFERENCES "user_role"
+
+  ALTER TABLE
+  "service"
+ADD
+  "serial_number" VARCHAR(100);
+
+
+  ALTER TABLE
+  "service"
+ADD
+  "status" VARCHAR(100);

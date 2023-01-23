@@ -1,18 +1,18 @@
 const makeServiceEntity = ({}) => {
 
   return function createService(service) {
-    const { service_name, hourly_rate } = service;
+    const {  customer_id, serial_number, user_id } = service;
 
-    if (!service_name) {
-      throw new Error("Service name is required.");
+    if (!serial_number) {
+      throw new Error("Serial Number is required.");
     }
-    if (!hourly_rate) {
-      throw new Error("Hourly Rate is required.");
+  
+    if (!customer_id) {
+      throw new Error("Customer is required.");
     }
 
     return Object.freeze({
-      service_name,
-      hourly_rate
+      customer_id, serial_number, user_id
     });
   };
 };

@@ -7,7 +7,7 @@ const addService = ({ serviceDB, serviceEntity }) => {
       user_id: result.user_id,
       customer_id: result.customer_id,
       serial_number: result.serial_number,
-      status: result.status
+      user_id: result.user_id
     });
   };
 };
