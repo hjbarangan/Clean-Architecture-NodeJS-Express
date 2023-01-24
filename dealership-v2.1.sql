@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS "customer"(
 
 CREATE TABLE IF NOT EXISTS "stockard"(
   "stockard_id" SERIAL PRIMARY KEY,
-  "qty" VARCHAR(100),
-  "qtybalance" VARCHAR(150),
+  "qty" NUMERIC,
+  "qtybalance" NUMERIC,
   "date_created" DATE,
   "sku_id" SERIAL REFERENCES "sku"
 );

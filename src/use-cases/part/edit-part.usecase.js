@@ -2,7 +2,7 @@ const editPart = ({ partDB, partEntity }) => {
   return async function putPart({ id, ...partInfo }) {
     const result = partEntity(partInfo);
 
-    return partDB.editPart({
+    const data = await partDB.editPart({
       id: id,
       printname: result.printname,
       barcode: result.barcode,
@@ -10,6 +10,11 @@ const editPart = ({ partDB, partEntity }) => {
       qty: result.qty,
       cost: result.cost
     });
+
+    return {
+      msg: "Part Updated Successfully",
+      data: data.rows
+    };
   };
 };
 module.exports = editPart;

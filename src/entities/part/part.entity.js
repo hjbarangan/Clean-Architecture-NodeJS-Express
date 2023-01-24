@@ -1,6 +1,6 @@
 const makePartEntity = ({}) => {
   return function createPart(part) {
-    const { printname, barcode, cost, unit, qty } = part;
+    const { printname, barcode, cost, unit, qty, qtybalance } = part;
 
     if (!printname) {
       throw new Error("Printname is required.");
@@ -20,7 +20,8 @@ const makePartEntity = ({}) => {
       barcode,
       cost,
       unit,
-      qty
+      qty,
+      qtybalance
     });
   };
 };
