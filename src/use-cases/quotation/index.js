@@ -1,7 +1,7 @@
 const quotationDB = require("../../data-access/quotation/index");
-const quotationEntity = require("../../entities/quotation/index");
+// const quotationEntity = require("../../entities/quotation/index");
 const viewAllProducts = require("./view-all-products.usecase");
-
+const addQuotation = require("./add-quotation.usecase")
 // const addSku = require("./add-sku.usecase");
 // const editSku = require("./edit-sku.usecase");
 // const viewSku = require("./view-sku.usecase");
@@ -25,6 +25,7 @@ const viewAllProducts = require("./view-all-products.usecase");
 
 
 const viewAllProductsUseCase = viewAllProducts({ quotationDB });
+const addQuotationUseCase = addQuotation({ quotationDB });
 
 
 const skuService = Object.freeze({
@@ -33,7 +34,8 @@ const skuService = Object.freeze({
   // viewSkuUseCase,
   // viewAllSkuUseCase,
   // softDeleteSkuUseCase
-  viewAllProductsUseCase
+  viewAllProductsUseCase,
+  addQuotationUseCase
 });
 
 module.exports = skuService;
@@ -44,5 +46,6 @@ module.exports = {
   // viewSkuUseCase,
   // viewAllSkuUseCase,
   // softDeleteSkuUseCase
-  viewAllProductsUseCase
+  viewAllProductsUseCase,
+  addQuotationUseCase
 };
