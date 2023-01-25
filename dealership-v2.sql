@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS "users"(
   "user_id" SERIAL PRIMARY KEY,
   "name" VARCHAR(100),
@@ -43,7 +42,6 @@ CREATE TABLE IF NOT EXISTS "customer"(
   "is_active" BOOLEAN
 );
 
-
 CREATE TABLE IF NOT EXISTS "stockard"(
   "stockard_id" SERIAL PRIMARY KEY,
   "qty" VARCHAR(100),
@@ -55,7 +53,8 @@ CREATE TABLE IF NOT EXISTS "stockard"(
 CREATE TABLE IF NOT EXISTS "service" (
   "service_id" SERIAL PRIMARY KEY,
   "serial_number" NUMERIC,
-  "status" NUMERIC,
+  "comment" VARCHAR(250),
+  "status" VARCHAR(100),
   "date_transaction" DATE,
   "user_id" SERIAL REFERENCES "users",
   "customer_id" SERIAL REFERENCES "customer"
@@ -64,7 +63,7 @@ CREATE TABLE IF NOT EXISTS "service" (
 CREATE TABLE IF NOT EXISTS "service_item" (
   "service_item_id" SERIAL PRIMARY KEY,
   "service_name" VARCHAR(150),
-  "unit" NUMERIC,
+  "unit" VARCHAR(100),
   "cost" NUMERIC,
   "date_created" DATE,
   "is_active" BOOLEAN
@@ -100,11 +99,9 @@ CREATE TABLE IF NOT EXISTS "quotation_line" (
   "qty" NUMERIC,
   "cost" NUMERIC,
   "amount" NUMERIC,
-  "sku_id" SERIAL REFERENCES "sku",
+  "sku_id" INTEGER [] REFERENCES "sku",
   "quotation_id" SERIAL REFERENCES "quotation"
 );
-
-
 
 CREATE TABLE IF NOT EXISTS "billing" (
   "billing_id" SERIAL PRIMARY KEY,
@@ -134,6 +131,22 @@ CREATE TABLE IF NOT EXISTS "billing_service_line" (
   "service_item_id" SERIAL REFERENCES "service_item"
 );
 
+ALTER TABLE
+  "users"
+ADD
+  "user_role_id" SERIAL REFERENCES "user_role"
+ALTER TABLE
+  "service_item"
+ALTER COLUMN
+  "cost" TYPE FLOAT;
 
-  ALTER TABLE "users"
-  ADD "user_role_id" SERIAL REFERENCES "user_role"
+ALTER TABLE
+  "sku"
+ALTER COLUMN
+  "cost" TYPE FLOAT;
+
+
+ALTER TABLE
+  "quotation_line"
+ALTER COLUMN
+  "amount" TYPE FLOAT;

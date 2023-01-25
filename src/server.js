@@ -43,10 +43,11 @@ app.use("/api", require("./routes/car.route"));
 app.use("/api", require("./routes/customer.route"));
 app.use("/api", require("./routes/user.route"));
 app.use("/api", require("./routes/user_role.route"));
-app.use("/api", require("./routes/sku.route"))
+app.use("/api", require("./routes/sku.route"));
 app.use("/api", require("./routes/service.route"));
-app.use("/api", require("./routes/car.route"))
-app.use("/api", require("./routes/parts.route"))
+app.use("/api", require("./routes/car.route"));
+app.use("/api", require("./routes/parts.route"));
+app.use("/api", require("./routes/quotation.route"));
 
 const PORT = process.env.PORT || 3000;
 
