@@ -37,20 +37,36 @@ const quotationData = ({ dbs }) => {
       const connect = await dbs();
 
       //TODO: INSERT THE USER ID FROM THE LOGGED IN USER TO THE QUOTATION
-      const sql = `INSERT INTO quotation ( customer_id, serial_number, status, date_transaction) VALUES ( $1, $2, 'PR (Process)', localtimestamp) RETURNING *;`;
-      await connect.query(sql, [customer_id, serial_number]);
+      // const sql = `INSERT INTO quotation ( customer_id, serial_number, status, date_transaction) VALUES ( $1, $2, 'PR (Process)', localtimestamp) RETURNING *;`;
+      // await connect.query(sql, [customer_id, serial_number]);
 
       //TODO: INSERT INTO QUOTATION LINE
-      const addQuotationLineSQL = `INSERT INTO quotation_line (quotation_id, sku_id, )`;
+      // const addQuotationLineSQL = `INSERT INTO quotation_line (quotation_id, sku_id, )`;
 
       //TODO: FOR LOOP TO INSERT THE ARRAY
-      for (let i = 0; i < sku_id.length; i++) {
-        return connect.query(addQuotationLineSQL, [sku_id[i]]);
-      }
+      // for (let i = 0; i < sku_id.length; i++) {
+      //   return connect.query(addQuotationLineSQL, [sku_id[i]]);
+      // }
+
+      const skuIds = [1, 2, 3];
+      const orderId = 1;
+      const insertQuery = `INSERT INTO quotation_line (quotation_id, sku_id) VALUES ${skuIds
+        .map((skuId) => `(${orderId}, ${skuId})`)
+        .join(",")};`;
+      connect.query(insertQuery, (err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("SKU IDs inserted into Order table");
+        }
+      });
     } catch (error) {
       console.log(error);
     }
   }
 };
 
+
 module.exports = quotationData;
+
+//INSERT INTO quotation (status, date_transaction, user_id, customer_id) VALUES ('Y', NOW(), 1, 1)
