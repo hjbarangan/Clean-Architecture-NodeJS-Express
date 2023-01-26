@@ -98,14 +98,20 @@ CREATE TABLE IF NOT EXISTS "quotation" (
 );
 
 CREATE TABLE IF NOT EXISTS "quotation_line" (
-  "quotation_line_id" SERIAL PRIMARY KEY,
+  "sku_id" INT REFERENCES "sku"("sku_id"),
+  "quotation_id" INT REFERENCES "quotation"("quotation_id"),
   "qty" NUMERIC,
   "cost" NUMERIC,
   "amount" NUMERIC,
-  "sku_id" SERIAL REFERENCES "sku",
-  "quotation_id" SERIAL REFERENCES "quotation"
+  primary key ("sku_id", "quotation_id")
 );
 
+-- "quotation_line_id" SERIAL PRIMARY KEY,
+-- "qty" NUMERIC,
+-- "cost" NUMERIC,
+-- "amount" NUMERIC,
+-- "sku_id" SERIAL REFERENCES "sku",
+-- "quotation_id" SERIAL REFERENCES "quotation"
 CREATE TABLE IF NOT EXISTS "billing" (
   "billing_id" SERIAL PRIMARY KEY,
   "status" VARCHAR(150),
@@ -138,14 +144,12 @@ ALTER TABLE
   "users"
 ADD
   "user_role_id" SERIAL REFERENCES "user_role"
-
-  ALTER TABLE
+ALTER TABLE
   "service"
 ADD
   "serial_number" VARCHAR(100);
 
-
-  ALTER TABLE
+ALTER TABLE
   "service"
 ADD
   "status" VARCHAR(100);

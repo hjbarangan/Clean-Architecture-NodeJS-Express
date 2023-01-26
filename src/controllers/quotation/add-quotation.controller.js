@@ -11,14 +11,15 @@ const addQuotationController = ({ addQuotationUseCase }) => {
         ...info,
         source
       };
-      const quotation = await addQuotationUseCase(toView);
 
+      const res = await addQuotationUseCase(toView);
+     
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: quotation
+        body: res
       };
     } catch (e) {
       console.log(e);
