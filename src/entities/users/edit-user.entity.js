@@ -7,9 +7,7 @@ const makeUserUpdateEntity = ({}) => {
     contact_number,
     user_role_id
   }) {
-    if (!username) {
-      throw new Error("User should have an username!");
-    }
+
 
     if (!password) {
       throw new Error("User must have password!");

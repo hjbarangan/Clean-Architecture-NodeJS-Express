@@ -1,5 +1,5 @@
 const quotationDB = require("../../data-access/quotation/index");
-// const quotationEntity = require("../../entities/quotation/index");
+const quotationEntity = require("../../entities/quotation/index");
 const viewAllProducts = require("./view-all-products.usecase");
 const addQuotation = require("./add-quotation.usecase")
 // const addSku = require("./add-sku.usecase");
@@ -25,7 +25,7 @@ const addQuotation = require("./add-quotation.usecase")
 
 
 const viewAllProductsUseCase = viewAllProducts({ quotationDB });
-const addQuotationUseCase = addQuotation({ quotationDB });
+const addQuotationUseCase = addQuotation({ quotationDB, quotationEntity });
 
 
 const skuService = Object.freeze({
