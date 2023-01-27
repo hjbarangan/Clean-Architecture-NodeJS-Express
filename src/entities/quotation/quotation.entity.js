@@ -1,21 +1,10 @@
 const makeQuotationEntity = ({}) => {
-  return function createQuotation(quotation) {
-    const {
-      customer_id,
-      user_id,
-      sku_id,
-      qty,
-      cost,
-      amount
-    } = quotation;
-
+  return function createQuotation({ customer_id, user_id, service_id, products }) {
     return Object.freeze({
       customer_id,
       user_id,
-      sku_id,
-      qty,
-      cost,
-      amount
+      service_id,
+      products
     });
   };
 };

@@ -5,7 +5,7 @@ const changeUserPassController = ({ changePasswordUseCase }) => {
     };
     try {
       const { source = {}, password } = httpRequest.body;
-      console.log(password);
+      //console.log(password);
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
       const toView = {
@@ -13,7 +13,7 @@ const changeUserPassController = ({ changePasswordUseCase }) => {
         source,
         id: httpRequest.params.id
       };
-      console.log(toView);
+      //console.log(toView);
       const response = await changePasswordUseCase(toView);
 
       return {
