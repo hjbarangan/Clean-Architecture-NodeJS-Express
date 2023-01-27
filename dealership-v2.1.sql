@@ -145,9 +145,9 @@ ALTER TABLE
 ADD
   "user_role_id" SERIAL REFERENCES "user_role"
 ALTER TABLE
-  "service"
+  "quotation"
 ADD
-  "serial_number" VARCHAR(100);
+  "service_id" INT REFERENCES "service"("service_id")
 
 ALTER TABLE
   "service"

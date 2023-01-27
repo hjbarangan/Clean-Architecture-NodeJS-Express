@@ -12,7 +12,7 @@ const tokenChecker = ({ jwt, SECRET_KEY }) => {
       const bearerToken = bearerHeader.split(" ")[1];
       const decoded = jwt.verify(bearerToken, SECRET_KEY);
       req.user = decoded.user;
-      console.log("user", decoded.user)
+      //console.log("user", decoded.user)
       next();
 
       // const bearer = bearerHeader.split(" ");

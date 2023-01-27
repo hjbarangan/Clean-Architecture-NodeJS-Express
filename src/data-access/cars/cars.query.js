@@ -60,7 +60,7 @@ const carData = ({ dbs }) => {
     const params = [serial_number, brand_name, model, color, id];
     const carRes = await connect.query(sql, params);
     const skuId = carRes.rows[0].sku_id;
-    console.log("sku", skuId);
+    //console.log("sku", skuId);
     const updateSkuSql =
       "UPDATE sku SET unit = $1, cost = $2 WHERE sku_id = $3 RETURNING *";
 
