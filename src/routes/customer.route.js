@@ -10,7 +10,7 @@ const {
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
 
-router.post("/customer/add", authMiddleware , makeExpressCallback(postCustomerController));
+router.post("/customer/add" , makeExpressCallback(postCustomerController));
 router.patch("/customer/edit/:id", authMiddleware , makeExpressCallback(putCustomerController));
 router.get("/customers", authMiddleware , makeExpressCallback(getAllCustomersController));
 router.get(

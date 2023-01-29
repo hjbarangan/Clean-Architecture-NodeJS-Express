@@ -1,45 +1,37 @@
 const {
   viewAllProductsUseCase,
-  addQuotationUseCase
+  addQuotationUseCase,
+  viewAllQuotationsUseCase,
+  viewQuotationUseCase
 } = require("../../use-cases/quotation/index");
 
-// const editSkuController = require("./edit-sku.controller");
-// const fetchAllSkusController = require("./get-all-sku.controller");
-// const fetchSkuDetailsController = require("./get-sku-details.controller");
-// const deleteSkuController = require("./soft-delete-sku.controller");
-
-////// const postSkuController = addSkuController({
-/////   addSkuUseCase
-//// });
-///// const putSkuController = editSkuController({
-/////   editSkuUseCase
-///// });
-//// const getAllSkuController = fetchAllSkusController({
-////   viewAllSkuUseCase
-////// });
-//// const getSkuByIdController = fetchSkuDetailsController({
-////   viewSkuUseCase
-///// });
-
-//// const softDeleteSkuController = deleteSkuController({
-//// softDeleteSkuUseCase
-///// });
 const addQuotationController = require("./add-quotation.controller");
 const fetchAllProductsController = require("./get-all-products.controller");
+const fetchAllQuotationsController = require("./get-all-quotations.controller");
+const fetchQuotationDetailsController = require("./get-quotation-details.controller");
 
 const postQuotationController = addQuotationController({ addQuotationUseCase });
 const getAllProductsController = fetchAllProductsController({
   viewAllProductsUseCase
 });
-
+const getAllQuotationsController = fetchAllQuotationsController({
+  viewAllQuotationsUseCase
+});
+const getQuotationByIdController = fetchQuotationDetailsController({
+  viewQuotationUseCase
+});
 const controller = Object.freeze({
   postQuotationController,
-  getAllProductsController
+  getAllProductsController,
+  getAllQuotationsController,
+  getQuotationByIdController
 });
 
 module.exports = controller;
 
 module.exports = {
   postQuotationController,
-  getAllProductsController
+  getAllProductsController,
+  getAllQuotationsController,
+  getQuotationByIdController
 };

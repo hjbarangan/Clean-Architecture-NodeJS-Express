@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "product_car" (
   "model" VARCHAR(100),
   "color" VARCHAR(50),
   "date_created" DATE,
-  "sku_id" SERIAL REFERENCES "sku"
+  "sku_id" INT REFERENCES "sku"
 );
 
 CREATE TABLE IF NOT EXISTS "customer"(
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS "product_parts" (
   "printname" VARCHAR(100),
   "barcode" VARCHAR(100),
   "date_created" DATE,
-  "sku_id" SERIAL REFERENCES "sku"
+  "sku_id" INT REFERENCES "sku"
 );
 
 CREATE TABLE IF NOT EXISTS "quotation" (

@@ -6,10 +6,14 @@ const addService = ({ serviceDB, serviceEntity }) => {
       customer_id: result.customer_id,
       serial_number: result.serial_number,
       user_id: result.user_id,
+      comment: result.comment,
       services: result.services
     });
 
-    return data;
+    return {
+      msg: "Service Ticket Successfully Added.",
+      data: data.rows
+    }
   };
 };
 module.exports = addService;

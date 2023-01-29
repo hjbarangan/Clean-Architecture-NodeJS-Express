@@ -4,41 +4,58 @@ const quotationData = ({ dbs }) => {
     getQuotationById,
     addQuotation,
     getAllProducts
-    // addQuotationLine,
-    // editQuotationLine,
-    // softDeleteQuotationLine,
-    // findByQuotationLineName,
-    // getAllQuotationLines
   });
 
   async function getAllQuotations() {
     const connect = await dbs();
-    const sql = "SELECT * FROM quotation ORDER BY quotation_id DESC";
+    const sql = `SELECT
+    Q.quotation_id,  SK.cost, QL.qty, QL.amount, SK.unit,
+    PP.printname, PP.barcode, PC.serial_number,
+    PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
+    C.name, C.contact_number, C.address, Q.date_transaction, Q.status
+    FROM quotation Q
+    INNER JOIN quotation_line QL ON QL.quotation_id = Q.quotation_id
+    LEFT OUTER JOIN sku SK ON SK.sku_id = QL.sku_id
+    LEFT OUTER JOIN service S ON S.service_id = Q.service_id
+    LEFT OUTER JOIN service_line SL ON SL.service_id = S.service_id
+    LEFT OUTER JOIN service_item SI ON SI.service_item_id = SL.service_item_id
+    LEFT OUTER JOIN product_parts PP ON SK.sku_id = PP.sku_id
+    LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
+    INNER JOIN customer C ON C.customer_id = Q.customer_id ORDER BY quotation_id DESC`;
     return connect.query(sql);
   }
 
   async function getAllProducts() {
     const connect = await dbs();
-    const sql =
-      "SELECT C.product_car_id, C.color,  C.brand_name, C.model, C.serial_number,  P.product_parts_id, P.printname, P.barcode, sku.sku_id, sku.unit, sku.cost FROM sku LEFT OUTER JOIN product_car C ON C.sku_id = sku.sku_id LEFT OUTER JOIN product_parts P ON P.sku_id = sku.sku_id ORDER BY sku.sku_id DESC;";
+    const sql = `SELECT C.product_car_id, C.color,  C.brand_name, C.model, C.serial_number,  P.product_parts_id, P.printname, P.barcode, sku.sku_id, 
+      sku.unit, sku.cost FROM sku LEFT OUTER JOIN product_car C ON C.sku_id = sku.sku_id LEFT OUTER JOIN product_parts P ON P.sku_id = sku.sku_id ORDER BY sku.sku_id DESC;`;
     return connect.query(sql);
   }
 
   async function getQuotationById(id) {
     const connect = await dbs();
-    const sql = "SELECT * FROM quotation WHERE quotation_id = $1";
+    const sql = `SELECT
+    Q.quotation_id, QL.qty, QL.amount, SK.unit, SK.cost,
+    PP.printname, PP.barcode, PC.serial_number,
+    PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
+    C.name, C.contact_number, C.address, Q.date_transaction, Q.status
+    FROM quotation Q
+    INNER JOIN quotation_line QL ON QL.quotation_id = Q.quotation_id
+    LEFT OUTER JOIN sku SK ON SK.sku_id = QL.sku_id
+    LEFT OUTER JOIN service S ON S.service_id = Q.service_id
+    LEFT OUTER JOIN service_line SL ON SL.service_id =  S.service_id
+    LEFT OUTER JOIN service_item SI ON SI.service_item_id = SL.service_item_id
+    LEFT OUTER JOIN product_parts PP ON SK.sku_id = PP.sku_id
+    LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
+    INNER JOIN customer C ON C.customer_id = Q.customer_id where Q.quotation_id = $1;`;
     const params = [id];
     return connect.query(sql, params);
   }
 
-  //! HIGH PRIORITY TASK
   async function addQuotation({ customer_id, user_id, service_id, products }) {
     try {
       const connect = await dbs();
 
-      //const { customer_id, user_id, sku_id, qty, cost, amount } = quotation;
-
-      //TODO: INSERT THE USER ID FROM THE LOGGED IN USER TO THE QUOTATION
       const sql = `INSERT INTO quotation ( customer_id, user_id, service_id, status, date_transaction) VALUES ( $1,  $2, $3, 'PR (Process)', localtimestamp) RETURNING *;`;
       const getQuotation = await connect.query(sql, [
         customer_id,
@@ -47,68 +64,47 @@ const quotationData = ({ dbs }) => {
       ]);
 
       let quotation_id = getQuotation.rows[0].quotation_id;
-      // insert into quotation (status, date_transaction, user_id, customer_id) values ('Processed', NOW(), 2,1)
-      //TODO: FOR LOOP TO INSERT THE ARRAY AND INSERT INTO QUOTATION LINE
-
-      //const addQuotationLineSQL = `INSERT INTO quotation_line (quotation_id, sku_id, qty, cost, amount) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-      // let data = [];
-      // for (let i = 0; i < sku_id.length; i++) {
-      //   await connect.query(addQuotationLineSQL, [
-      //     quotation_id,
-      //     sku_id[i],
-      //     qty,
-      //     cost,
-      //     amount
-      //   ]);
-
-      //   data.push({
-      //     quotation_id: quotation_id,
-      //     sku_id: sku_id[i],
-      //     qty: qty,
-      //     cost: cost,
-      //     amount: amount
-      //   });
-      // }
-
-      //delete products.source;
-
-      // if (products instanceof Array) {
-      // The arrayLike value is an array, so it's safe to call forEach() on it.
-      //   console.log("ob")
-      //   products.forEach(element => console.log(element));
-      // } else {
-      // The arrayLike value is not an array, so it's not safe to call forEach() on it.
-      // You can throw an error or do something else here.
-      //   throw new TypeError('The value is not an array.');
-      // }
-
-      // // //temporary response
-      // return data;
+      let service_id_check = getQuotation.rows[0].service_id;
 
       let insertQuotationItemsSQL =
-        "INSERT INTO quotation_line (quotation_id, sku_id, qty, cost) VALUES ";
+        "INSERT INTO quotation_line (quotation_id, sku_id, qty, amount) VALUES ";
       let values = "";
+      let data = [];
+
       products.forEach((product) => {
-        values += `(${quotation_id},${product.sku_id}, ${product.qty}, ${product.cost}),`;
+        values += `(${quotation_id},${product.sku_id}, ${product.qty}, ${product.amount}),`;
+        data.push({
+          sku_id: product.sku_id,
+          qty: product.qty,
+          amount: product.amount
+        });
       });
       insertQuotationItemsSQL += values.slice(0, -1);
       insertQuotationItemsSQL += " RETURNING *;";
 
-      return connect.query(insertQuotationItemsSQL, (err, result) => {
-        if (err) {
-          console.log(err);
-        } else {
-          //console.log(result);
-        }
-      });
+      await connect.query(insertQuotationItemsSQL);
 
-      //TODO: Get the unit and cost of the sku_id then amount will do the math
+      const showQuotationSQL = `SELECT
+      Q.quotation_id, QL.qty, QL.amount, SK.unit, SK.cost,
+      PP.printname, PP.barcode, PC.serial_number,
+      PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
+      C.name, C.contact_number, C.address, Q.date_transaction, Q.status
+      FROM quotation Q
+      INNER JOIN quotation_line QL ON QL.quotation_id = Q.quotation_id
+      LEFT OUTER JOIN sku SK ON SK.sku_id = QL.sku_id
+      LEFT OUTER JOIN service S ON S.service_id = Q.service_id
+      LEFT OUTER JOIN service_line SL ON SL.service_id =  S.service_id
+      LEFT OUTER JOIN service_item SI ON SI.service_item_id = SL.service_item_id
+      LEFT OUTER JOIN product_parts PP ON SK.sku_id = PP.sku_id
+      LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
+      INNER JOIN customer C ON C.customer_id = Q.customer_id where Q.quotation_id = ${quotation_id};`;
 
-
-      //   // for (let i = 0; i < skuIds.length; i++) {
-      //     const insertQuery = `INSERT INTO quotation_line (quotation_id, sku_id) VALUES ${skuIds
-      //       .map((skuId) => `(${orderId}, ${skuId})`)
-      //       .join(",")};`;
+      return {
+        quotation_id: quotation_id,
+        service_id: service_id_check,
+        products: products
+      };
+      // return connect.query(showQuotationSQL);
     } catch (error) {
       console.log(error);
     }
@@ -116,5 +112,3 @@ const quotationData = ({ dbs }) => {
 };
 
 module.exports = quotationData;
-
-//INSERT INTO quotation (status, date_transaction, user_id, customer_id) VALUES ('Y', NOW(), 1, 1)

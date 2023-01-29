@@ -13,10 +13,10 @@ const {
 const authMiddleware = require("../middleware/index")
 const makeExpressCallback = require("../express-callback/index");
 
-router.post("/service/add", makeExpressCallback(postServiceController));
+router.post("/service/create", makeExpressCallback(postServiceController));
 router.patch("/service/edit/:id", authMiddleware, makeExpressCallback(putServiceController));
-router.get("/service/view/:id", authMiddleware, makeExpressCallback(getServiceByIdController));
-router.get("/service", makeExpressCallback(getAllServiceController));
+router.get("/service/view/:id", makeExpressCallback(getServiceByIdController));
+router.get("/services", makeExpressCallback(getAllServiceController));
 router.patch("/service/delete/:id", authMiddleware, makeExpressCallback(softDeleteServiceController))
 
 //service item
