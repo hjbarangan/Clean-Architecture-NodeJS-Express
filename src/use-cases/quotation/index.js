@@ -1,51 +1,27 @@
 const quotationDB = require("../../data-access/quotation/index");
 const quotationEntity = require("../../entities/quotation/index");
 const viewAllProducts = require("./view-all-products.usecase");
-const addQuotation = require("./add-quotation.usecase")
-// const addSku = require("./add-sku.usecase");
-// const editSku = require("./edit-sku.usecase");
-// const viewSku = require("./view-sku.usecase");
-// const viewAllSku = require("./view-all-sku.usecase");
-// const softDelSku = require("./delete-sku.usecase");
-
-
-
-
-// const addSkuUseCase = addSku({
-//   skuDB,
-//   skuEntity
-// });
-// const editSkuUseCase = editSku({
-//   skuDB,
-//   skuEntity
-// });
-// const viewSkuUseCase = viewSku({ skuDB });
-// const viewAllSkuUseCase = viewAllSku({ skuDB });
-// const softDeleteSkuUseCase = softDelSku({ skuDB });
-
+const addQuotation = require("./add-quotation.usecase");
+const viewAllQuotations = require("./view-all-quotations.usecase");
+const viewQuotation = require("./view-quotation.usecase");
 
 const viewAllProductsUseCase = viewAllProducts({ quotationDB });
 const addQuotationUseCase = addQuotation({ quotationDB, quotationEntity });
+const viewAllQuotationsUseCase = viewAllQuotations({ quotationDB });
+const viewQuotationUseCase = viewQuotation({ quotationDB });
 
-
-const skuService = Object.freeze({
-  // addSkuUseCase,
-  // editSkuUseCase,
-  // viewSkuUseCase,
-  // viewAllSkuUseCase,
-  // softDeleteSkuUseCase
+const quotationService = Object.freeze({
   viewAllProductsUseCase,
-  addQuotationUseCase
+  addQuotationUseCase,
+  viewAllQuotationsUseCase,
+  viewQuotationUseCase
 });
 
-module.exports = skuService;
+module.exports = quotationService;
 
 module.exports = {
-  // addSkuUseCase,
-  // editSkuUseCase,
-  // viewSkuUseCase,
-  // viewAllSkuUseCase,
-  // softDeleteSkuUseCase
   viewAllProductsUseCase,
-  addQuotationUseCase
+  addQuotationUseCase,
+  viewAllQuotationsUseCase,
+  viewQuotationUseCase
 };

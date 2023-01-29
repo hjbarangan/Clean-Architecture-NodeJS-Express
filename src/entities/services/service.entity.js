@@ -3,6 +3,7 @@ const makeServiceEntity = ({}) => {
     customer_id,
     serial_number,
     user_id,
+    comment,
     services
   }) {
     // const {  customer_id, serial_number, user_id } = service;
@@ -19,6 +20,7 @@ const makeServiceEntity = ({}) => {
       customer_id,
       serial_number,
       user_id,
+      comment,
       services
     });
   };
