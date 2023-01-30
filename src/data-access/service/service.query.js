@@ -14,7 +14,7 @@ const serviceData = ({ dbs }) => {
     const connect = await dbs();
     const sql = `SELECT
     S.service_id, SI.service_name, SI.unit, SI.cost, S.serial_number, SL.qty, SL.amount,
-     C.name, C.contact_number, C.address, S.status
+     C.name, C.contact_number, C.address, S.date_transaction, S.status
      FROM service S
      INNER JOIN service_line SL ON SL.service_id = S.service_id
      INNER JOIN service_item SI ON SL.service_item_id = SI.service_item_id
@@ -26,7 +26,7 @@ const serviceData = ({ dbs }) => {
     const connect = await dbs();
     const sql = `SELECT
     S.service_id, SI.service_name, SI.unit, SI.cost, S.serial_number, SL.qty, SL.amount,
-     C.name, C.contact_number, C.address, S.status
+     C.name, C.contact_number, C.address,  S.date_transaction, S.status
      FROM service S
      INNER JOIN service_line SL ON SL.service_id = S.service_id
      INNER JOIN service_item SI ON SL.service_item_id = SI.service_item_id
@@ -35,7 +35,13 @@ const serviceData = ({ dbs }) => {
     return connect.query(sql, params);
   }
 
-  async function addService({ customer_id, serial_number, user_id, comment, services }) {
+  async function addService({
+    customer_id,
+    serial_number,
+    user_id,
+    comment,
+    services
+  }) {
     const connect = await dbs();
 
     const params = [customer_id, serial_number, user_id, comment];
@@ -43,6 +49,7 @@ const serviceData = ({ dbs }) => {
     const getService = await connect.query(sql, params);
 
     let service_id = getService.rows[0].service_id;
+    let service_date_transaction = getService.rows[0].date_transaction;
 
     let insertServiceItemsSQL =
       "INSERT INTO service_line (service_id, service_item_id, qty, amount) VALUES ";
@@ -54,15 +61,26 @@ const serviceData = ({ dbs }) => {
     insertServiceItemsSQL += " RETURNING *;";
 
     //This query shows all the service transaction
-    const showServicesSQL = `SELECT SI.service_name, SI.cost, SI.unit, SL.qty, SL.amount, S.status FROM service_line SL INNER JOIN service S ON S.service_id = SL.service_id INNER JOIN service_item SI ON SI.service_item_id = SL.service_item_id where SL.service_id = ${service_id};`;
+    // const showServicesSQL = `SELECT S.service_id, SL.service_line_id, SI.service_name, SI.cost, SI.unit, SL.qty, SL.amount, S.status FROM service_line SL INNER JOIN service S ON S.service_id = SL.service_id INNER JOIN service_item SI ON SI.service_item_id = SL.service_item_id where SL.service_id = $1;`;
 
-    await connect.query(insertServiceItemsSQL, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    const sll = await connect.query(insertServiceItemsSQL);
 
-    return await connect.query(showServicesSQL);
+    return {
+      msg: "Service Ticket Successfully Added.",
+      date_transaction: service_date_transaction,
+      service_id: service_id,
+      data: sll.rows
+    };
+
+    // const serviceParams = [service_id]
+
+    //  const sqll = await connect.query(showServicesSQL, serviceParams);
+
+    //  const herzlia = [{
+    //   service_id: service_id,
+    //   showServicesSQL: sqll.rows ?  sqll.rows : 'aa'
+    //  }]
+    // return herzlia
   }
 
   async function findByServiceItemName(service_name) {

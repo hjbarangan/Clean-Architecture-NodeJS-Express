@@ -65,6 +65,7 @@ const quotationData = ({ dbs }) => {
 
       let quotation_id = getQuotation.rows[0].quotation_id;
       let service_id_check = getQuotation.rows[0].service_id;
+      let quotation_date_transaction = getQuotation.rows[0].date_transaction;
 
       let insertQuotationItemsSQL =
         "INSERT INTO quotation_line (quotation_id, sku_id, qty, amount) VALUES ";
@@ -82,29 +83,31 @@ const quotationData = ({ dbs }) => {
       insertQuotationItemsSQL += values.slice(0, -1);
       insertQuotationItemsSQL += " RETURNING *;";
 
-      await connect.query(insertQuotationItemsSQL);
+      const sll = await connect.query(insertQuotationItemsSQL);
 
-      const showQuotationSQL = `SELECT
-      Q.quotation_id, QL.qty, QL.amount, SK.unit, SK.cost,
-      PP.printname, PP.barcode, PC.serial_number,
-      PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
-      C.name, C.contact_number, C.address, Q.date_transaction, Q.status
-      FROM quotation Q
-      INNER JOIN quotation_line QL ON QL.quotation_id = Q.quotation_id
-      LEFT OUTER JOIN sku SK ON SK.sku_id = QL.sku_id
-      LEFT OUTER JOIN service S ON S.service_id = Q.service_id
-      LEFT OUTER JOIN service_line SL ON SL.service_id =  S.service_id
-      LEFT OUTER JOIN service_item SI ON SI.service_item_id = SL.service_item_id
-      LEFT OUTER JOIN product_parts PP ON SK.sku_id = PP.sku_id
-      LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
-      INNER JOIN customer C ON C.customer_id = Q.customer_id where Q.quotation_id = ${quotation_id};`;
+      // const showQuotationSQL = `SELECT
+      // Q.quotation_id, QL.quotation_line_id, QL.qty, QL.amount, SK.unit, SK.cost,
+      // PP.printname, PP.barcode, PC.serial_number,
+      // PC.brand_name, PC.model, PC.color, SK.sku_id, S.serial_number,
+
+      // C.name, C.contact_number, C.address, Q.date_transaction, Q.status
+      // FROM quotation Q
+      // INNER JOIN quotation_line QL ON QL.quotation_id = Q.quotation_id
+      // LEFT OUTER JOIN sku SK ON SK.sku_id = QL.sku_id
+      // LEFT OUTER JOIN service S ON S.service_id = Q.service_id
+      // LEFT OUTER JOIN service_line SL ON SL.service_id =  S.service_id
+      // LEFT OUTER JOIN service_item SI ON SI.service_item_id = SL.service_item_id
+      // LEFT OUTER JOIN product_parts PP ON SK.sku_id = PP.sku_id
+      // LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
+      // INNER JOIN customer C ON C.customer_id = Q.customer_id where Q.quotation_id = ${quotation_id};`;
 
       return {
+        msg: "Quotation Successfully Added.",
+        date_transaction: quotation_date_transaction,
         quotation_id: quotation_id,
         service_id: service_id_check,
-        products: products
+        data: sll.rows
       };
-      // return connect.query(showQuotationSQL);
     } catch (error) {
       console.log(error);
     }
