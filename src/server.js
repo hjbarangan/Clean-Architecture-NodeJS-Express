@@ -48,6 +48,7 @@ app.use("/api", require("./routes/service.route"));
 app.use("/api", require("./routes/car.route"));
 app.use("/api", require("./routes/parts.route"));
 app.use("/api", require("./routes/quotation.route"));
+app.use("/api", require("./routes/billing.route"))
 
 const PORT = process.env.PORT || 3000;
 

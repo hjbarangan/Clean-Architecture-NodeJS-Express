@@ -1,4 +1,4 @@
-const addServiceController = ({ addServiceUseCase }) => {
+const addBillingController = ({ addBillingUseCase }) => {
   return async function post(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
@@ -11,14 +11,15 @@ const addServiceController = ({ addServiceUseCase }) => {
         ...info,
         source
       };
-      //console.log(httpRequest.headers["Authorization"])
-      const services = await addServiceUseCase(toView);
+
+      const res = await addBillingUseCase(toView);
+     
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: services
+        body: res
       };
     } catch (e) {
       console.log(e);
@@ -33,4 +34,4 @@ const addServiceController = ({ addServiceUseCase }) => {
   };
 };
 
-module.exports = addServiceController;
+module.exports = addBillingController;

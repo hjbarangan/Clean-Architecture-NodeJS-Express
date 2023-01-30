@@ -1,5 +1,5 @@
-const addServiceController = ({ addServiceUseCase }) => {
-  return async function post(httpRequest) {
+const fetchAllBillingsController = ({ viewAllBillingsUseCase }) => {
+  return async function getAll(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
     };
@@ -11,14 +11,14 @@ const addServiceController = ({ addServiceUseCase }) => {
         ...info,
         source
       };
-      //console.log(httpRequest.headers["Authorization"])
-      const services = await addServiceUseCase(toView);
+      const billing = await viewAllBillingsUseCase(toView);
+
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: services
+        body: billing
       };
     } catch (e) {
       console.log(e);
@@ -33,4 +33,4 @@ const addServiceController = ({ addServiceUseCase }) => {
   };
 };
 
-module.exports = addServiceController;
+module.exports = fetchAllBillingsController;

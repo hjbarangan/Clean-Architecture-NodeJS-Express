@@ -152,4 +152,4 @@ ADD
 ALTER TABLE
   "service"
 ADD
-  "status" VARCHAR(100);
+  "comment" VARCHAR(150);

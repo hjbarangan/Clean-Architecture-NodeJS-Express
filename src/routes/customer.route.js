@@ -14,7 +14,7 @@ router.post("/customer/add" , makeExpressCallback(postCustomerController));
 router.patch("/customer/edit/:id", authMiddleware , makeExpressCallback(putCustomerController));
 router.get("/customers", authMiddleware , makeExpressCallback(getAllCustomersController));
 router.get(
-  "/customer/view/:id", authMiddleware ,
+  "/customer/view/:id",
   makeExpressCallback(getCustomerByIdController)
 );
 router.patch("/customer/delete/:id", authMiddleware ,  makeExpressCallback(softDeleteCustomerController))
