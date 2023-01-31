@@ -116,10 +116,10 @@ CREATE TABLE IF NOT EXISTS "billing" (
   "billing_id" SERIAL PRIMARY KEY,
   "status" VARCHAR(150),
   "date_transaction" DATE,
-  "service_id" SERIAL REFERENCES "service",
-  "quotation_id" SERIAL REFERENCES "quotation",
-  "user_id" SERIAL REFERENCES "users",
-  "customer_id" SERIAL REFERENCES "customer"
+  "service_id" INT REFERENCES "service",
+  "quotation_id" INT REFERENCES "quotation",
+  "user_id" INT REFERENCES "users",
+  "customer_id" INT REFERENCES "customer"
 );
 
 CREATE TABLE IF NOT EXISTS "billing_goods_line" (

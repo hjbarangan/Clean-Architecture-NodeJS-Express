@@ -6,17 +6,15 @@ const addBilling = ({ billingDB, billingEntity }) => {
       customer_id: result.customer_id,
       user_id: result.user_id,
       service_id: result.service_id,
+      quotation_id: result.quotation_id,
       products: result.products
     });
     //console.log("result-usecase", data);
 
-    return ({
-      msg: "Billing is successfully created!",
-      billing_id: data.rows[0].billing_id,
-      serial_number: data.rows[0].serial_number,
-      service: data.rows[0].service_name,
-      data: data.rows
-    });
+    return {
+      msg: "Transaction Processed Successfully.",
+      data: data.rows};
+  
   };
 };
 module.exports = addBilling;
