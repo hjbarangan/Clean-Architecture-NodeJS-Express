@@ -13,8 +13,8 @@ const serviceData = ({ dbs }) => {
   async function getAllServices() {
     const connect = await dbs();
     const sql = `SELECT
-    S.service_id, SI.service_name, SI.unit, SI.cost, S.serial_number, SL.qty, SL.amount,
-     C.name, C.contact_number, C.address, S.date_transaction, S.status
+    S.service_id, SI.service_name, SI.unit, SI.cost, S.serial_number, SL.qty, SL.amount, C.customer_id,
+     C.name, C.contact_number, C.address, S.comment,  S.date_transaction, S.status
      FROM service S
      INNER JOIN service_line SL ON SL.service_id = S.service_id
      INNER JOIN service_item SI ON SL.service_item_id = SI.service_item_id
@@ -25,8 +25,8 @@ const serviceData = ({ dbs }) => {
   async function getServiceById(id) {
     const connect = await dbs();
     const sql = `SELECT
-    S.service_id, SI.service_name, SI.unit, SI.cost, S.serial_number, SL.qty, SL.amount,
-     C.name, C.contact_number, C.address,  S.date_transaction, S.status
+    S.service_id, SI.service_name, SI.unit, SI.cost, S.serial_number, SL.qty, SL.amount, C.customer_id,
+     C.name, C.contact_number, C.address,  S.comment, S.date_transaction, S.status
      FROM service S
      INNER JOIN service_line SL ON SL.service_id = S.service_id
      INNER JOIN service_item SI ON SL.service_item_id = SI.service_item_id
