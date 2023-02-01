@@ -45,9 +45,8 @@ const billingData = ({ dbs }) => {
     service_id,
     quotation_id
   }) {
+    const connect = await dbs();
     try {
-      const connect = await dbs();
-
       const sql = `INSERT INTO billing ( customer_id, user_id, service_id, quotation_id, status, date_transaction) VALUES ( $1,  $2, $3, $4, 'PR (Process)', localtimestamp) RETURNING *;`;
       const billingQuery = await connect.query(sql, [
         customer_id,
@@ -56,9 +55,44 @@ const billingData = ({ dbs }) => {
         quotation_id
       ]);
 
-     // const billingID = billingQuery.rows[0].billing_id;
+      // const yawaSQL = `select Q.quotation_id, QL.qty, QL.amount, SK.sku_id, SK.cost, SK.unit, PC.serial_number, PC.model, PC.brand_name, PP.barcode, PP.printname from quotation_line QL  
+      // JOIN quotation Q ON Q.quotation_id = QL.quotation_id
+      // JOIN sku SK ON SK.sku_id = QL.sku_id
+      // LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
+      // LEFT OUTER JOIN stockard ST ON ST.sku_id = SK.sku_id
+      // LEFT OUTER JOIN product_parts PP ON PP.sku_id = SK.sku_id where Q.quotation_id = ${quotation_id};`;
 
-      
+      // const yawa = await connect.query(yawaSQL);
+      // console.log(`foo = `, yawa.rows);
+      // let products = [];
+
+      // products.forEach((product) => {
+      //   let sql = `SELECT qtybalance FROM stockard WHERE sku_id = ${product.sku_id}`;
+      //   connect.query(sql, (err, result) => {
+      //     if (err) {
+      //       console.log(err.message);
+      //     } else {
+      //       let stock = result.rows[0].qtybalance;
+      //       if (stock >= product.qty) {
+      //         sql = `UPDATE stockard SET qtybalance = qtybalance - ${product.qty} WHERE sku_id = ${product.sku_id}`;
+      //         connect.query(sql, (err, result) => {
+      //           if (err) {
+      //             console.log(err.message);
+      //           } else {
+      //             console.log(
+      //               `Stock updated for product ID: ${product.sku_id}`
+      //             );
+      //           }
+      //         });
+      //       } else {
+      //         console.log(`Out of stock for product ID: ${product.sku_id}`);
+      //       }
+      //     }
+      //   });
+      // });
+
+      //const updateQtySQL = `UPDATE stockard SET qtybalance = qtybalance - ${}`
+      // const billingID = billingQuery.rows[0].billing_id;
 
       return billingQuery;
 
@@ -99,7 +133,7 @@ const billingData = ({ dbs }) => {
       // LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
       // INNER JOIN customer C ON C.customer_id = Q.customer_id where Q.billing_id = ${billing_id};`;
     } catch (error) {
-      console.log("a",error);
+      console.log("a", error);
     }
   }
 };

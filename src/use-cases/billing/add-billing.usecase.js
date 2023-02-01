@@ -13,8 +13,8 @@ const addBilling = ({ billingDB, billingEntity }) => {
 
     return {
       msg: "Transaction Processed Successfully.",
-      data: data.rows};
-  
+      data: data.rows
+    };
   };
 };
 module.exports = addBilling;
