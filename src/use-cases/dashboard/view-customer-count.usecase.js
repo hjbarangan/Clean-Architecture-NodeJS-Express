@@ -1,7 +1,10 @@
 const viewCustomerCount = ({ dashboardDB }) => {
   return async function customerCount() {
     const result = await dashboardDB.getMonthlyCustomers();
-    return result.rows;
+    return {
+      weekly_sales: result.monthly_total,
+      weekly_total: result.data.rows
+    };
   };
 };
 
