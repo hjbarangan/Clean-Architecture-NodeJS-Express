@@ -10,7 +10,6 @@ const makeExpressCallback = require("../express-callback/index");
 
 router.post(
   "/billing/create",
-  authMiddleware,
   makeExpressCallback(postBillingController)
 );
 router.get(

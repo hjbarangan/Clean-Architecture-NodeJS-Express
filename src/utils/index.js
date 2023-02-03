@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = require("../config/auth.config");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const jwtGenerator = require("./auth.util");
 const comparePass = require("./comparePass");

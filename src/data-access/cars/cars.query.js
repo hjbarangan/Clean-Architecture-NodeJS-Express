@@ -11,7 +11,7 @@ const carData = ({ dbs }) => {
   async function getAllCars() {
     const connect = await dbs();
     const sql =
-      "SELECT p.product_car_id, p.serial_number, p.brand_name, p.model, p.color, sku.unit, sku.cost, ST.qty FROM product_car p JOIN sku ON sku.sku_id = p.sku_id INNER JOIN stockard ST ON sku.sku_id = ST.sku_id ORDER BY product_car_id DESC";
+      "SELECT p.product_car_id, p.serial_number, p.brand_name, p.model, p.color, sku.unit, sku.cost, ST.qty, ST.qtybalance FROM product_car p JOIN sku ON sku.sku_id = p.sku_id INNER JOIN stockard ST ON sku.sku_id = ST.sku_id ORDER BY product_car_id DESC";
     return connect.query(sql);
   }
 

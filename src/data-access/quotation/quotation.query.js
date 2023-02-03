@@ -9,7 +9,11 @@ const quotationData = ({ dbs }) => {
   async function getAllQuotations() {
     const connect = await dbs();
     const sql = `SELECT
+<<<<<<< HEAD
     Q.quotation_id,  SK.cost, QL.qty, QL.amount, SK.unit,
+=======
+    Q.quotation_id, S.service_id,  SK.sku_id, C.customer_id, SK.cost, QL.qty, QL.amount, SK.unit,
+>>>>>>> feat/insert-array
     PP.printname, PP.barcode, PC.serial_number,
     PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
     C.name, C.contact_number, C.address, Q.date_transaction, Q.status
@@ -35,7 +39,7 @@ const quotationData = ({ dbs }) => {
   async function getQuotationById(id) {
     const connect = await dbs();
     const sql = `SELECT
-    Q.quotation_id, QL.qty, QL.amount, SK.unit, SK.cost,
+    Q.quotation_id, S.service_id,  SK.sku_id,  C.customer_id, QL.qty, QL.amount, SK.unit, SK.cost,
     PP.printname, PP.barcode, PC.serial_number,
     PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
     C.name, C.contact_number, C.address, Q.date_transaction, Q.status
