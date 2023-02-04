@@ -5,46 +5,37 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "prod" ]
+    branches: ["v2"]
   pull_request:
-    branches: [ "prod" ]
+    branches: ["v2"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PORT: 5000
-      NODE_ENV: development
-      PG_USER: postgres
-      PG_HOST: db
-      PG_DATABASE: clean_api
-      PG_USERPASS: admin 
-      SECRET_KEY: naevis   
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: admin
-          POSTGRES_DB: clean_api
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run test:unit
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v2
+
+  - name: Build Docker image
+    uses: docker/build-push-action@v2
+    with:
+      push: true
+      tags: herzliyaaa/clean-arch-api:latest
+      context: .
+
+  - name: Deploy to Ubuntu server
+    uses: actions/ssh-action@v0
+    with:
+      host: ${{ secrets.HOST }}
+      username: ${{ secrets.USERNAME }}
+      password: ${{ secrets.PASSWORD }}
+      script: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker pull herzliyaaa/clean-arch-api:latest
+        docker-compose down
+        docker-compose up -d
