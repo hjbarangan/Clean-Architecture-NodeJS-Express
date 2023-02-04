@@ -1,37 +1,33 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI/CD
+name: Deploy API
 
 on:
   push:
-    branches: ["v2"]
+    branches:
+      - main
 
 jobs:
   build:
-    runs-on:
-      ubuntu-latest
-      # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout code
-    uses: actions/checkout@v2
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-  - name: Build Docker image
-    uses: docker/build-push-action@v2
-    with:
-      push: true
-      tags: herzliyaaa/clean-arch-api:latest
-      context: .
+    - name: Build Docker image
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: herzliyaaa/clean-arch-api:latest
+        context: .
 
-  - name: Deploy to Ubuntu server
-    uses: actions/ssh-action@v0
-    with:
-      host: ${{ secrets.HOST }}
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
-      script: |
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker pull herzliyaaa/clean-arch-api:latest
-        docker-compose down
-        docker-compose up -d
+    - name: Deploy to Ubuntu server
+      uses: actions/ssh-action@v0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        script: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker pull herzliyaaa/clean-arch-api:latest
+          docker-compose down
+          docker-compose up -d
