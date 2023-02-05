@@ -38,3 +38,4 @@ jobs:
           docker pull herzliyaaa/clean-arch-api:latest
           docker-compose down
           docker-compose up -d
+        strict-host-key-checking: false
