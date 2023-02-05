@@ -27,7 +27,7 @@ jobs:
         context: .
 
     - name: Deploy to Ubuntu server
-      uses: JimCronqvist/action-ssh@0.1.1
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
