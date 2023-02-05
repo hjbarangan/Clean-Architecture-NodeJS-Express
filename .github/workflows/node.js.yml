@@ -27,6 +27,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         script: |
+          cd /opt/dev-api/Clean-Architecture-NodeJS-Express
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker pull herzliyaaa/clean-arch-api:latest
           docker-compose down
