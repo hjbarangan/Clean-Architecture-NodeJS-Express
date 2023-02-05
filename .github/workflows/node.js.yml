@@ -27,12 +27,11 @@ jobs:
         context: .
 
     - name: Deploy to Ubuntu server
-      uses: appleboy/ssh-action@master
+      uses: JimCronqvist/action-ssh@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        script: |
+        hosts: ${{ secrets.SERVER_HOST }}
+        privateKey: ${{ secrets.PRIVATE_KEY }}
+        command: |
           cd /opt/dev-api/Clean-Architecture-NodeJS-Express
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker pull herzliyaaa/clean-arch-api:latest
