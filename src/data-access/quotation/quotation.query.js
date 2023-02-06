@@ -9,11 +9,7 @@ const quotationData = ({ dbs }) => {
   async function getAllQuotations() {
     const connect = await dbs();
     const sql = `SELECT
-<<<<<<< HEAD
-    Q.quotation_id,  SK.cost, QL.qty, QL.amount, SK.unit,
-=======
     Q.quotation_id, S.service_id,  SK.sku_id, C.customer_id, SK.cost, QL.qty, QL.amount, SK.unit,
->>>>>>> feat/insert-array
     PP.printname, PP.barcode, PC.serial_number,
     PC.brand_name, PC.model, PC.color, SI.service_name, SI.unit as service_unit, SI.cost as service_cost,
     C.name, C.contact_number, C.address, Q.date_transaction, Q.status
@@ -88,22 +84,6 @@ const quotationData = ({ dbs }) => {
       insertQuotationItemsSQL += " RETURNING *;";
 
       const sll = await connect.query(insertQuotationItemsSQL);
-
-      // const showQuotationSQL = `SELECT
-      // Q.quotation_id, QL.quotation_line_id, QL.qty, QL.amount, SK.unit, SK.cost,
-      // PP.printname, PP.barcode, PC.serial_number,
-      // PC.brand_name, PC.model, PC.color, SK.sku_id, S.serial_number,
-
-      // C.name, C.contact_number, C.address, Q.date_transaction, Q.status
-      // FROM quotation Q
-      // INNER JOIN quotation_line QL ON QL.quotation_id = Q.quotation_id
-      // LEFT OUTER JOIN sku SK ON SK.sku_id = QL.sku_id
-      // LEFT OUTER JOIN service S ON S.service_id = Q.service_id
-      // LEFT OUTER JOIN service_line SL ON SL.service_id =  S.service_id
-      // LEFT OUTER JOIN service_item SI ON SI.service_item_id = SL.service_item_id
-      // LEFT OUTER JOIN product_parts PP ON SK.sku_id = PP.sku_id
-      // LEFT OUTER JOIN product_car PC ON PC.sku_id = SK.sku_id
-      // INNER JOIN customer C ON C.customer_id = Q.customer_id where Q.quotation_id = ${quotation_id};`;
 
       return {
         msg: "Quotation Successfully Added.",
