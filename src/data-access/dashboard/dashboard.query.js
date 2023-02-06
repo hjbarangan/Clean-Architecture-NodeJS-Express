@@ -22,7 +22,7 @@ const dashboardData = ({ dbs }) => {
     const totalSales = serviceSales + quotationSales;
 
     return {
-      monthly_total: totalSales,
+      daily_total: totalSales,
       data: dailyRevenue
     };
   }
@@ -68,7 +68,7 @@ const dashboardData = ({ dbs }) => {
     const totalSales = serviceSales + quotationSales;
 
     return {
-      monthly_total: totalSales,
+      weekly_total: totalSales,
       data: weeklyRevenue
     };
   }
