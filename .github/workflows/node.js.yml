@@ -33,6 +33,7 @@ jobs:
         privateKey: ${{ secrets.PRIVATE_KEY }}
         command: |
           cd /opt/dev-api/Clean-Architecture-NodeJS-Express
+          sudo docker stop clean-api-v2
           sudo docker rm clean-api-v2
           sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           sudo docker pull herzliyaaa/clean-arch-api:latest
