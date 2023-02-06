@@ -6,13 +6,11 @@ const {
   softDeleteCustomerUseCase
 } = require("../../use-cases/customer/index");
 
-
 const addCustomerController = require("./add-customer.controller");
 const editCustomerController = require("./edit-customer.controller");
 const fetchAllCustomersController = require("./get-all-customers.controller");
 const fetchCustomerDetailsController = require("./get-customer-details.controller");
 const deleteCustomerController = require("./soft-delete-customer.controller");
-
 
 const postCustomerController = addCustomerController({ addCustomerUseCase });
 const putCustomerController = editCustomerController({ editCustomerUseCase });

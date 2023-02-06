@@ -18,10 +18,6 @@ router.get("/user-details/:id", authMiddleware, makeExpressCallback(getUserByIdC
 router.patch("/user/pass/:id", authMiddleware, makeExpressCallback(changeUserPasswordController));
 router.patch("/user/edit/:id", authMiddleware, makeExpressCallback(putUserController));
 router.get("/users", authMiddleware, makeExpressCallback(getAllUsersController));
-router.patch(
-  "/user/delete/:id",
-  authMiddleware,
-  makeExpressCallback(softDeleteUserController)
-);
+router.patch("/user/delete/:id", authMiddleware, makeExpressCallback(softDeleteUserController));
 
 module.exports = router;

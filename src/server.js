@@ -4,15 +4,6 @@ const cors = require("cors");
 const logger = require("morgan");
 const path = require("path");
 const helmet = require("helmet");
-const fs = require("fs");
-
-// create a write stream (in append mode)
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  {
-    flags: "a"
-  }
-);
 
 const app = express();
 
@@ -24,13 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  logger(
-    ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer"',
-    { stream: accessLogStream }
-  )
-);
-//logs for console
 app.use(logger("dev"));
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
@@ -48,8 +32,8 @@ app.use("/api", require("./routes/service.route"));
 app.use("/api", require("./routes/car.route"));
 app.use("/api", require("./routes/parts.route"));
 app.use("/api", require("./routes/quotation.route"));
-app.use("/api", require("./routes/billing.route"))
-app.use("/api", require("./routes/dashboard.route"))
+app.use("/api", require("./routes/billing.route"));
+app.use("/api", require("./routes/dashboard.route"));
 
 const PORT = process.env.PORT || 3000;
 
