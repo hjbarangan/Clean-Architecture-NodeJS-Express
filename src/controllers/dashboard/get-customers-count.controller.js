@@ -1,4 +1,4 @@
-const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
+const fetchWeeklySalesController = ({ viewWeeklySalesUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
@@ -11,7 +11,7 @@ const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
         ...info,
         source
       };
-      const customers = await viewCustomerCountUseCase(toView);
+      const customers = await viewWeeklySalesUseCase(toView);
 
       return {
         headers: {
@@ -33,4 +33,4 @@ const fetchCustomersCountController = ({ viewCustomerCountUseCase }) => {
   };
 };
 
-module.exports = fetchCustomersCountController;
+module.exports = fetchWeeklySalesController;

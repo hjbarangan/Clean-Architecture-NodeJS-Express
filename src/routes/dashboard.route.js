@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const {
-  getCustomersCountController,
+  getWeeklySalesController,
   getMonthlyRevenueController,
   getTopSellersController,
   getSalesNumberController,
@@ -12,7 +12,7 @@ const makeExpressCallback = require("../express-callback/index");
 
 router.get(
   "/weekly-sales" ,
-  makeExpressCallback(getCustomersCountController)
+  makeExpressCallback(getWeeklySalesController)
 );
 router.get(
   "/monthly-sales" ,

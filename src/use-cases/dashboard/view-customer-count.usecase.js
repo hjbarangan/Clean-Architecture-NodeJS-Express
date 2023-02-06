@@ -1,6 +1,6 @@
-const viewCustomerCount = ({ dashboardDB }) => {
-  return async function customerCount() {
-    const result = await dashboardDB.getMonthlyCustomers();
+const viewWeeklySales = ({ dashboardDB }) => {
+  return async function weeklySales() {
+    const result = await dashboardDB.getWeeklySales();
 
     return {
       weekly_sales: result.weekly_total ? result.weekly_total : 0,
@@ -9,4 +9,4 @@ const viewCustomerCount = ({ dashboardDB }) => {
   };
 };
 
-module.exports = viewCustomerCount;
+module.exports = viewWeeklySales;
