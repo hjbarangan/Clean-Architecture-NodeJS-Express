@@ -27,8 +27,19 @@ const quotationData = ({ dbs }) => {
 
   async function getAllProducts() {
     const connect = await dbs();
-    const sql = `SELECT C.product_car_id, C.color,  C.brand_name, C.model, C.serial_number,  P.product_parts_id, P.printname, P.barcode, sku.sku_id, 
-      sku.unit, sku.cost FROM sku LEFT OUTER JOIN product_car C ON C.sku_id = sku.sku_id LEFT OUTER JOIN product_parts P ON P.sku_id = sku.sku_id ORDER BY sku.sku_id DESC;`;
+
+    const sql = `SELECT C.product_car_id, C.color,  C.brand_name, C.model, C.serial_number,  
+    P.product_parts_id, P.printname, P.barcode, sku.sku_id, 
+          sku.unit, sku.cost 
+        FROM sku 
+        LEFT OUTER JOIN product_car C ON C.sku_id = sku.sku_id 
+        LEFT OUTER JOIN product_parts P ON P.sku_id = sku.sku_id 
+        WHERE  P.printname IS NOT NULL OR C.sku_id NOT IN
+        (SELECT sku_id from quotation_line)
+         ORDER BY sku.sku_id DESC;`;
+
+    // const sql = `SELECT C.product_car_id, C.color,  C.brand_name, C.model, C.serial_number,  P.product_parts_id, P.printname, P.barcode, sku.sku_id,
+    //   sku.unit, sku.cost FROM sku LEFT OUTER JOIN product_car C ON C.sku_id = sku.sku_id LEFT OUTER JOIN product_parts P ON P.sku_id = sku.sku_id ORDER BY sku.sku_id DESC;`;
     return connect.query(sql);
   }
 
