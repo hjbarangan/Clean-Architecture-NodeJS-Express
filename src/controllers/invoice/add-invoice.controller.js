@@ -7,11 +7,11 @@ const createInvoiceController = ({ createInvoiceUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const invoice = await createInvoiceUseCase(toView);
+      const invoice = await createInvoiceUseCase(response);
 
       return {
         headers: {

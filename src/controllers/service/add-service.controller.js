@@ -7,12 +7,12 @@ const addServiceController = ({ addServiceUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
       //console.log(httpRequest.headers["Authorization"])
-      const services = await addServiceUseCase(toView);
+      const services = await addServiceUseCase(response);
       return {
         headers: {
           "Content-Type": "application/json"

@@ -1,20 +1,18 @@
-const makeUserLoginEntity = ({}) => {
-  return function loginUser(user) {
-    const { username, password } = user;
+const userLoginEntity = (user) => {
+  const { username, password } = user;
 
-    if (!username) {
-      throw new Error("Enter Username!");
-    }
+  if (!username) {
+    throw new Error("Enter Username!");
+  }
 
-    if (!password) {
-      throw new Error("Enter Password!");
-    }
+  if (!password) {
+    throw new Error("Enter Password!");
+  }
 
-    return Object.freeze({
-      username,
-      password
-    });
-  };
+  return Object.freeze({
+    username,
+    password
+  });
 };
 
-module.exports = makeUserLoginEntity;
+module.exports = userLoginEntity;

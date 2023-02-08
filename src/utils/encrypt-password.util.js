@@ -1,4 +1,4 @@
-const encryptPass = ({ bcrypt }) => {
+const encryptPassword = ({ bcrypt }) => {
   async function encrypt(password) {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
@@ -7,4 +7,4 @@ const encryptPass = ({ bcrypt }) => {
   return encrypt;
 };
 
-module.exports = encryptPass;
+module.exports = encryptPassword;

@@ -7,19 +7,19 @@ const fetchServiceDetailsController = ({ viewServiceUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-      const service = await viewServiceUseCase(toView);
+      const service_item = await viewServiceUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: service
+        body: service_item
       };
     } catch (e) {
       console.log(e);

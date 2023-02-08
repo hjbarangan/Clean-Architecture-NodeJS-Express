@@ -1,5 +1,3 @@
-const makePartEntity = require("./part.entity");
-
-const partEntity = makePartEntity({});
+const partEntity = require("./part.entity");
 
 module.exports = partEntity;

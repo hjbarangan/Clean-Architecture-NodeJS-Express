@@ -7,11 +7,11 @@ const fetchAllCustomersController = ({ viewAllCustomersUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const customers = await viewAllCustomersUseCase(toView);
+      const customers = await viewAllCustomersUseCase(response);
 
       return {
         headers: {

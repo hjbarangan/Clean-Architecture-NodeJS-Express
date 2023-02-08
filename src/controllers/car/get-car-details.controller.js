@@ -7,12 +7,12 @@ const fetchCarDetailsController = ({ viewCarUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-      const cars = await viewCarUseCase(toView);
+      const cars = await viewCarUseCase(response);
 
       return {
         headers: {

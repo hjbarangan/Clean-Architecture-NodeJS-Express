@@ -1,21 +1,12 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = require("../config/auth.config");
 const bcrypt = require("bcryptjs");
 
-const jwtGenerator = require("./auth.util");
-const comparePass = require("./comparePass");
-const encryptPass = require("./encryptPass");
+const generateJWT = require("./generate-token.util");
+const comparePass = require("./compare-password.util");
+const encryptPass = require("./encrypt-password.util");
 
 const comparePassword = comparePass({ bcrypt });
 const encryptPassword = encryptPass({ bcrypt });
-const jwtGenerate = jwtGenerator({ jwt, SECRET_KEY });
+const generateToken = generateJWT({ jwt });
 
-const authService = Object.freeze({
-  encryptPassword,
-  comparePassword,
-  jwtGenerate
-});
-
-module.exports = authService;
-
-module.exports = { encryptPassword, comparePassword, jwtGenerate };
+module.exports = { encryptPassword, comparePassword, generateToken };

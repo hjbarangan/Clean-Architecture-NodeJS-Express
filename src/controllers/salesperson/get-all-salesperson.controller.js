@@ -7,12 +7,12 @@ const fetchAllSalespersonsController = ({ viewAllSalespersonUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const salesperson = await viewAllSalespersonUseCase(toView);
-      // console.log(salesperson);
+      const salesperson = await viewAllSalespersonUseCase(response);
+
       return {
         headers: {
           "Content-Type": "application/json"

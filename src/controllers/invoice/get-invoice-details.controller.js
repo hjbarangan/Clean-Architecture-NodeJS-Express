@@ -7,12 +7,12 @@ const fetchInvoiceDetailsController = ({ viewInvoiceUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-      const invoice = await viewInvoiceUseCase(toView);
+      const invoice = await viewInvoiceUseCase(response);
 
       return {
         headers: {

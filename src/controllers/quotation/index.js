@@ -20,18 +20,10 @@ const getAllQuotationsController = fetchAllQuotationsController({
 const getQuotationByIdController = fetchQuotationDetailsController({
   viewQuotationUseCase
 });
-const controller = Object.freeze({
+
+module.exports = Object.freeze({
   postQuotationController,
   getAllProductsController,
   getAllQuotationsController,
   getQuotationByIdController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postQuotationController,
-  getAllProductsController,
-  getAllQuotationsController,
-  getQuotationByIdController
-};

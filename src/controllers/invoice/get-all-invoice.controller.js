@@ -7,11 +7,11 @@ const fetchAllInvoicesController = ({ viewAllInvoicesUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const invoice = await viewAllInvoicesUseCase(toView);
+      const invoice = await viewAllInvoicesUseCase(response);
 
       return {
         headers: {

@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const userRoleData = require("./user_role.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./user_role.query");
-
-const userRoleDB = makeDb ({ db });
+const userRoleDB = userRoleData({ dbs });
 
 module.exports = userRoleDB;

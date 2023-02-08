@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const createTicketController = ({ createTicketUseCase }) => {
   return async function post(httpRequest) {
     const headers = {
@@ -7,11 +9,11 @@ const createTicketController = ({ createTicketUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const service_ticket = await createTicketUseCase(toView);
+      const service_ticket = await createTicketUseCase(response);
 
       return {
         headers: {

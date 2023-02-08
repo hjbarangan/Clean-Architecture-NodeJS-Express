@@ -50,7 +50,7 @@ const putServiceItemController = editServiceItemController({
   editServiceItemUseCase
 });
 
-const controller = Object.freeze({
+module.exports = Object.freeze({
   postServiceController,
   putServiceController,
   getAllServiceController,
@@ -60,16 +60,3 @@ const controller = Object.freeze({
   getAllServiceItemsController,
   putServiceItemController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postServiceController,
-  putServiceController,
-  getServiceByIdController,
-  getAllServiceController,
-  softDeleteServiceController,
-  postServiceItemController,
-  getAllServiceItemsController,
-  putServiceItemController
-};

@@ -7,11 +7,11 @@ const fetchAllQuotationsController = ({ viewAllQuotationsUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const quotation = await viewAllQuotationsUseCase(toView);
+      const quotation = await viewAllQuotationsUseCase(response);
 
       return {
         headers: {

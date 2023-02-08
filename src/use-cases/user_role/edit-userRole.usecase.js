@@ -4,8 +4,7 @@ const editUserRole = ({ userRoleDB, userRoleEntity }) => {
 
     return userRoleDB.editUserRole({
       id: id,
-      role: result.role,
-
+      role: result.role
     });
   };
 };

@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const invoiceData = require("./invoice.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./invoice.query");
-
-const invoiceDB = makeDb ({ db });
+const invoiceDB = invoiceData({ dbs });
 
 module.exports = invoiceDB;

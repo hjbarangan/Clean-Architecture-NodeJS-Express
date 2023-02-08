@@ -18,13 +18,9 @@ async function dbs() {
   try {
     return pool;
   } catch (e) {
-    pool.end(); // end connection
+    pool.end();
     console.log("Errors: ", e);
   }
 }
 
-const makeDb = ({ db, encryptPassword, comparePassword }) => {
-  return db({ dbs, encryptPassword, comparePassword });
-};
-
-module.exports = makeDb;
+module.exports = dbs;

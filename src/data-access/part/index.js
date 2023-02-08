@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const partData = require("./part.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./part.query");
-
-const partDB = makeDb ({ db });
+const partDB = partData({ dbs });
 
 module.exports = partDB;

@@ -1,4 +1,4 @@
-const serviceData = ({ dbs }) => {
+const userRoleData = ({ dbs }) => {
   return Object.freeze({
     getAllUserRoles,
     getUserRoleById,
@@ -80,4 +80,4 @@ const serviceData = ({ dbs }) => {
   }
 };
 
-module.exports = serviceData;
+module.exports = userRoleData;

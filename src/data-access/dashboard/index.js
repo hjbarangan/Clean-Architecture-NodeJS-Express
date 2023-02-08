@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const dashboardData = require("./dashboard.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./dashboard.query");
-
-const dashboardDB = makeDb ({ db });
+const dashboardDB = dashboardData({ dbs });
 
 module.exports = dashboardDB;

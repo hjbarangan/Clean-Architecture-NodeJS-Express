@@ -9,7 +9,6 @@ const addBilling = ({ billingDB, billingEntity }) => {
       quotation_id: result.quotation_id,
       products: result.products
     });
-    //console.log("result-usecase", data);
 
     return {
       msg: "Transaction Processed Successfully.",

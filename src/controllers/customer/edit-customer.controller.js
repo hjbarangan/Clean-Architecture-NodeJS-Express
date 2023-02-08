@@ -7,20 +7,20 @@ const editCustomerController = ({ editCustomerUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-      // console.log(toView);
-      const response = await editCustomerUseCase(toView);
+
+      const customers = await editCustomerUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: response
+        body: customers
       };
     } catch (e) {
       console.log(e);

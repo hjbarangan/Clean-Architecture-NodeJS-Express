@@ -7,20 +7,20 @@ const editTicketController = ({ editTicketUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
       
-      const response = await editTicketUseCase(toView);
+      const service_ticket = await editTicketUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: response
+        body: service_ticket
       };
     } catch (e) {
       console.log(e);

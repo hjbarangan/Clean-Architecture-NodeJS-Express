@@ -1,4 +1,4 @@
-const userData = ({ dbs, encryptPassword, comparePassword }) => {
+const userData = ({ dbs, encryptPassword }) => {
   return Object.freeze({
     getAllUsers,
     getUserById,

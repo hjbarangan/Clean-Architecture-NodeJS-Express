@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const quotationData = require("./quotation.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./quotation.query");
-
-const quotationDB = makeDb ({ db });
+const quotationDB = quotationData({ dbs });
 
 module.exports = quotationDB;

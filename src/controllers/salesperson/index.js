@@ -29,20 +29,10 @@ const softDeleteSalespersonController = deleteSalespersonController({
   softDeleteSalespersonUseCase
 });
 
-const controller = Object.freeze({
+module.exports = Object.freeze({
   postSalespersonController,
   putSalespersonController,
   getAllSalespersonController,
   getSalespersonByIdController,
   softDeleteSalespersonController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postSalespersonController,
-  putSalespersonController,
-  getSalespersonByIdController,
-  getAllSalespersonController,
-  softDeleteSalespersonController
-};

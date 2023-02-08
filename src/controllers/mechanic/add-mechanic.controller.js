@@ -7,11 +7,11 @@ const addMechanicController = ({ addMechanicUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const mechanics = await addMechanicUseCase(toView);
+      const mechanics = await addMechanicUseCase(response);
 
       return {
         headers: {

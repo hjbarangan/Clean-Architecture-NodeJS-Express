@@ -1,5 +1,3 @@
-const makeCustomerEntity = require("./customer.entity");
-
-const customerEntity = makeCustomerEntity({});
+const customerEntity = require("./customer.entity");
 
 module.exports = customerEntity;

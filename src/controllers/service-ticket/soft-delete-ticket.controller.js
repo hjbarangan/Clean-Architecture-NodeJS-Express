@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const deleteTicketController = ({ softDeleteTicketUseCase }) => {
   return async function get(httpRequest) {
     const headers = {
@@ -7,20 +9,20 @@ const deleteTicketController = ({ softDeleteTicketUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-     
-      const response = await softDeleteTicketUseCase(toView);
+
+      const service_ticket = await softDeleteTicketUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: response
+        body: service_ticket
       };
     } catch (e) {
       console.log(e);

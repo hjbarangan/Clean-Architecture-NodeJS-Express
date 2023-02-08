@@ -7,11 +7,11 @@ const fetchAllTicketsController = ({ viewAllTicketsUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const ticket = await viewAllTicketsUseCase(toView);
+      const ticket = await viewAllTicketsUseCase(response);
 
       return {
         headers: {

@@ -7,11 +7,11 @@ const addPartController = ({ addPartUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const parts = await addPartUseCase(toView);
+      const parts = await addPartUseCase(response);
 
       return {
         headers: {

@@ -10,11 +10,10 @@ const addCarController = ({ addCarUseCase }) => {
       }
 
       // const image_file = `${httpRequest.protocol}://${httpRequest.host}/${httpRequest.file.path.replace(/\\/g,"/")}`
-   
+
       const response = {
         ...info,
         source
-   
       };
 
       const cars = await addCarUseCase(response);

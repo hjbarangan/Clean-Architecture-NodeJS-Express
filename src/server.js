@@ -20,14 +20,13 @@ app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/api", (req, res) => {
-  res.send("Car dealership API");
+  res.send("Car Dealership API");
 });
 
 app.use("/api", require("./routes/car.route"));
 app.use("/api", require("./routes/customer.route"));
 app.use("/api", require("./routes/user.route"));
 app.use("/api", require("./routes/user_role.route"));
-app.use("/api", require("./routes/sku.route"));
 app.use("/api", require("./routes/service.route"));
 app.use("/api", require("./routes/car.route"));
 app.use("/api", require("./routes/parts.route"));

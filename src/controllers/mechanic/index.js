@@ -29,20 +29,10 @@ const softDeleteMechanicController = deleteMechanicController({
   softDeleteMechanicUseCase
 });
 
-const controller = Object.freeze({
+module.exports = Object.freeze({
   postMechanicController,
   putMechanicController,
   getAllMechanicController,
   getMechanicByIdController,
   softDeleteMechanicController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postMechanicController,
-  putMechanicController,
-  getMechanicByIdController,
-  getAllMechanicController,
-  softDeleteMechanicController
-};
