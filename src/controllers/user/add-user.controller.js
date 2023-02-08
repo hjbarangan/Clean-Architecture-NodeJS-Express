@@ -7,11 +7,11 @@ const addUserController = ({ addUserUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const users = await addUserUseCase(toView);
+      const users = await addUserUseCase(response);
 
       return {
         headers: {

@@ -7,12 +7,12 @@ const fetchAllMechanicsController = ({ viewAllMechanicUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const mechanic = await viewAllMechanicUseCase(toView);
-      // console.log(mechanic);
+      const mechanic = await viewAllMechanicUseCase(response);
+
       return {
         headers: {
           "Content-Type": "application/json"

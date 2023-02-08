@@ -5,7 +5,7 @@ const {
   userUpdateEntity,
   changePasswordEntity
 } = require("../../entities/users/index");
-const { jwtGenerate, comparePassword } = require("../../utils/index");
+const { generateToken, comparePassword } = require("../../utils/index");
 
 const addUser = require("./add-user.usecase");
 const editUser = require("./edit-user.usecase");
@@ -23,7 +23,7 @@ const changePasswordUseCase = changePassword({ userDB, changePasswordEntity });
 const loginUserUseCase = loginUser({
   userDB,
   userLoginEntity,
-  jwtGenerate,
+  generateToken,
   comparePassword
 });
 const softDeleteUserUseCase = softDelUser({ userDB });

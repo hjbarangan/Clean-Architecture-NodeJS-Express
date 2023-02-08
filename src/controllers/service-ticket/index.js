@@ -26,20 +26,10 @@ const softDeleteTicketController = deleteTicketController({
 const putTicketController = editTicketController({
   editTicketUseCase
 });
-const controller = Object.freeze({
+module.exports = Object.freeze({
   postTicketController,
   getAllTicketsController,
   getTicketByIdController,
   putTicketController,
   softDeleteTicketController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postTicketController,
-  getAllTicketsController,
-  getTicketByIdController,
-  putTicketController,
-  softDeleteTicketController
-};

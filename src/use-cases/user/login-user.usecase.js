@@ -1,7 +1,7 @@
 const loginUser = ({
   userDB,
   userLoginEntity,
-  jwtGenerate,
+  generateToken,
   comparePassword
 }) => {
   return async function postLoginUser(info) {
@@ -23,7 +23,7 @@ const loginUser = ({
     );
 
     if (validPass) {
-      token = jwtGenerate(userExists.rows[0].user_id);
+      token = generateToken(userExists.rows[0].user_id);
       // console.log("\x1b[35m%s\x1b[0m", { token: token });
     } else {
       throw new Error("Incorrect Password!");

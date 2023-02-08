@@ -1,4 +1,3 @@
-const makeBillingEntity = require("./billing.entity")
-const billingEntity = makeBillingEntity({});
+const billingEntity = require("./billing.entity");
 
 module.exports = billingEntity;

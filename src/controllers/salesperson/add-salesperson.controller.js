@@ -7,11 +7,11 @@ const addSalespersonController = ({ addSalespersonUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const salespersons = await addSalespersonUseCase(toView);
+      const salespersons = await addSalespersonUseCase(response);
 
       return {
         headers: {

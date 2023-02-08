@@ -7,20 +7,20 @@ const deletePartController = ({ softDeletePartUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
 
-      const response = await softDeletePartUseCase(toView);
+      const part = await softDeletePartUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: response
+        body: part
       };
     } catch (e) {
       console.log(e);

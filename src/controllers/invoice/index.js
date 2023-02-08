@@ -16,16 +16,8 @@ const getInvoiceByIdController = fetchInvoiceDetailsController({
   viewInvoiceUseCase
 });
 
-const controller = Object.freeze({
+module.exports = Object.freeze({
   postInvoiceController,
   getAllInvoicesController,
   getInvoiceByIdController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postInvoiceController,
-  getAllInvoicesController,
-  getInvoiceByIdController
-};

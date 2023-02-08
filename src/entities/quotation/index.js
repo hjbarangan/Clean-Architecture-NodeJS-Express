@@ -1,4 +1,3 @@
-const makeQuotationEntity = require("./quotation.entity")
-const quotationEntity = makeQuotationEntity({});
+const quotationEntity = require("./quotation.entity");
 
 module.exports = quotationEntity;

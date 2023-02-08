@@ -7,20 +7,20 @@ const deleteUserController = ({ softDeleteUserUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-     
-      const response = await softDeleteUserUseCase(toView);
+
+      const users = await softDeleteUserUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: response
+        body: users
       };
     } catch (e) {
       console.log(e);

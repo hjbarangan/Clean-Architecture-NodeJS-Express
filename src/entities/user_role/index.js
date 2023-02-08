@@ -1,5 +1,3 @@
-const makeUserRoleEntity = require("./user_role.entity");
-
-const userRoleEntity = makeUserRoleEntity({});
+const userRoleEntity = require("./user_role.entity");
 
 module.exports = userRoleEntity;

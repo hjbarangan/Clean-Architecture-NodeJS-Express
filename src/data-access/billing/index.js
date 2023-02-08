@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const billingData = require("./billing.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./billing.query");
-
-const billingDB = makeDb ({ db });
+const billingDB = billingData({ dbs });
 
 module.exports = billingDB;

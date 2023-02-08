@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const serviceData = require("./service.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./service.query");
-
-const serviceDB = makeDb ({ db });
+const serviceDB = serviceData({ dbs });
 
 module.exports = serviceDB;

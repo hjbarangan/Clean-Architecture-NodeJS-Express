@@ -1,4 +1,4 @@
-const tokenChecker = ({ jwt, SECRET_KEY }) => {
+const tokenChecker = ({ jwt }) => {
   function checker(req, res, next) {
     const bearerHeader = req.header("Authorization");
 
@@ -10,7 +10,7 @@ const tokenChecker = ({ jwt, SECRET_KEY }) => {
 
     try {
       const bearerToken = bearerHeader.split(" ")[1];
-      const decoded = jwt.verify(bearerToken, SECRET_KEY);
+      const decoded = jwt.verify(bearerToken, process.env.SECRET_KEY);
       req.user = decoded.user;
       next();
     } catch (err) {

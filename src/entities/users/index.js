@@ -1,12 +1,7 @@
-const makeUserEntity = require("./user.entity");
-const makeUserLoginEntity = require("./user-login.entity");
-const makeChangePasswordEntity = require("./change-password.entity");
-const makeUserUpdateEntity = require("./edit-user.entity");
-
-const userEntity = makeUserEntity({});
-const userLoginEntity = makeUserLoginEntity({});
-const userUpdateEntity = makeUserUpdateEntity({});
-const changePasswordEntity = makeChangePasswordEntity({});
+const userEntity = require("./user.entity");
+const userLoginEntity = require("./user-login.entity");
+const changePasswordEntity = require("./change-password.entity");
+const userUpdateEntity = require("./edit-user.entity");
 
 const services = Object.freeze({
   userEntity,

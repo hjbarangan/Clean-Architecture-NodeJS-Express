@@ -20,18 +20,9 @@ const getAllBillingsController = fetchAllBillingsController({
 const getBillingByIdController = fetchBillingDetailsController({
   viewBillingUseCase
 });
-const controller = Object.freeze({
+module.exports = Object.freeze({
   postBillingController,
   getAllProductsController,
   getAllBillingsController,
   getBillingByIdController
 });
-
-module.exports = controller;
-
-module.exports = {
-  postBillingController,
-  getAllProductsController,
-  getAllBillingsController,
-  getBillingByIdController
-};

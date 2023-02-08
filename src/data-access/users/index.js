@@ -1,7 +1,7 @@
-const makeDb = require("../../config/db.config");
-const db = require("./users.query");
+const dbs = require("../../config/db.config");
+const userData = require("./users.query");
 
-const { encryptPassword, comparePassword, jwtGenerate } = require("../../utils/index");
-const userDB = makeDb({ db, encryptPassword, comparePassword, jwtGenerate });
+const { encryptPassword } = require("../../utils/index");
+const userDB = userData({ dbs, encryptPassword });
 
 module.exports = userDB;

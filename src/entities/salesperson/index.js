@@ -1,5 +1,3 @@
-const makeSalespersonEntity = require("./salesperson.entity");
-
-const salespersonEntity = makeSalespersonEntity({});
+const salespersonEntity = require("./salesperson.entity");
 
 module.exports = salespersonEntity;

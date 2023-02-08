@@ -10,7 +10,6 @@ const editCarController = ({ editCarUseCase }) => {
       }
 
       // const image_file = `${httpRequest.protocol}://${httpRequest.host}/${httpRequest.file.path.replace(/\\/g,"/")}`
-      
 
       const response = {
         ...info,

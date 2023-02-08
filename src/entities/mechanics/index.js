@@ -1,5 +1,3 @@
-const makeMechanicEntity = require("./mechanic.entity");
-
-const mechanicEntity = makeMechanicEntity({});
+const mechanicEntity = require("./mechanic.entity");
 
 module.exports = mechanicEntity;

@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const deleteSalespersonController = ({ softDeleteSalespersonUseCase }) => {
   return async function get(httpRequest) {
     const headers = {
@@ -7,20 +9,19 @@ const deleteSalespersonController = ({ softDeleteSalespersonUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source,
         id: httpRequest.params.id
       };
-      // console.log(toView);
-      const response = await softDeleteSalespersonUseCase(toView);
+      const salesperson = await softDeleteSalespersonUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: response
+        body: salesperson
       };
     } catch (e) {
       console.log(e);

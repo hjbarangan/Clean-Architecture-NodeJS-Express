@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const carData = require("./cars.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./cars.query");
-
-const carDB = makeDb ({ db });
+const carDB = carData({ dbs });
 
 module.exports = carDB;

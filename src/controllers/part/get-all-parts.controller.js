@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const fetchAllPartsController = ({ viewAllPartUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
@@ -7,11 +9,11 @@ const fetchAllPartsController = ({ viewAllPartUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const part = await viewAllPartUseCase(toView);
+      const part = await viewAllPartUseCase(response);
 
       return {
         headers: {

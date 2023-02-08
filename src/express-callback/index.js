@@ -9,7 +9,7 @@ const makeExpressCallback = (controller) => {
       path: req.path,
       protocol: req.protocol,
       host: req.get("host"),
-      file: req.file, // for upload image
+      file: req.file, 
       headers: {
         "Content-Type": req.get("Content-Type"),
         Referer: req.get("referer"),

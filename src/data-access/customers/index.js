@@ -1,7 +1,6 @@
+const dbs = require("../../config/db.config");
+const customerData = require("./customers.query");
 
-const makeDb = require("../../config/db.config");
-const db = require("./customers.query");
-
-const customerDB = makeDb ({ db });
+const customerDB = customerData({ dbs });
 
 module.exports = customerDB;

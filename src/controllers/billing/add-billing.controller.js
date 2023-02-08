@@ -12,14 +12,14 @@ const addBillingController = ({ addBillingUseCase }) => {
         source
       };
 
-      const res = await addBillingUseCase(toView);
-     
+      const billing = await addBillingUseCase(toView);
+
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: res
+        body: billing
       };
     } catch (e) {
       console.log(e);
