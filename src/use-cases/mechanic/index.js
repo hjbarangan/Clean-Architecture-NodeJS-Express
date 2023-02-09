@@ -19,16 +19,6 @@ const viewMechanicUseCase = viewMechanic({ mechanicDB });
 const viewAllMechanicUseCase = viewAllMechanic({ mechanicDB });
 const softDeleteMechanicUseCase = softDelMechanic({ mechanicDB });
 
-const mechanicService = Object.freeze({
-  addMechanicUseCase,
-  editMechanicUseCase,
-  viewMechanicUseCase,
-  viewAllMechanicUseCase,
-  softDeleteMechanicUseCase
-});
-
-module.exports = mechanicService;
-
 module.exports = {
   addMechanicUseCase,
   editMechanicUseCase,

@@ -10,15 +10,6 @@ const addBillingUseCase = addBilling({ billingDB, billingEntity });
 const viewAllBillingsUseCase = viewAllBillings({ billingDB });
 const viewBillingUseCase = viewBilling({ billingDB });
 
-const billingService = Object.freeze({
-  viewAllProductsUseCase,
-  addBillingUseCase,
-  viewAllBillingsUseCase,
-  viewBillingUseCase
-});
-
-module.exports = billingService;
-
 module.exports = {
   viewAllProductsUseCase,
   addBillingUseCase,

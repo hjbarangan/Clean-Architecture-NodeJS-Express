@@ -10,15 +10,6 @@ const addQuotationUseCase = addQuotation({ quotationDB, quotationEntity });
 const viewAllQuotationsUseCase = viewAllQuotations({ quotationDB });
 const viewQuotationUseCase = viewQuotation({ quotationDB });
 
-const quotationService = Object.freeze({
-  viewAllProductsUseCase,
-  addQuotationUseCase,
-  viewAllQuotationsUseCase,
-  viewQuotationUseCase
-});
-
-module.exports = quotationService;
-
 module.exports = {
   viewAllProductsUseCase,
   addQuotationUseCase,

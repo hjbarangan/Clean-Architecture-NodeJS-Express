@@ -13,16 +13,6 @@ const viewAllCustomersUseCase = viewAllCustomers({ customerDB });
 const viewCustomerUseCase = viewCustomer({ customerDB });
 const softDeleteCustomerUseCase = softDelCustomer({ customerDB });
 
-const customerServices = Object.freeze({
-  addCustomerUseCase,
-  editCustomerUseCase,
-  viewAllCustomersUseCase,
-  viewCustomerUseCase,
-  softDeleteCustomerUseCase
-});
-
-module.exports = customerServices;
-
 module.exports = {
   addCustomerUseCase,
   editCustomerUseCase,

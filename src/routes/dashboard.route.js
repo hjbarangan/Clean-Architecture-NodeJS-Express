@@ -4,7 +4,7 @@ const {
   getWeeklySalesController,
   getMonthlyRevenueController,
   getTopSellersController,
-  getSalesNumberController,
+  getDailySalesController,
 } = require("../controllers/dashboard/index");
 
 const authMiddleware = require("../middleware/index");
@@ -24,7 +24,7 @@ router.get(
 );
 router.get(
   "/daily-sales" ,
-  makeExpressCallback(getSalesNumberController)
+  makeExpressCallback(getDailySalesController)
 );
 
 module.exports = router;

@@ -16,17 +16,6 @@ const viewCarUseCase = viewCar({ carDB });
 const softDeleteCarUseCase = softDelCar({ carDB, fs });
 const viewAllCarsForSaleUseCase = viewAllCarsForSale({ carDB });
 
-const carServices = Object.freeze({
-  addCarUseCase,
-  editCarUseCase,
-  viewAllCarsUseCase,
-  viewCarUseCase,
-  viewAllCarsForSaleUseCase,
-  softDeleteCarUseCase
-});
-
-module.exports = carServices;
-
 module.exports = {
   addCarUseCase,
   editCarUseCase,

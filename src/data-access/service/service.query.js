@@ -70,13 +70,13 @@ const serviceData = ({ dbs }) => {
       insertServiceItemsSQL += values.slice(0, -1);
       insertServiceItemsSQL += " RETURNING *;";
 
-      const insertSQL = await connect.query(insertServiceItemsSQL);
+      const insertServiceItems = await connect.query(insertServiceItemsSQL);
 
       return {
         msg: "Service Ticket Successfully Added.",
         date_transaction: service_date_transaction,
         service_id: service_id,
-        data: insertSQL.rows
+        data: insertServiceItems.rows
       };
     } catch (error) {
       console.log(error);

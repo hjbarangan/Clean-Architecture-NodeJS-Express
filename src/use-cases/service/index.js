@@ -10,11 +10,10 @@ const viewService = require("./view-service.usecase");
 const viewAllService = require("./view-all-service.usecase");
 const softDelService = require("./delete-service.usecase");
 
-
 //Service Item
 const addServiceItem = require("./add-service-item.usecase");
-const viewAllServiceItems = require("./view-all-service-items.usecase")
-const editServiceItem = require("./edit-service-item.usecase")
+const viewAllServiceItems = require("./view-all-service-items.usecase");
+const editServiceItem = require("./edit-service-item.usecase");
 
 const addServiceUseCase = addService({
   serviceDB,
@@ -34,23 +33,14 @@ const addServiceItemUseCase = addServiceItem({
   serviceItemEntity
 });
 
-const viewAllServiceItemsUseCase = viewAllServiceItems({serviceDB, serviceItemEntity})
-const editServiceItemUseCase = editServiceItem({serviceDB, serviceItemEntity})
-
-
-//export
-const serviceItem = Object.freeze({
-  addServiceUseCase,
-  editServiceUseCase,
-  viewServiceUseCase,
-  viewAllServiceUseCase,
-  softDeleteServiceUseCase,
-  addServiceItemUseCase,
-  viewAllServiceItemsUseCase,
-  editServiceItemUseCase
+const viewAllServiceItemsUseCase = viewAllServiceItems({
+  serviceDB,
+  serviceItemEntity
 });
-
-module.exports = serviceItem;
+const editServiceItemUseCase = editServiceItem({
+  serviceDB,
+  serviceItemEntity
+});
 
 module.exports = {
   addServiceUseCase,

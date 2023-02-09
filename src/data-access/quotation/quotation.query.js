@@ -93,14 +93,14 @@ const quotationData = ({ dbs }) => {
       insertQuotationItemsSQL += values.slice(0, -1);
       insertQuotationItemsSQL += " RETURNING *;";
 
-      const insertSQL = await connect.query(insertQuotationItemsSQL);
+      const insertQuotationItems = await connect.query(insertQuotationItemsSQL);
 
       return {
         msg: "Quotation Successfully Added.",
         date_transaction: quotation_date_transaction,
         quotation_id: quotation_id,
         service_id: service_id_check,
-        data: insertSQL.rows
+        data: insertQuotationItems.rows
       };
     } catch (error) {
       console.log(error);

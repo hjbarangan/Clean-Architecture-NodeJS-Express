@@ -1,12 +1,12 @@
 const dashboardData = ({ dbs }) => {
   return Object.freeze({
-    getMonthlyNumberOfSales,
+    getDailySales,
     getMonthlyRevenue,
     getWeeklySales,
     getTopSellingBrands
   });
 
-  async function getMonthlyNumberOfSales() {
+  async function getDailySales() {
     try {
       const connect = await dbs();
       const sql = `SELECT SUM(QL.amount) as quotation_daily_sales, SUM(SL.amount) as service_daily_sales FROM billing B 
