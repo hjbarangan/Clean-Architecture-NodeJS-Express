@@ -28,18 +28,6 @@ const loginUserUseCase = loginUser({
 });
 const softDeleteUserUseCase = softDelUser({ userDB });
 
-const userServices = Object.freeze({
-  addUserUseCase,
-  editUserUseCase,
-  viewAllUsersUseCase,
-  viewUserUseCase,
-  changePasswordUseCase,
-  loginUserUseCase,
-  softDeleteUserUseCase
-});
-
-module.exports = userServices;
-
 module.exports = {
   addUserUseCase,
   editUserUseCase,

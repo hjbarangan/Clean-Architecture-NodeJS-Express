@@ -1,4 +1,4 @@
-const fetchSalesNumberController = ({ viewSalesNumberUseCase }) => {
+const fetchDailySalesController = ({ viewDailySalesUseCase }) => {
   return async function getAll(httpRequest) {
     const headers = {
       "Content-Type": "application/json"
@@ -7,18 +7,18 @@ const fetchSalesNumberController = ({ viewSalesNumberUseCase }) => {
       const { source = {}, ...info } = httpRequest.body;
       source.ip = httpRequest.ip;
       source.browser = httpRequest.headers["User-Agent"];
-      const toView = {
+      const response = {
         ...info,
         source
       };
-      const salesNumber = await viewSalesNumberUseCase(toView);
+      const dailySales = await viewDailySalesUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: salesNumber
+        body: dailySales
       };
     } catch (e) {
       console.log(e);
@@ -33,4 +33,4 @@ const fetchSalesNumberController = ({ viewSalesNumberUseCase }) => {
   };
 };
 
-module.exports = fetchSalesNumberController;
+module.exports = fetchDailySalesController;

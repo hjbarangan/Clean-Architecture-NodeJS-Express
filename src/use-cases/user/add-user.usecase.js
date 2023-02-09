@@ -11,7 +11,7 @@ const addUser = ({ userDB, userEntity }) => {
       return result;
     }
 
-    return userDB.addUser({
+    const data = await userDB.addUser({
       username: result.username,
       password: result.password,
       name: result.name,
@@ -19,6 +19,11 @@ const addUser = ({ userDB, userEntity }) => {
       contact_number: result.contact_number,
       user_role_id: result.user_role_id
     });
+
+    return {
+      msg: "User added successfully.",
+      user: data.rows
+    }
   };
 };                                                                                    
 module.exports = addUser;

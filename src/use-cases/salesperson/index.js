@@ -19,16 +19,6 @@ const viewSalespersonUseCase = viewSalesperson({ salespersonDB });
 const viewAllSalespersonUseCase = viewAllSalesperson({ salespersonDB });
 const softDeleteSalespersonUseCase = softDelSalesperson({ salespersonDB });
 
-const salespersonService = Object.freeze({
-  addSalespersonUseCase,
-  editSalespersonUseCase,
-  viewSalespersonUseCase,
-  viewAllSalespersonUseCase,
-  softDeleteSalespersonUseCase
-});
-
-module.exports = salespersonService;
-
 module.exports = {
   addSalespersonUseCase,
   editSalespersonUseCase,

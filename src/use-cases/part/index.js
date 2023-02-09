@@ -19,16 +19,6 @@ const viewPartUseCase = viewPart({ partDB });
 const viewAllPartUseCase = viewAllPart({ partDB });
 const softDeletePartUseCase = softDelPart({ partDB });
 
-const partService = Object.freeze({
-  addPartUseCase,
-  editPartUseCase,
-  viewPartUseCase,
-  viewAllPartUseCase,
-  softDeletePartUseCase
-});
-
-module.exports = partService;
-
 module.exports = {
   addPartUseCase,
   editPartUseCase,

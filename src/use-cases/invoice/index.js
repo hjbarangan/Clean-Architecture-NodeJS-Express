@@ -12,14 +12,6 @@ const viewAllInvoicesUseCase = viewAllInvoices({
   invoiceEntity
 });
 
-const invoiceServices = Object.freeze({
-  createInvoiceUseCase,
-  viewInvoiceUseCase,
-  viewAllInvoicesUseCase
-});
-
-module.exports = invoiceServices;
-
 module.exports = {
   createInvoiceUseCase,
   viewInvoiceUseCase,

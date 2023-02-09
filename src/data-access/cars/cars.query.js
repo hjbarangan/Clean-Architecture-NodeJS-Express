@@ -42,11 +42,11 @@ const carData = ({ dbs }) => {
       const skuRes = await connect.query(insetSkuSQL, skuParams);
       const skuId = skuRes.rows[0].sku_id;
 
-      const InsertCarsql =
+      const InsertCarSql =
         "INSERT INTO product_car (sku_id, serial_number, brand_name, model, color, date_created) VALUES ( $1, $2, $3, $4, $5, localtimestamp) RETURNING *;";
 
       const params = [skuId, serial_number, brand_name, model, color];
-      const res = await connect.query(InsertCarsql, params);
+      const res = await connect.query(InsertCarSql, params);
 
       const productID = res.rows[0].product_car_id;
       const qtySql =

@@ -18,7 +18,7 @@ const editUser = ({ userDB, userUpdateEntity }) => {
       user_role_id
     });
 
-    return userDB.editUser({
+    const data = await userDB.editUser({
       id: id,
       username: result.username,
       password: result.password,
@@ -27,6 +27,11 @@ const editUser = ({ userDB, userUpdateEntity }) => {
       contact_number: result.contact_number,
       user_role_id: result.user_role_id
     });
+
+    return {
+      msg: "User updated successfully.",
+      user: data.rows
+    }
   };
 };
 module.exports = editUser;

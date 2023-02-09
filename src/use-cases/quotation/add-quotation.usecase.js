@@ -8,15 +8,7 @@ const addQuotation = ({ quotationDB, quotationEntity }) => {
       service_id: result.service_id,
       products: result.products
     });
-    //console.log("result-usecase", data);
 
-    // return ({
-    //   msg: "Quotation is successfully created!",
-    //   quotation_id: data.rows[0].quotation_id,
-    //   serial_number: data.rows[0].serial_number,
-    //   service: data.rows[0].service_name,
-    //   data: data.rows
-    // });
   };
 };
 module.exports = addQuotation;

@@ -11,14 +11,14 @@ const fetchWeeklySalesController = ({ viewWeeklySalesUseCase }) => {
         ...info,
         source
       };
-      const customers = await viewWeeklySalesUseCase(response);
+      const weeklySales = await viewWeeklySalesUseCase(response);
 
       return {
         headers: {
           "Content-Type": "application/json"
         },
         statusCode: 200,
-        body: customers
+        body: weeklySales
       };
     } catch (e) {
       console.log(e);
